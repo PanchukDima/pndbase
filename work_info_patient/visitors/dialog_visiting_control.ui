@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog_visiting_control</class>
+ <widget class="QDialog" name="Dialog_visiting_control">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1024</width>
+    <height>556</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QPushButton" name="pushButton_green">
+       <property name="text">
+        <string>Посещения сегодня</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_red">
+       <property name="text">
+        <string>Просроченные</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_gray">
+       <property name="text">
+        <string>Закрытые посещения</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_view_all">
+       <property name="text">
+        <string>Показать все</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="checkBox_filter_to_date">
+       <property name="text">
+        <string>фильтровать по дате</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_from">
+       <property name="text">
+        <string>С</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QDateEdit" name="dateEdit_from">
+       <property name="wrapping">
+        <bool>false</bool>
+       </property>
+       <property name="calendarPopup">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_to">
+       <property name="text">
+        <string>По</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QDateEdit" name="dateEdit_to">
+       <property name="wrapping">
+        <bool>false</bool>
+       </property>
+       <property name="calendarPopup">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_find">
+       <property name="text">
+        <string>Найти</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QTableView" name="tableView">
+     <property name="contextMenuPolicy">
+      <enum>Qt::CustomContextMenu</enum>
+     </property>
+     <property name="editTriggers">
+      <set>QAbstractItemView::NoEditTriggers</set>
+     </property>
+     <property name="selectionMode">
+      <enum>QAbstractItemView::SingleSelection</enum>
+     </property>
+     <property name="selectionBehavior">
+      <enum>QAbstractItemView::SelectRows</enum>
+     </property>
+     <property name="sortingEnabled">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

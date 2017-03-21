@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog_add_diagnos_and_dop_diagnos</class>
+ <widget class="QDialog" name="Dialog_add_diagnos_and_dop_diagnos">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>498</width>
+    <height>299</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_3">
+   <item>
+    <widget class="QSplitter" name="splitter">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <widget class="QGroupBox" name="groupBox">
+      <property name="title">
+       <string>Основной диагноз</string>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <widget class="QLabel" name="label">
+           <property name="text">
+            <string>Диагноз:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="comboBox_code_main_diagnos">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>90</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="editable">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="comboBox_name_main_diagnos">
+           <property name="minimumSize">
+            <size>
+             <width>300</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>400</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="editable">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <widget class="QLabel" name="label_3">
+           <property name="text">
+            <string>Дата установки</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QDateEdit" name="dateEdit_main">
+           <property name="calendarPopup">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="checkBox_first">
+         <property name="text">
+          <string>Первичный</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <item>
+          <widget class="QLabel" name="label_status">
+           <property name="text">
+            <string>Статус:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_create">
+           <property name="text">
+            <string>Создать</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_2">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="title">
+       <string>Дополнительный диагноз</string>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_6">
+         <item>
+          <widget class="QLabel" name="label_2">
+           <property name="text">
+            <string>Диагноз:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="comboBox_code_dop_diagnos">
+           <property name="minimumSize">
+            <size>
+             <width>70</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>90</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="editable">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="comboBox_name_dop_diagnos">
+           <property name="minimumSize">
+            <size>
+             <width>300</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>400</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="editable">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_5">
+         <item>
+          <widget class="QLabel" name="label_date_dop">
+           <property name="text">
+            <string>Дата установки:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QDateEdit" name="dateEdit_date_dop_diagnos">
+           <property name="calendarPopup">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
+         <item>
+          <widget class="QLabel" name="label_status_dop">
+           <property name="text">
+            <string>Статус</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_add_dop_diagnos">
+           <property name="text">
+            <string>Добавить</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_close">
+         <property name="text">
+          <string>Закрыть</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

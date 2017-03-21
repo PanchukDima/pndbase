@@ -1,0 +1,1043 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog_find_filters</class>
+ <widget class="QDialog" name="Dialog_find_filters">
+  <property name="windowModality">
+   <enum>Qt::NonModal</enum>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>914</width>
+    <height>766</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_2">
+   <item>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="contextMenuPolicy">
+      <enum>Qt::CustomContextMenu</enum>
+     </property>
+     <property name="currentIndex">
+      <number>1</number>
+     </property>
+     <widget class="QWidget" name="tab">
+      <attribute name="title">
+       <string>Расширенный поиск пациентов</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_6">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <item>
+          <widget class="QTableView" name="tableView">
+           <property name="contextMenuPolicy">
+            <enum>Qt::CustomContextMenu</enum>
+           </property>
+           <property name="editTriggers">
+            <set>QAbstractItemView::NoEditTriggers</set>
+           </property>
+           <property name="selectionMode">
+            <enum>QAbstractItemView::SingleSelection</enum>
+           </property>
+           <property name="selectionBehavior">
+            <enum>QAbstractItemView::SelectRows</enum>
+           </property>
+           <property name="sortingEnabled">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton">
+           <property name="maximumSize">
+            <size>
+             <width>20</width>
+             <height>99999</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>&gt;</string>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QFrame" name="frame">
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Raised</enum>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout">
+            <item>
+             <layout class="QGridLayout" name="gridLayout">
+              <item row="19" column="0">
+               <widget class="QLabel" name="label_14">
+                <property name="text">
+                 <string>Квартира</string>
+                </property>
+               </widget>
+              </item>
+              <item row="19" column="1">
+               <widget class="QLineEdit" name="lineEdit_flat"/>
+              </item>
+              <item row="20" column="0">
+               <widget class="QCheckBox" name="checkBox_see_arhiv">
+                <property name="text">
+                 <string>Показывать архивных</string>
+                </property>
+               </widget>
+              </item>
+              <item row="18" column="0">
+               <widget class="QLabel" name="label_15">
+                <property name="text">
+                 <string>Корпус</string>
+                </property>
+               </widget>
+              </item>
+              <item row="18" column="1">
+               <widget class="QLineEdit" name="lineEdit_korp"/>
+              </item>
+              <item row="8" column="1">
+               <widget class="QComboBox" name="comboBox_area_street"/>
+              </item>
+              <item row="9" column="0">
+               <widget class="QLabel" name="label_5">
+                <property name="text">
+                 <string>Пол</string>
+                </property>
+               </widget>
+              </item>
+              <item row="9" column="1">
+               <widget class="QComboBox" name="comboBox_sex"/>
+              </item>
+              <item row="10" column="0">
+               <widget class="QLabel" name="label_7">
+                <property name="text">
+                 <string>Паспорт:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="11" column="0">
+               <widget class="QLabel" name="label_6">
+                <property name="text">
+                 <string>Серия</string>
+                </property>
+               </widget>
+              </item>
+              <item row="11" column="1">
+               <widget class="QLineEdit" name="lineEdit_passport_serial"/>
+              </item>
+              <item row="12" column="0">
+               <widget class="QLabel" name="label_8">
+                <property name="text">
+                 <string>Номер</string>
+                </property>
+               </widget>
+              </item>
+              <item row="12" column="1">
+               <widget class="QLineEdit" name="lineEdit_passport_number"/>
+              </item>
+              <item row="13" column="0">
+               <widget class="QLabel" name="label_9">
+                <property name="text">
+                 <string>Полис:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="16" column="1">
+               <widget class="QComboBox" name="comboBox_street">
+                <property name="editable">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="17" column="0">
+               <widget class="QLabel" name="label_13">
+                <property name="text">
+                 <string>Дом</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLineEdit" name="lineEdit_fname"/>
+              </item>
+              <item row="4" column="0">
+               <widget class="QLabel" name="label_3">
+                <property name="text">
+                 <string>Участок</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="0">
+               <widget class="QLabel" name="label_2">
+                <property name="text">
+                 <string>Дата рождения</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="1">
+               <widget class="QLineEdit" name="lineEdit_date_birthday"/>
+              </item>
+              <item row="8" column="0">
+               <widget class="QLabel" name="label_4">
+                <property name="text">
+                 <string>Район</string>
+                </property>
+               </widget>
+              </item>
+              <item row="14" column="0">
+               <widget class="QLabel" name="label_11">
+                <property name="text">
+                 <string>Номер</string>
+                </property>
+               </widget>
+              </item>
+              <item row="15" column="0">
+               <widget class="QCheckBox" name="checkBox_pt">
+                <property name="text">
+                 <string>ПТ</string>
+                </property>
+                <property name="tristate">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QLabel" name="label">
+                <property name="text">
+                 <string>Фамилия</string>
+                </property>
+               </widget>
+              </item>
+              <item row="14" column="1">
+               <widget class="QLineEdit" name="lineEdit_polis_number"/>
+              </item>
+              <item row="16" column="0">
+               <widget class="QLabel" name="label_12">
+                <property name="text">
+                 <string>Улица</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QLineEdit" name="lineEdit_oname"/>
+              </item>
+              <item row="17" column="1">
+               <widget class="QLineEdit" name="lineEdit_house"/>
+              </item>
+              <item row="2" column="0">
+               <widget class="QLabel" name="label_16">
+                <property name="text">
+                 <string>Отчество</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="1">
+               <widget class="QLineEdit" name="lineEdit_name"/>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="label_10">
+                <property name="text">
+                 <string>Имя</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="2">
+               <widget class="QCheckBox" name="checkBox_2">
+                <property name="text">
+                 <string>по</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="1">
+               <widget class="QComboBox" name="comboBox_area"/>
+              </item>
+              <item row="5" column="0">
+               <widget class="QCheckBox" name="checkBox_show_area_list">
+                <property name="text">
+                 <string>Выбрать несколько</string>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="0">
+               <widget class="QCheckBox" name="checkBox_all_area_list">
+                <property name="text">
+                 <string>Выбрать все</string>
+                </property>
+               </widget>
+              </item>
+              <item row="7" column="0" colspan="2">
+               <widget class="QListWidget" name="listWidget_area_list"/>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <widget class="QPushButton" name="pushButton_find">
+           <property name="text">
+            <string>Показать</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_cancel">
+           <property name="text">
+            <string>Отмена</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_status">
+         <property name="text">
+          <string>Количество записей:0</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_2">
+      <attribute name="title">
+       <string>Поиск по диагнозу</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <widget class="QTableView" name="tableView_diagnos_find">
+           <property name="contextMenuPolicy">
+            <enum>Qt::CustomContextMenu</enum>
+           </property>
+           <property name="editTriggers">
+            <set>QAbstractItemView::NoEditTriggers</set>
+           </property>
+           <property name="selectionMode">
+            <enum>QAbstractItemView::SingleSelection</enum>
+           </property>
+           <property name="selectionBehavior">
+            <enum>QAbstractItemView::SelectRows</enum>
+           </property>
+           <property name="sortingEnabled">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_hide_menu_diagnos">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>30</width>
+             <height>9999</height>
+            </size>
+           </property>
+           <property name="sizeIncrement">
+            <size>
+             <width>0</width>
+             <height>-31073</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>&gt;</string>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QFrame" name="frame_2">
+           <property name="frameShape">
+            <enum>QFrame::Box</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Raised</enum>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_4">
+            <item>
+             <layout class="QGridLayout" name="gridLayout_2">
+              <item row="9" column="0" colspan="2">
+               <widget class="QListWidget" name="listWidget_area_list_diagnos"/>
+              </item>
+              <item row="7" column="0">
+               <widget class="QCheckBox" name="checkBox_show_area_list_diagnos">
+                <property name="text">
+                 <string>Выбрать участки</string>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="1">
+               <widget class="QLineEdit" name="lineEdit_name_find_diagnos"/>
+              </item>
+              <item row="4" column="0">
+               <widget class="QLabel" name="label_18">
+                <property name="maximumSize">
+                 <size>
+                  <width>100</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Фамилия</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QCheckBox" name="checkBox_all_check_diagnos_find">
+                <property name="text">
+                 <string>Выбрать несколько</string>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="0">
+               <widget class="QLabel" name="label_20">
+                <property name="text">
+                 <string>Отчество</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QComboBox" name="comboBox_code_diagnos_find_diagnos">
+                <property name="editable">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QLabel" name="label_17">
+                <property name="maximumSize">
+                 <size>
+                  <width>100</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Код Диагноза</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="1">
+               <widget class="QLineEdit" name="lineEdit_fname_find_diagnos">
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="1">
+               <widget class="QListWidget" name="listWidget_list_diagnos">
+                <property name="maximumSize">
+                 <size>
+                  <width>200</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="0">
+               <widget class="QLabel" name="label_19">
+                <property name="text">
+                 <string>Имя</string>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="1">
+               <widget class="QLineEdit" name="lineEdit_oname_find_diagnos"/>
+              </item>
+              <item row="1" column="1">
+               <widget class="QComboBox" name="comboBox_name_diagnos_find_diagnos">
+                <property name="editable">
+                 <bool>true</bool>
+                </property>
+                <property name="sizeAdjustPolicy">
+                 <enum>QComboBox::AdjustToMinimumContentsLengthWithIcon</enum>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="label_21">
+                <property name="text">
+                 <string>Наименование диагноза</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="0">
+               <widget class="QCheckBox" name="checkBox_see_arhive_diagnos">
+                <property name="text">
+                 <string>Показывать архивных</string>
+                </property>
+               </widget>
+              </item>
+              <item row="8" column="0">
+               <widget class="QCheckBox" name="checkBox_check_all_area_diagnos">
+                <property name="text">
+                 <string>Выбрать все</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <widget class="QGroupBox" name="groupBox">
+              <property name="title">
+               <string>Информация о выборке</string>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_5">
+               <item>
+                <widget class="QLabel" name="label_find_result">
+                 <property name="font">
+                  <font>
+                   <pointsize>12</pointsize>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Всего найдено:</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButton_find_diagnos">
+              <property name="text">
+               <string>Найти</string>
+              </property>
+              <property name="icon">
+               <iconset resource="images.qrc">
+                <normaloff>:/icon/png/images/magnifier.png</normaloff>:/icon/png/images/magnifier.png</iconset>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="verticalSpacer">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_3">
+      <attribute name="title">
+       <string>Фильтр по наблюдениям</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_7">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
+         <item>
+          <widget class="QTableView" name="tableView_show_filter_dynamic">
+           <property name="contextMenuPolicy">
+            <enum>Qt::CustomContextMenu</enum>
+           </property>
+           <property name="editTriggers">
+            <set>QAbstractItemView::NoEditTriggers</set>
+           </property>
+           <property name="selectionMode">
+            <enum>QAbstractItemView::SingleSelection</enum>
+           </property>
+           <property name="selectionBehavior">
+            <enum>QAbstractItemView::SelectRows</enum>
+           </property>
+           <property name="sortingEnabled">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_show_and_hide_dynamic_view">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>30</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="sizeIncrement">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="baseSize">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>&gt;</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QFrame" name="frame_3">
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Raised</enum>
+           </property>
+           <layout class="QGridLayout" name="gridLayout_3">
+            <item row="2" column="0">
+             <widget class="QCheckBox" name="checkBox_all_dynamic_view_area">
+              <property name="text">
+               <string>Выбрать все</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="0">
+             <widget class="QCheckBox" name="checkBox_show_archiv_dynamic">
+              <property name="text">
+               <string>Показывать архивных</string>
+              </property>
+             </widget>
+            </item>
+            <item row="7" column="0">
+             <spacer name="verticalSpacer_2">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="8" column="0">
+             <widget class="QPushButton" name="pushButton_find_dynamic_view">
+              <property name="text">
+               <string>Поиск</string>
+              </property>
+             </widget>
+            </item>
+            <item row="6" column="0">
+             <widget class="QCheckBox" name="checkBox_show_close_dynamic">
+              <property name="text">
+               <string>Показывать закрытые</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QCheckBox" name="checkBox_show_dynamic_view_area">
+              <property name="text">
+               <string>Выбрать участки</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <widget class="QListWidget" name="listWidget_dynamic_view_area"/>
+            </item>
+            <item row="0" column="0">
+             <widget class="QGroupBox" name="groupBox_2">
+              <property name="title">
+               <string>Тип наблюдения</string>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_8">
+               <item>
+                <widget class="QCheckBox" name="checkBox_d">
+                 <property name="text">
+                  <string>Д</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="checkBox_lp">
+                 <property name="text">
+                  <string>ЛП</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="checkBox_k">
+                 <property name="text">
+                  <string>К</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="checkBox_not">
+                 <property name="text">
+                  <string>Нет согласия</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="checkBox_apl">
+                 <property name="text">
+                  <string>АПЛ</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="checkBox_adn">
+                 <property name="text">
+                  <string>АДН</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item row="5" column="0">
+             <widget class="QCheckBox" name="checkBox_pt_dynamic_view">
+              <property name="text">
+               <string>ПТ</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_4">
+      <attribute name="title">
+       <string>Фильтр по инвалидности</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_9">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_6">
+         <item>
+          <widget class="QTableView" name="tableView_invalid">
+           <property name="editTriggers">
+            <set>QAbstractItemView::NoEditTriggers</set>
+           </property>
+           <property name="selectionMode">
+            <enum>QAbstractItemView::SingleSelection</enum>
+           </property>
+           <property name="selectionBehavior">
+            <enum>QAbstractItemView::SelectRows</enum>
+           </property>
+           <property name="sortingEnabled">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_hide_invalid">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>100</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>20</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>&gt;</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QFrame" name="frame_4">
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Raised</enum>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_10">
+            <item>
+             <layout class="QGridLayout" name="gridLayout_4">
+              <item row="2" column="2">
+               <widget class="QCheckBox" name="checkBox_inv_3">
+                <property name="text">
+                 <string>III</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="2">
+               <widget class="QCheckBox" name="checkBox_inv_1">
+                <property name="text">
+                 <string>I</string>
+                </property>
+               </widget>
+              </item>
+              <item row="8" column="1">
+               <spacer name="verticalSpacer_3">
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>20</width>
+                  <height>40</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item row="1" column="2">
+               <widget class="QCheckBox" name="checkBox_inv_2">
+                <property name="text">
+                 <string>II</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QLabel" name="label_22">
+                <property name="text">
+                 <string>Группа инвалидности:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="2">
+               <widget class="QDateEdit" name="dateEdit_is_install">
+                <property name="calendarPopup">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="1">
+               <widget class="QLabel" name="label_23">
+                <property name="text">
+                 <string>Дата установления или пересмотра с:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="0">
+               <widget class="QCheckBox" name="checkBox_date_pere">
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </item>
+              <item row="9" column="1">
+               <widget class="QPushButton" name="pushButton_find_invalid">
+                <property name="text">
+                 <string>Поиск</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="0">
+               <widget class="QCheckBox" name="checkBox_date_install">
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="3">
+               <widget class="QLabel" name="label_26">
+                <property name="text">
+                 <string>по</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="4">
+               <widget class="QDateEdit" name="dateEdit_to_pere">
+                <property name="calendarPopup">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="2">
+               <widget class="QDateEdit" name="dateEdit_is_pere">
+                <property name="calendarPopup">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="1">
+               <widget class="QLabel" name="label_25">
+                <property name="text">
+                 <string>Дата переосведетельствования с: </string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="4">
+               <widget class="QDateEdit" name="dateEdit_to_install">
+                <property name="calendarPopup">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="3">
+               <widget class="QLabel" name="label_24">
+                <property name="text">
+                 <string>по</string>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="1">
+               <widget class="QCheckBox" name="checkBox_see_invalid_arhiv">
+                <property name="text">
+                 <string>Показывать архивных</string>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="1">
+               <widget class="QCheckBox" name="checkBox_bs">
+                <property name="text">
+                 <string>Показывать бесрочных</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QCheckBox" name="checkBox_group_inv">
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="7" column="1">
+               <widget class="QCheckBox" name="checkBox_dubl">
+                <property name="text">
+                 <string>Пациенты с историей инвалидностей</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_5">
+     <item>
+      <widget class="QPushButton" name="pushButton_export">
+       <property name="text">
+        <string>Экспорт</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_print">
+       <property name="font">
+        <font>
+         <family>MS Shell Dlg 2</family>
+         <italic>false</italic>
+         <underline>false</underline>
+         <stylestrategy>PreferDefault</stylestrategy>
+        </font>
+       </property>
+       <property name="cursor">
+        <cursorShape>CrossCursor</cursorShape>
+       </property>
+       <property name="text">
+        <string>Печать(в Разработке)</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>tableView</tabstop>
+  <tabstop>pushButton</tabstop>
+  <tabstop>lineEdit_fname</tabstop>
+  <tabstop>lineEdit_name</tabstop>
+  <tabstop>lineEdit_oname</tabstop>
+  <tabstop>lineEdit_date_birthday</tabstop>
+  <tabstop>comboBox_area</tabstop>
+  <tabstop>comboBox_area_street</tabstop>
+  <tabstop>comboBox_sex</tabstop>
+  <tabstop>lineEdit_passport_serial</tabstop>
+  <tabstop>lineEdit_passport_number</tabstop>
+  <tabstop>lineEdit_polis_number</tabstop>
+  <tabstop>comboBox_street</tabstop>
+  <tabstop>lineEdit_house</tabstop>
+  <tabstop>lineEdit_korp</tabstop>
+  <tabstop>lineEdit_flat</tabstop>
+  <tabstop>pushButton_find</tabstop>
+  <tabstop>checkBox_pt</tabstop>
+  <tabstop>pushButton_cancel</tabstop>
+ </tabstops>
+ <resources>
+  <include location="images.qrc"/>
+ </resources>
+ <connections/>
+</ui>

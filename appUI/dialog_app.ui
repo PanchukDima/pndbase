@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog_app</class>
+ <widget class="QDialog" name="Dialog_app">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QPushButton" name="pushButton_browser">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>91</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Запуск браузера</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_open_chat">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>40</y>
+     <width>80</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Открыть чат</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_doc_edit">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>70</y>
+     <width>131</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Редактор документов</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

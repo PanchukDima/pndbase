@@ -1,0 +1,1296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <author>Панчук Дмитрий</author>
+ <class>Dialog_patient</class>
+ <widget class="QDialog" name="Dialog_patient">
+  <property name="windowModality">
+   <enum>Qt::NonModal</enum>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>915</width>
+    <height>653</height>
+   </rect>
+  </property>
+  <property name="font">
+   <font>
+    <pointsize>10</pointsize>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QTabBar::tab {
+
+border: 2px solid #C4C4C3;
+border-bottom-color: #C2C7CB; /* same as the pane color */
+border-top-left-radius: 4px;
+border-top-right-radius: 4px;
+min-width: 8ex;
+padding: 2px;
+}
+
+ QTabBar::tab:selected{ 
+
+background-color: #63B8FF; 
+color: black
+}
+QTabWidget::pane { /* The tab widget frame */
+border: 2px solid #C2C7CB;
+}
+QTabWidget::tab-bar {
+left: 5px; /* move to the right by 5px */
+}
+</string>
+     </property>
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="tab">
+      <attribute name="title">
+       <string>Общие сведения</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <widget class="QLabel" name="label">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Фамилия</string>
+           </property>
+           <property name="buddy">
+            <cstring>lineEdit_fname</cstring>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="lineEdit_fname">
+           <property name="font">
+            <font>
+             <pointsize>11</pointsize>
+            </font>
+           </property>
+           <property name="clearButtonEnabled">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_fname_icon">
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_2">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Имя</string>
+           </property>
+           <property name="buddy">
+            <cstring>lineEdit_name</cstring>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="lineEdit_name">
+           <property name="clearButtonEnabled">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_name_icon">
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_3">
+           <property name="text">
+            <string>Отчество</string>
+           </property>
+           <property name="buddy">
+            <cstring>lineEdit_oname</cstring>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="lineEdit_oname">
+           <property name="clearButtonEnabled">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_mname_icon">
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_10">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <widget class="QLabel" name="label_4">
+           <property name="maximumSize">
+            <size>
+             <width>30</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Пол</string>
+           </property>
+           <property name="buddy">
+            <cstring>comboBox_sex</cstring>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="comboBox_sex">
+           <property name="maximumSize">
+            <size>
+             <width>60</width>
+             <height>16777215</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_5">
+           <property name="text">
+            <string>Дата рождения</string>
+           </property>
+           <property name="buddy">
+            <cstring>lineEdit_date_birtday</cstring>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="lineEdit_date_birtday">
+           <property name="maximumSize">
+            <size>
+             <width>120</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="clearButtonEnabled">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="comboBox_area">
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_8">
+           <property name="text">
+            <string>Участок</string>
+           </property>
+           <property name="buddy">
+            <cstring>comboBox_area</cstring>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="checkBox_pt">
+           <property name="text">
+            <string>ПТ</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_8">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QTableView" name="tableView">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>170</height>
+          </size>
+         </property>
+         <property name="editTriggers">
+          <set>QAbstractItemView::NoEditTriggers</set>
+         </property>
+         <property name="selectionMode">
+          <enum>QAbstractItemView::SingleSelection</enum>
+         </property>
+         <property name="selectionBehavior">
+          <enum>QAbstractItemView::SelectRows</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
+         <item>
+          <widget class="QLabel" name="label_10">
+           <property name="text">
+            <string>Направлен</string>
+           </property>
+           <property name="buddy">
+            <cstring>comboBox_direction</cstring>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="comboBox_direction"/>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_6">
+           <property name="text">
+            <string>Взят на учет</string>
+           </property>
+           <property name="buddy">
+            <cstring>lineEdit_date_start</cstring>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="lineEdit_date_start">
+           <property name="minimumSize">
+            <size>
+             <width>120</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>120</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="clearButtonEnabled">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="checkBox_ds_end_state">
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_9">
+           <property name="text">
+            <string>Снят с учета</string>
+           </property>
+           <property name="buddy">
+            <cstring>lineEdit_date_end</cstring>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="lineEdit_date_end">
+           <property name="minimumSize">
+            <size>
+             <width>120</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>120</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="clearButtonEnabled">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_11">
+           <property name="text">
+            <string>Причина снятия</string>
+           </property>
+           <property name="buddy">
+            <cstring>comboBox_why_close</cstring>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="comboBox_why_close"/>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_add_history">
+           <property name="focusPolicy">
+            <enum>Qt::NoFocus</enum>
+           </property>
+           <property name="text">
+            <string>Добавить</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_del_uchet">
+           <property name="text">
+            <string>Удалить</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_7">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_15">
+         <item>
+          <widget class="QLabel" name="label_direct_from">
+           <property name="text">
+            <string>Откуда</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="comboBox_direct_from"/>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_15">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_6">
+         <property name="spacing">
+          <number>6</number>
+         </property>
+         <item>
+          <widget class="QLabel" name="label_12">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Дополнительная информация</string>
+           </property>
+           <property name="buddy">
+            <cstring>lineEdit_work_or_education</cstring>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="lineEdit_work_or_education">
+           <property name="clearButtonEnabled">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_17">
+         <item>
+          <widget class="QCheckBox" name="checkBox_custody">
+           <property name="text">
+            <string>Опека</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_18">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_7">
+           <property name="text">
+            <string>Группа инвалидности общая</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="comboBox_invalid"/>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_17">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox">
+         <property name="title">
+          <string>Адрес</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout">
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>1</number>
+          </property>
+          <item row="0" column="3">
+           <widget class="QLabel" name="label_16">
+            <property name="text">
+             <string>Дом</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+            <property name="buddy">
+             <cstring>lineEdit_house</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QComboBox" name="comboBox_area_street"/>
+          </item>
+          <item row="1" column="3">
+           <widget class="QLineEdit" name="lineEdit_house">
+            <property name="clearButtonEnabled">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QPushButton" name="pushButton_add_street">
+            <property name="maximumSize">
+             <size>
+              <width>20</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="focusPolicy">
+             <enum>Qt::NoFocus</enum>
+            </property>
+            <property name="text">
+             <string>+</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="7">
+           <widget class="QLabel" name="label_19">
+            <property name="text">
+             <string>Телефон</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+            <property name="buddy">
+             <cstring>lineEdit_telefon</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="5">
+           <widget class="QLineEdit" name="lineEdit_korpuse">
+            <property name="clearButtonEnabled">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QComboBox" name="comboBox_street">
+            <property name="minimumSize">
+             <size>
+              <width>150</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>11</pointsize>
+             </font>
+            </property>
+            <property name="editable">
+             <bool>true</bool>
+            </property>
+            <property name="insertPolicy">
+             <enum>QComboBox::NoInsert</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="5">
+           <widget class="QLabel" name="label_17">
+            <property name="text">
+             <string>Корпус</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+            <property name="buddy">
+             <cstring>lineEdit_korpuse</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_20">
+            <property name="text">
+             <string>Район</string>
+            </property>
+            <property name="buddy">
+             <cstring>comboBox_area_street</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="7">
+           <widget class="QLineEdit" name="lineEdit_telefon">
+            <property name="clearButtonEnabled">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLabel" name="label_15">
+            <property name="font">
+             <font>
+              <weight>50</weight>
+              <bold>false</bold>
+              <kerning>true</kerning>
+             </font>
+            </property>
+            <property name="inputMethodHints">
+             <set>Qt::ImhNone</set>
+            </property>
+            <property name="text">
+             <string>Улица</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+            <property name="buddy">
+             <cstring>comboBox_street</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="6">
+           <widget class="QLabel" name="label_18">
+            <property name="text">
+             <string>Квартира</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+            <property name="buddy">
+             <cstring>lineEdit_room</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_14">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Проживает</string>
+            </property>
+            <property name="buddy">
+             <cstring>comboBox_street</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="6">
+           <widget class="QLineEdit" name="lineEdit_room">
+            <property name="clearButtonEnabled">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="8">
+           <spacer name="horizontalSpacer_5">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="1" column="4">
+           <widget class="QLabel" name="label_house_status">
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="5">
+           <widget class="QLineEdit" name="lineEdit_index">
+            <property name="maxLength">
+             <number>9</number>
+            </property>
+            <property name="clearButtonEnabled">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="3">
+           <widget class="QLabel" name="label_21">
+            <property name="layoutDirection">
+             <enum>Qt::LeftToRight</enum>
+            </property>
+            <property name="lineWidth">
+             <number>0</number>
+            </property>
+            <property name="text">
+             <string>Индекс</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+         <zorder>comboBox_area_street</zorder>
+         <zorder>comboBox_street</zorder>
+         <zorder>label_16</zorder>
+         <zorder>lineEdit_house</zorder>
+         <zorder>pushButton_add_street</zorder>
+         <zorder>label_19</zorder>
+         <zorder>lineEdit_korpuse</zorder>
+         <zorder>label_17</zorder>
+         <zorder>label_20</zorder>
+         <zorder>lineEdit_telefon</zorder>
+         <zorder>label_15</zorder>
+         <zorder>label_18</zorder>
+         <zorder>label_14</zorder>
+         <zorder>lineEdit_room</zorder>
+         <zorder>label_house_status</zorder>
+         <zorder>lineEdit_index</zorder>
+         <zorder>label_21</zorder>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_10">
+         <item>
+          <widget class="QLabel" name="label_26">
+           <property name="text">
+            <string>Паспорт</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_serial_passport">
+           <property name="text">
+            <string>Серия</string>
+           </property>
+           <property name="buddy">
+            <cstring>lineEdit_serial_passport</cstring>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="lineEdit_serial_passport">
+           <property name="inputMask">
+            <string/>
+           </property>
+           <property name="maxLength">
+            <number>4</number>
+           </property>
+           <property name="echoMode">
+            <enum>QLineEdit::Normal</enum>
+           </property>
+           <property name="cursorPosition">
+            <number>0</number>
+           </property>
+           <property name="cursorMoveStyle">
+            <enum>Qt::LogicalMoveStyle</enum>
+           </property>
+           <property name="clearButtonEnabled">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_28">
+           <property name="text">
+            <string>Номер</string>
+           </property>
+           <property name="buddy">
+            <cstring>lineEdit_number_passport</cstring>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="lineEdit_number_passport">
+           <property name="inputMask">
+            <string/>
+           </property>
+           <property name="maxLength">
+            <number>6</number>
+           </property>
+           <property name="clearButtonEnabled">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_22">
+           <property name="text">
+            <string>Кем выдан</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="lineEdit_passport_vidan">
+           <property name="clearButtonEnabled">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_9">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_16">
+         <item>
+          <widget class="QLabel" name="label_23">
+           <property name="minimumSize">
+            <size>
+             <width>57</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>57</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Полис</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_25">
+           <property name="text">
+            <string>Серия</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="lineEdit_polis_serial">
+           <property name="maxLength">
+            <number>7</number>
+           </property>
+           <property name="clearButtonEnabled">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_27">
+           <property name="text">
+            <string>Номер</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="lineEdit_polis_number">
+           <property name="maxLength">
+            <number>20</number>
+           </property>
+           <property name="clearButtonEnabled">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_16">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_7">
+         <item>
+          <widget class="QLabel" name="label_13">
+           <property name="text">
+            <string>СНИЛС</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="lineEdit_snils">
+           <property name="inputMask">
+            <string/>
+           </property>
+           <property name="clearButtonEnabled">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_24">
+           <property name="text">
+            <string>Группа льгот на медикаменты</string>
+           </property>
+           <property name="buddy">
+            <cstring>lineEdit_group_lgot</cstring>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="lineEdit_group_lgot">
+           <property name="clearButtonEnabled">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_19">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_2">
+      <attribute name="title">
+       <string>Документы</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <item>
+          <widget class="QLabel" name="label_29">
+           <property name="text">
+            <string>Тип заключения</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="comboBox_end"/>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_30">
+           <property name="text">
+            <string>Тип документа</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="comboBox_document">
+           <property name="minimumSize">
+            <size>
+             <width>170</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="sizeAdjustPolicy">
+            <enum>QComboBox::AdjustToContents</enum>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_5">
+         <item>
+          <widget class="QPushButton" name="pushButton_document_create">
+           <property name="text">
+            <string>Создать</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_document_edit">
+           <property name="text">
+            <string>Изменить</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_document_delete">
+           <property name="text">
+            <string>Удалить</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_3">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QSplitter" name="splitter">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <widget class="QTableView" name="tableView_documents_list">
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectRows</enum>
+          </property>
+         </widget>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_12"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_5">
+      <attribute name="title">
+       <string>Комментарии</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_6">
+       <item>
+        <widget class="QTableView" name="tableView_comments_patient">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="contextMenuPolicy">
+          <enum>Qt::CustomContextMenu</enum>
+         </property>
+         <property name="editTriggers">
+          <set>QAbstractItemView::NoEditTriggers</set>
+         </property>
+         <property name="alternatingRowColors">
+          <bool>true</bool>
+         </property>
+         <property name="selectionMode">
+          <enum>QAbstractItemView::SingleSelection</enum>
+         </property>
+         <property name="selectionBehavior">
+          <enum>QAbstractItemView::SelectRows</enum>
+         </property>
+         <property name="gridStyle">
+          <enum>Qt::NoPen</enum>
+         </property>
+         <attribute name="horizontalHeaderVisible">
+          <bool>false</bool>
+         </attribute>
+         <attribute name="verticalHeaderVisible">
+          <bool>false</bool>
+         </attribute>
+         <attribute name="verticalHeaderCascadingSectionResizes">
+          <bool>false</bool>
+         </attribute>
+         <attribute name="verticalHeaderStretchLastSection">
+          <bool>false</bool>
+         </attribute>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_13">
+         <item>
+          <widget class="QTextEdit" name="textEdit_comment">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>100</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>100</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_add_comments">
+           <property name="text">
+            <string>Добавить</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_9">
+     <item>
+      <widget class="QDateTimeEdit" name="dateTimeEdit">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="readOnly">
+        <bool>false</bool>
+       </property>
+       <property name="calendarPopup">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_edit_date_create_medcard">
+       <property name="text">
+        <string>Изменить</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_ok">
+       <property name="focusPolicy">
+        <enum>Qt::NoFocus</enum>
+       </property>
+       <property name="text">
+        <string>ОК</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_apply">
+       <property name="focusPolicy">
+        <enum>Qt::NoFocus</enum>
+       </property>
+       <property name="text">
+        <string>Применить</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_cancel">
+       <property name="focusPolicy">
+        <enum>Qt::NoFocus</enum>
+       </property>
+       <property name="text">
+        <string>Отмена</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>lineEdit_fname</tabstop>
+  <tabstop>lineEdit_name</tabstop>
+  <tabstop>lineEdit_oname</tabstop>
+  <tabstop>comboBox_sex</tabstop>
+  <tabstop>lineEdit_date_birtday</tabstop>
+  <tabstop>comboBox_area</tabstop>
+  <tabstop>checkBox_pt</tabstop>
+  <tabstop>tableView</tabstop>
+  <tabstop>comboBox_direction</tabstop>
+  <tabstop>lineEdit_date_start</tabstop>
+  <tabstop>checkBox_ds_end_state</tabstop>
+  <tabstop>lineEdit_date_end</tabstop>
+  <tabstop>comboBox_why_close</tabstop>
+  <tabstop>comboBox_direct_from</tabstop>
+  <tabstop>lineEdit_work_or_education</tabstop>
+  <tabstop>checkBox_custody</tabstop>
+  <tabstop>comboBox_invalid</tabstop>
+  <tabstop>comboBox_street</tabstop>
+  <tabstop>lineEdit_house</tabstop>
+  <tabstop>lineEdit_korpuse</tabstop>
+  <tabstop>lineEdit_room</tabstop>
+  <tabstop>lineEdit_telefon</tabstop>
+  <tabstop>comboBox_area_street</tabstop>
+  <tabstop>lineEdit_index</tabstop>
+  <tabstop>lineEdit_serial_passport</tabstop>
+  <tabstop>lineEdit_number_passport</tabstop>
+  <tabstop>lineEdit_passport_vidan</tabstop>
+  <tabstop>lineEdit_polis_serial</tabstop>
+  <tabstop>lineEdit_polis_number</tabstop>
+  <tabstop>lineEdit_snils</tabstop>
+  <tabstop>lineEdit_group_lgot</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+ <designerdata>
+  <property name="gridDeltaX">
+   <number>10</number>
+  </property>
+  <property name="gridDeltaY">
+   <number>10</number>
+  </property>
+  <property name="gridSnapX">
+   <bool>true</bool>
+  </property>
+  <property name="gridSnapY">
+   <bool>true</bool>
+  </property>
+  <property name="gridVisible">
+   <bool>true</bool>
+  </property>
+ </designerdata>
+</ui>

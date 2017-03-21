@@ -1,0 +1,31 @@
+<RCC>
+    <qresource prefix="/icon/png">
+        <file>images/add_icon.png</file>
+        <file>images/edit_icon.png</file>
+        <file>images/NZT.png</file>
+        <file>images/ok.png</file>
+        <file>images/error.png</file>
+        <file>images/Warning.png</file>
+        <file>images/sortIndicatorDown.png</file>
+        <file>images/sortIndicatorUp.png</file>
+        <file>images/Settings.png</file>
+        <file>images/center.png</file>
+        <file>images/Left.png</file>
+        <file>images/Right.png</file>
+        <file>images/add-user.png</file>
+        <file>images/magnifier.png</file>
+        <file>images/remove-user.png</file>
+        <file>images/drawing.png</file>
+        <file>images/eye.png</file>
+        <file>images/settings-gears.png</file>
+        <file>images/group.png</file>
+        <file>images/user.png</file>
+        <file>images/justify.png</file>
+        <file>images/save.png</file>
+        <file>images/print.png</file>
+        <file>images/1484595950_bold.png</file>
+        <file>images/1484595941_text_italic.png</file>
+        <file>images/1484596168_text-format.png</file>
+        <file>images/1484596761_098_Spreadsheet.png</file>
+    </qresource>
+</RCC>

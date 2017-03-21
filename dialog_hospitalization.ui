@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog_hospitalization</class>
+ <widget class="QDialog" name="Dialog_hospitalization">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>266</width>
+    <height>264</height>
+   </rect>
+  </property>
+  <property name="font">
+   <font>
+    <pointsize>11</pointsize>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="1" column="2">
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="0" column="1">
+      <widget class="QComboBox" name="comboBox_who">
+       <property name="editable">
+        <bool>false</bool>
+       </property>
+       <property name="maxCount">
+        <number>5</number>
+       </property>
+       <property name="frame">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QDateEdit" name="dateEdit_date_down">
+       <property name="calendarPopup">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QDateEdit" name="dateEdit_date_up">
+       <property name="calendarPopup">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Дата поступления</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Кем</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>Дата выписки</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QCheckBox" name="checkBox">
+       <property name="text">
+        <string>Выписан</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QLabel" name="label_4">
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_ok">
+       <property name="text">
+        <string>ОК</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton_cancel">
+       <property name="text">
+        <string>Отмена</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

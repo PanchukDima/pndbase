@@ -1,0 +1,142 @@
+    QString save_find_string = str_find_patient->text();
+    QSqlDatabase db = QSqlDatabase::database();
+    QSettings *settings = new QSettings("settings_user.ini",QSettings::IniFormat);
+    int vari=0;
+    bool use_filter = settings->value("use_filter").toBool();
+    if(use_filter)
+    {
+        ui->statusBar->showMessage("Используеться фильтр поиска");
+        QString fname = settings->value("fname_filter").toString();
+        QString name = settings->value("name_filter").toString();
+        QString mname = settings->value("mname_filter").toString();
+
+    }
+    else
+    {
+        //QString save_find_string = str_find_patient->text();
+
+        clear_main_table();
+        clear_dynamic_view_table();
+        clear_visiting_control_table();
+        settings_ui();
+
+        str_find_patient->setText(save_find_string);
+        QStringList find_string = save_find_string.split(" ");
+
+
+        if(find_string[0].toInt()>0)
+        {
+            vari=1;
+        }
+        else if (find_string[0]==0 && find_string[0]=="")
+        {
+            vari=2;
+        }
+        else if(find_string.count()==1)
+        {
+            vari=3;
+        }
+        else if (find_string.count()>1)
+        {
+            vari=4;
+        }
+        if(db.open())
+        {
+
+            QSqlQuery query;
+            QString sqlquery;
+            QString sqlquery_count;
+            switch (vari) {
+            case 1:
+
+                sqlquery="SELECT medcard.id, patient.id, patient.fname, patient.name, patient.mname, patient.serial_passport, patient.number_passport FROM test.medcard, test.patient WHERE medcard.patient_id = patient.id  AND patient.id = ";
+                sqlquery.append(find_string[0]).append(";");
+                sqlquery_count="SELECT count(patient.id) FROM test.medcard, test.patient WHERE medcard.patient_id = patient.id  AND patient.id = ";
+                sqlquery_count.append(find_string[0]).append(";");
+                break;
+            case 2:
+                sqlquery="SELECT medcard.id, patient.id, patient.fname, patient.name, patient.mname, patient.serial_passport, patient.number_passport FROM test.medcard, test.patient WHERE medcard.patient_id = patient.id ;";
+                sqlquery_count="SELECT count(patient.id) FROM test.medcard, test.patient WHERE medcard.patient_id = patient.id ;";
+
+                break;
+            case 3:
+                sqlquery="SELECT medcard.id, patient.id, patient.fname, patient.name, patient.mname, patient.serial_passport, patient.number_passport FROM test.medcard, test.patient WHERE medcard.patient_id = patient.id  AND patient.fname LIKE ";
+                sqlquery.append("'%").append(find_string[0]).append("%'").append(";");
+                sqlquery_count="SELECT count(patient.id) FROM test.medcard, test.patient WHERE medcard.patient_id = patient.id AND patient.fname LIKE ";
+                sqlquery_count.append("'%").append(find_string[0]).append("%'").append(";");
+
+                break;
+            case 4:
+
+                sqlquery="SELECT medcard.id, patient.id, patient.fname, patient.name, patient.mname, patient.serial_passport, patient.number_passport FROM test.medcard, test.patient WHERE medcard.patient_id = patient.id  AND patient.fname LIKE ";
+                sqlquery.append("'%").append(find_string[0]).append("%'").append(" AND patient.name LIKE ").append("'").append(find_string[1]).append("%'").append(";");
+                sqlquery_count="SELECT count(patient.id) FROM test.medcard, test.patient WHERE medcard.patient_id = patient.id  AND patient.fname LIKE";
+                sqlquery_count.append("'%").append(find_string[0]).append("%'").append(" AND patient.name LIKE ").append("'").append(find_string[1]).append("%'").append(";");
+                break;
+            }
+            query.exec(sqlquery_count);
+            while(query.next())
+            {
+                ui->progressBar->show();
+                ui->progressBar->setMaximum(query.value(0).toInt());
+            }
+            query.exec(sqlquery);
+            qDebug()<<sqlquery;
+            int last_row = ui->tableWidget->rowCount();
+            int progress_status=0;
+            while (query.next()) {
+                progress_status++;
+                ui->progressBar->setValue(progress_status);
+                QString id_medcard = query.value(0).toString();
+                QString id_patient = query.value(1).toString();
+                QString name;
+                name.append(query.value(2).toString())
+                        .append(" ")
+                        .append(query.value(3).toString())
+                        .append(" ")
+                        .append(query.value(4).toString());
+                QString serial_passport_value = query.value(5).toString();
+                QString number_passport_value = query.value(6).toString();
+
+                QTableWidgetItem * medcard_id = new QTableWidgetItem();
+                QTableWidgetItem * patient_id = new QTableWidgetItem();
+                QTableWidgetItem * name_t = new QTableWidgetItem();
+                QTableWidgetItem * serial_passport = new QTableWidgetItem();
+                QTableWidgetItem * number_passport = new QTableWidgetItem();
+
+                QFont font_text;
+                font_text.setPointSize(font_size);
+
+                medcard_id->setText(id_medcard);
+                patient_id->setText(id_patient);
+                name_t->setText(name);
+                serial_passport->setText(serial_passport_value);
+                number_passport->setText(number_passport_value);
+
+                medcard_id->setFont(font_text);
+                patient_id->setFont(font_text);
+                name_t->setFont(font_text);
+                serial_passport->setFont(font_text);
+                number_passport->setFont(font_text);
+
+
+                ui->tableWidget->insertRow(last_row);
+                //            if (query.value(0)==2)
+                //            {
+                //                patient_id->setBackground(Qt::red);
+                //                medcard_id->setBackground(Qt::red);
+                //                name_t->setBackground(Qt::red);
+                //                serial_passport->setBackground(Qt::red);
+                //                number_passport->setBackground(Qt::red);
+
+                //            }
+                ui->tableWidget->setItem(last_row,0,medcard_id);
+                ui->tableWidget->setItem(last_row,1,patient_id);
+                ui->tableWidget->setItem(last_row,2,name_t);
+                ui->tableWidget->setItem(last_row,3,serial_passport);
+                ui->tableWidget->setItem(last_row,4,number_passport);
+
+            }
+            ui->progressBar->hide();
+            query.finish();
+            query.clear();
