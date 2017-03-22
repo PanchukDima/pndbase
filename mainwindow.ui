@@ -373,7 +373,7 @@ left: 5px; /* move to the right by 5px */
               <item>
                <widget class="QPushButton" name="pushButton_add_today_visits_control">
                 <property name="text">
-                 <string>Пришел сегодня</string>
+                 <string>Посещение сегодня</string>
                 </property>
                </widget>
               </item>
@@ -951,7 +951,7 @@ left: 5px; /* move to the right by 5px */
      <x>0</x>
      <y>0</y>
      <width>1267</width>
-     <height>25</height>
+     <height>26</height>
     </rect>
    </property>
    <property name="font">
