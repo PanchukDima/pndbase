@@ -11,6 +11,8 @@ Dialog_add_dynamic_view::Dialog_add_dynamic_view(QWidget *parent) :
     ui->radioButton_d->setChecked(true);
     ui->dateEdit_adn->setEnabled(false);
     ui->dateEdit_apl->setEnabled(false);
+    ui->dateEdit_off_date->hide();
+    ui->label_off_date->hide();
     block_state = false;
 
     connect(ui->radioButton_d,SIGNAL(toggled(bool)),SLOT(active_radio_button(bool)));
@@ -20,6 +22,7 @@ Dialog_add_dynamic_view::Dialog_add_dynamic_view(QWidget *parent) :
     connect(ui->checkBox_apl,SIGNAL(toggled(bool)),SLOT(active_apl_check(bool)));
     connect(ui->pushButton_OK,SIGNAL(clicked()),SLOT(send_data()));
     connect(ui->pushButton_Cancel,SIGNAL(clicked()),SLOT(close()));
+    connect(ui->checkBox_state,SIGNAL(stateChanged(int)),SLOT(show_hide_close_date()));
 
 }
 
@@ -27,6 +30,55 @@ Dialog_add_dynamic_view::~Dialog_add_dynamic_view()
 {
     delete ui;
 }
+void Dialog_add_dynamic_view::load_info_dynamic_view()
+{
+    QSqlDatabase db = QSqlDatabase::database();
+    QSqlQuery query;
+    if(db.open())
+    {
+        query.exec("SELECT on_date, group_disp_view, stop_date, status FROM test.dynamic_view WHERE id="+global_id);
+        if(query.lastError().isValid())
+        {
+            qDebug()<<query.lastError();
+        }
+        while(query.next())
+        {
+           ui->dateEdit->setDate(query.value(0).toDate());
+           ui->radioButton_d->isChecked();
+
+           switch (query.value(1).toInt()) {
+           case 1:
+               ui->radioButton_1->setChecked(true);
+               break;
+           case 2:
+               ui->radioButton_2->setChecked(true);
+               break;
+           case 3:
+               ui->radioButton_3->setChecked(true);
+               break;
+           case 4:
+               ui->radioButton_4->setChecked(true);
+               break;
+           case 5:
+               ui->radioButton_5->setChecked(true);
+               break;
+           case 6:
+               ui->radioButton_6->setChecked(true);
+               break;
+           case 7:
+               ui->radioButton_7->setChecked(true);
+               break;
+           }
+           qDebug()<<query.value(1).toInt();
+           ui->dateEdit_off_date->setDate(query.value(2).toDate());
+           ui->checkBox_state->setChecked(query.value(3).toBool());
+
+        }
+        show_hide_close_date();
+    }
+
+}
+
 void Dialog_add_dynamic_view::load_diagnos_patient()
 {
     QSqlDatabase db = QSqlDatabase::database();
@@ -62,6 +114,11 @@ void Dialog_add_dynamic_view::setParam(int param, QString id,QString staff)
     ui->dateEdit->setDate(QDate::currentDate());
     ui->dateEdit_adn->setDate(QDate::currentDate());
     ui->dateEdit_apl->setDate(QDate::currentDate());
+    switch (param) {
+    case 1:
+        load_info_dynamic_view();
+        break;
+    }
 }
 
 void Dialog_add_dynamic_view::active_adn_check(bool state)
@@ -154,6 +211,17 @@ void Dialog_add_dynamic_view::send_data()
     QString date_apl = ui->dateEdit_apl->date().toString("dd.MM.yyyy");
     QString date_adn = ui->dateEdit_adn->date().toString("dd.MM.yyyy");
     QString date_visits;
+    QString state;
+    if(ui->checkBox_state->isChecked())
+    {
+        state = "true";
+    }
+    else
+    {
+        state = "false";
+    }
+    switch (global_param) {
+    case 0:
     if(ui->radioButton_d->isChecked())
     {
         if(check_data(0))
@@ -456,7 +524,15 @@ void Dialog_add_dynamic_view::send_data()
     }
 
 Dialog_add_dynamic_view::accept();
-
+        break;
+    case 1:
+        if(db.open())
+        {
+            query.exec("UPDATE test.dynamic_view SET on_date='"+ui->dateEdit->date().toString("dd.MM.yyyy")+"',  group_disp_view='"+some_d()+"',stop_date='"+ui->dateEdit_off_date->date().toString("dd.MM.yyyy")+"', status='"+state+"' WHERE id = "+global_id);
+            Dialog_add_dynamic_view::accept();
+        }
+        break;
+    }
 }
 void Dialog_add_dynamic_view::global_block()
 {
@@ -554,5 +630,53 @@ bool Dialog_add_dynamic_view::check_data(int param)
             return false;
         }
         break;
+    }
+}
+
+QString Dialog_add_dynamic_view::some_d()
+{
+    if(ui->radioButton_1->isChecked())
+    {
+        return "1";
+    }
+    if(ui->radioButton_2->isChecked())
+    {
+        return "2";
+    }
+    if(ui->radioButton_3->isChecked())
+    {
+        return "3";
+    }
+    if(ui->radioButton_4->isChecked())
+    {
+        return "4";
+    }
+    if(ui->radioButton_5->isChecked())
+    {
+        return "5";
+    }
+    if(ui->radioButton_6->isChecked())
+    {
+        return "6";
+    }
+    if(ui->radioButton_7->isChecked())
+    {
+        return "7";
+    }
+
+}
+void Dialog_add_dynamic_view::show_hide_close_date()
+{
+    if(ui->checkBox_state->isChecked())
+    {
+        qDebug()<<"true show close_date";
+        ui->dateEdit_off_date->show();
+        ui->label_off_date->show();
+    }
+    else
+    {
+        qDebug()<<"false hide close_date";
+        ui->dateEdit_off_date->hide();
+        ui->label_off_date->hide();
     }
 }

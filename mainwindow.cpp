@@ -112,6 +112,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->pushButton_edit_suicide,SIGNAL(clicked(bool)),SLOT(edit_suicide()));
     //connect(ui->pushButton_edit_preparate,SIGNAL(clicked(bool)),SLOT());
     connect(ui->pushButton_edit_visits_control,SIGNAL(clicked(bool)),SLOT(edit_visit()));
+    connect(ui->pushButton_edit_dynamic_view,SIGNAL(clicked(bool)),SLOT(edit_dynamic_view()));
 
     //Кнопки удаления
     connect(ui->pushButton_del_diagnos,SIGNAL(clicked(bool)),SLOT(del_diagnos_patient()));
@@ -4145,8 +4146,8 @@ void MainWindow::start_udp_server()
 
 void MainWindow::sort_gosp(int i_collumn)
 {
-    QSortFilterProxyModel * filter = new QSortFilterProxyModel();
-    filter->setSourceModel(model_sved_gosp);
-    filter->filterAcceptsColumn(i_collumn);
+    //QSortFilterProxyModel * filter = new QSortFilterProxyModel();
+    //filter->setSourceModel(model_sved_gosp);
+    //filter->filterAcceptsColumn(i_collumn);
 
 }
