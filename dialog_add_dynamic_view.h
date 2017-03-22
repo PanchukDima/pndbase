@@ -44,6 +44,9 @@ public slots:
     void global_block();
     bool check_data(int);
     void load_diagnos_patient();
+    void load_info_dynamic_view();
+    QString some_d();
+    void show_hide_close_date();
 
 };
 
