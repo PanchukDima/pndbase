@@ -4145,8 +4145,8 @@ void MainWindow::start_udp_server()
 
 void MainWindow::sort_gosp(int i_collumn)
 {
-    QSortFilterProxyModel * filter = new QSortFilterProxyModel();
-    filter->setSourceModel(model_sved_gosp);
-    filter->filterAcceptsColumn(i_collumn);
+    //QSortFilterProxyModel * filter = new QSortFilterProxyModel();
+    //filter->setSourceModel(model_sved_gosp);
+    //filter->filterAcceptsColumn(i_collumn);
 
 }
