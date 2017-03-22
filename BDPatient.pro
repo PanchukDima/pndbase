@@ -6,9 +6,8 @@
 
 QT       += core gui sql printsupport webkitwidgets network
 
-win32:
-{
-    QT += axcontainer
+win32{
+QT += axcontainer
 }
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
