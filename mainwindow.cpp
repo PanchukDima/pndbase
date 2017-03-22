@@ -2570,32 +2570,32 @@ void MainWindow::del_visit()
     {
         int row = ui->tableView_visits_control->currentIndex().row();
         QString id = ui->tableView_visits_control->model()->index(row,0).data(Qt::DisplayRole).toString();
-        int ret = QMessageBox::warning(this, tr("Удаление посещения!"),
-                                       tr("Вы точно хотите удалить?"),
-                                       QMessageBox::Yes|QMessageBox::No);
+//        int ret = QMessageBox::warning(this, tr("Удаление посещения!"),
+//                                       tr("Вы точно хотите удалить?"),
+//                                       QMessageBox::Yes|QMessageBox::No);
 
 
 
-        if(ret==16384)
-        {
-            bool bOk;
-            QString str = QInputDialog::getText( 0,
-                                                 "Причина удаления",
-                                                 "Причина удаления:",
-                                                 QLineEdit::Normal,
-                                                 "",
-                                                 &bOk
-                                                );
-            if (!bOk) {
-                // Была нажата кнопка Cancel
-            }
-            else
-            {
-                if(str =="")
-                {
-                    del_visit();
-                }
-                query.exec("UPDATE test.visits_control  SET delete_row='1', cause = '"+str+"' WHERE id= "+id);
+//        if(ret==16384)
+//        {
+//            bool bOk;
+//            QString str = QInputDialog::getText( 0,
+//                                                 "Причина удаления",
+//                                                 "Причина удаления:",
+//                                                 QLineEdit::Normal,
+//                                                 "",
+//                                                 &bOk
+//                                                );
+//            if (!bOk) {
+//                // Была нажата кнопка Cancel
+//            }
+//            else
+//            {
+//                if(str =="")
+//                {
+//                    del_visit();
+//                }
+                query.exec("UPDATE test.visits_control  SET delete_row='1' WHERE id= "+id);
                 if(query.lastError().isValid())
                 {
                     qDebug()<<query.lastError();
@@ -2611,9 +2611,9 @@ void MainWindow::del_visit()
                         QMessageBox::warning(this,"Ошибка SQL","Произошла ошибка при обращении к базе данных");
                     }
                 }
-            }
+
             load_all_info();
-        }
+
     }
     else
     {
