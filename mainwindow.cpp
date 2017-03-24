@@ -293,6 +293,7 @@ void MainWindow::settings_ui()
     ui->pushButton_edit_suicide->setEnabled(obj.rights_user[31]);
     ui->pushButton_edit_ood->setEnabled(obj.rights_user[35]);
     ui->pushButton_edit_visits_control->setEnabled(obj.rights_user[8]);
+    ui->pushButton_edit_dynamic_view->setEnabled(obj.rights_user[46]);
 
     //Кнопки удаления
     ui->pushButton_del_diagnos->setEnabled(obj.rights_user[3]);
