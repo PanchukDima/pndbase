@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>233</width>
+    <width>240</width>
     <height>257</height>
    </rect>
   </property>
@@ -23,7 +23,9 @@
     <normaloff>:/icon/png/images/NZT.png</normaloff>:/icon/png/images/NZT.png</iconset>
   </property>
   <property name="styleSheet">
-   <string notr="true">background:rgb(190, 255, 253)</string>
+   <string notr="true">QDialog{
+background:rgb(190, 255, 253)
+}</string>
   </property>
   <property name="inputMethodHints">
    <set>Qt::ImhNone</set>
@@ -39,7 +41,7 @@
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true"/>
+        <string notr="true">color:rgb(0, 0, 0)</string>
        </property>
        <property name="text">
         <string>Логин (Имя):</string>
@@ -72,6 +74,9 @@ background:white;</string>
         <font>
          <pointsize>11</pointsize>
         </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color:rgb(0, 0, 0)</string>
        </property>
        <property name="text">
         <string>Пароль:</string>
@@ -109,6 +114,9 @@ background:white;</string>
       <font>
        <pointsize>11</pointsize>
       </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color:rgb(0, 0, 0)</string>
      </property>
      <property name="text">
       <string>Введите Логин и пароль</string>
