@@ -118,6 +118,7 @@ void Dialog_add_dynamic_view::setParam(int param, QString id,QString staff)
     switch (param) {
     case 1:
         load_info_dynamic_view();
+        Dialog_add_dynamic_view::setWindowTitle("Изменение динамики наблюдения");
         break;
     case 0:
         ui->checkBox_state->hide();
