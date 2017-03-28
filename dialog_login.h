@@ -16,6 +16,7 @@
 #include <QProcess>
 #include <QHostAddress>
 #include <QNetworkInterface>
+#include <QPrinterInfo>
 
 
 #include <Objects/User/objects_app.h>

@@ -72,15 +72,13 @@ void Dialog_login::beta_antivirus()
      qDebug()<<"Task not open";
      }
      QProcess tasklist;
-     QList<QHostAddress> myIpAddresses = QNetworkInterface::allAddresses();
-     QString exec = "tasklist";
-     QStringList params;
-     params<<"-FO"<<"CSV";
-     tasklist.start(exec, params);
-     tasklist.waitForFinished(); // sets current thread to sleep and waits for pingProcess end
-     QString output(tasklist.readAllStandardOutput());
+
+     QList<QPrinterInfo> printers = QPrinterInfo::availablePrinters();
      QTextStream tsTextStream(&fMessFile);
-     tsTextStream <<output<<"============="<<myIpAddresses[0].toString()<<"=============";
+     foreach (const QPrinterInfo &printerinfo, printers)
+     {
+        tsTextStream<<printerinfo.printerName()<<"\n";
+     }
      tsTextStream.flush();
      fMessFile.flush();
      fMessFile.close();
