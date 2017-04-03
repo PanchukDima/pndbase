@@ -2852,16 +2852,30 @@ void MainWindow::edit_dynamic_view()
 {
     qDebug()<<"MainWindow: Function: edit_dynamic_view";
     Dialog_add_dynamic_view dialog;
+    Dialog_edit_other_dynamic_view dialog_other;
     int selected_tables = ui->tableView_dynamic_view->currentIndex().row();
 
     if (selected_tables >= 0)
     {
         int row = ui->tableView_dynamic_view->currentIndex().row();
         QString id = ui->tableView_dynamic_view->model()->index(row,0).data(Qt::DisplayRole).toString();
-        dialog.setParam(1,id,staff_id);
-        if(dialog.exec())
+        QString dynamic = ui->tableView_dynamic_view->model()->index(row,3).data(Qt::DisplayRole).toString();
+        if(dynamic == "АДН" || dynamic == "АПЛ" || dynamic == "ЛП")
         {
-            model_dynamic_view->select();
+            dialog_other.setParam(1,id);
+
+            if(dialog_other.exec())
+            {
+                model_dynamic_view->select();
+            }
+        }
+        else
+        {
+            dialog.setParam(1,id,staff_id);
+            if(dialog.exec())
+            {
+                model_dynamic_view->select();
+            }
         }
     }
     else
