@@ -43,6 +43,7 @@
 #include "work_info_patient/ood/dialog_ood.h"
 #include "journal/dialog_rvk.h"
 #include "work_info_patient/list_not_work/dialog_list_not_work.h"
+#include "work_info_patient/dynamic_view/dialog_edit_other_dynamic_view.h"
 
 //models other
 #include <QFileSystemModel>

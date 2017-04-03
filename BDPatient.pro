@@ -75,7 +75,8 @@ SOURCES += main.cpp\
     models/model_visiting_control_all.cpp \
     models/filters/model_filter_invalid.cpp \
     appUI/Browser/mainwindow_web_browser.cpp \
-    appUI/DocumentEditor/dialogs/dialog_page_settings.cpp
+    appUI/DocumentEditor/dialogs/dialog_page_settings.cpp \
+    work_info_patient/dynamic_view/dialog_edit_other_dynamic_view.cpp
 
 HEADERS  += mainwindow.h \
     dialog_patient.h \
@@ -129,7 +130,8 @@ HEADERS  += mainwindow.h \
     models/model_visiting_control_all.h \
     models/filters/model_filter_invalid.h \
     appUI/Browser/mainwindow_web_browser.h \
-    appUI/DocumentEditor/dialogs/dialog_page_settings.h
+    appUI/DocumentEditor/dialogs/dialog_page_settings.h \
+    work_info_patient/dynamic_view/dialog_edit_other_dynamic_view.h
 
 FORMS    += mainwindow.ui \
     dialog_patient.ui \
@@ -167,7 +169,8 @@ FORMS    += mainwindow.ui \
     work_info_patient/visitors/dialog_visiting_control.ui \
     appUI/TasksUI/window_palner.ui \
     appUI/Browser/mainwindow_web_browser.ui \
-    appUI/DocumentEditor/dialogs/dialog_page_settings.ui
+    appUI/DocumentEditor/dialogs/dialog_page_settings.ui \
+    work_info_patient/dynamic_view/dialog_edit_other_dynamic_view.ui
 
 RESOURCES += \
     images.qrc
