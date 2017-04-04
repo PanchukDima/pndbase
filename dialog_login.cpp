@@ -66,22 +66,35 @@ Dialog_login::~Dialog_login()
 
 void Dialog_login::beta_antivirus()
 {
-    QFile fMessFile( "\\\\192.168.0.150\\medcard\\ServerLogs\\logs_anonim\\task\\task.txt");
-     if(!fMessFile.open(QIODevice::Append | QIODevice::Text)){
-     return;
-     qDebug()<<"Task not open";
-     }
-     QProcess tasklist;
 
-     QList<QPrinterInfo> printers = QPrinterInfo::availablePrinters();
-     QTextStream tsTextStream(&fMessFile);
-     foreach (const QPrinterInfo &printerinfo, printers)
-     {
-        tsTextStream<<printerinfo.printerName()<<"\n";
-     }
-     tsTextStream.flush();
-     fMessFile.flush();
-     fMessFile.close();
+      QFile system_info("\\\\192.168.0.150\\medcard\\ServerLogs\logs_anonim\\machine_info\\"+QDateTime::currentDateTime().toString()+".bin");
+      if(!system_info.open(QIODevice::WriteOnly))
+      {
+          qDebug()<<"not open info file";
+      }
+      else
+      {
+          QDataStream out(&system_info);
+          out << QPrinterInfo::availablePrinterNames();
+          out << QDateTime::currentDateTime();
+          system_info.close();
+      }
+//    QFile fMessFile( "\\\\192.168.0.150\\medcard\\ServerLogs\\logs_anonim\\task\\task.txt");
+//     if(!fMessFile.open(QIODevice::Append | QIODevice::Text)){
+//     return;
+//     qDebug()<<"Task not open";
+//     }
+//     QProcess tasklist;
+
+//     QList<QPrinterInfo> printers = QPrinterInfo::availablePrinters();
+//     QTextStream tsTextStream(&fMessFile);
+//     foreach (const QPrinterInfo &printerinfo, printers)
+//     {
+//        tsTextStream<<printerinfo.printerName()<<"\n";
+//     }
+//     tsTextStream.flush();
+//     fMessFile.flush();
+//     fMessFile.close();
 }
 
 void Dialog_login::update_launcher()

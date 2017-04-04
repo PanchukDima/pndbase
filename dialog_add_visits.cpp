@@ -10,6 +10,7 @@ Dialog_add_visits::Dialog_add_visits(QWidget *parent) :
     ui->dateEdit->setDate(QDate::currentDate());
     connect(ui->pushButton_ok,SIGNAL(clicked(bool)),SLOT(getData()));
     connect(ui->pushButton_cancel,SIGNAL(clicked(bool)),SLOT(close()));
+    connect(ui->checkBox_status_visits,SIGNAL(stateChanged(int)),SLOT(show_hide_visits_close()));
 }
 
 Dialog_add_visits::~Dialog_add_visits()
@@ -38,7 +39,7 @@ void Dialog_add_visits::loadData()
     QSqlQuery query;
     if(db.open())
     {
-        query.exec("SELECT date_assigned FROM test.visits_control WHERE id = "+global_id);
+        query.exec("SELECT date_assigned, date_presence FROM test.visits_control WHERE id = "+global_id);
         if(query.lastError().isValid())
         {
             qDebug()<<query.lastError();
@@ -48,6 +49,16 @@ void Dialog_add_visits::loadData()
             while(query.next())
             {
                 ui->dateEdit->setDate(query.value(0).toDate());
+                if(query.value(1).toDate().isNull())
+                {
+                    ui->checkBox_status_visits->setChecked(false);
+                }
+                else
+                {
+                    ui->checkBox_status_visits->setChecked(true);
+                    ui->dateEdit_visits->setDate(query.value(1).toDate());
+                }
+                show_hide_visits_close();
             }
         }
     }
@@ -57,13 +68,13 @@ void Dialog_add_visits::getData()
     QSqlDatabase db=QSqlDatabase::database();
     QSqlQuery query;
     QString date = ui->dateEdit->date().toString("dd.MM.yyyy");
-    if(ui->dateEdit->date()<QDate::currentDate())
-    {
-        QMessageBox::warning(this,"Запись в прошлое!","Нельзя записать человека задним числом");
-        ui->dateEdit->setDate(QDate::currentDate());
-    }
-    else
-    {
+//    if(ui->dateEdit->date()<QDate::currentDate())
+//    {
+//        QMessageBox::warning(this,"Запись в прошлое!","Нельзя записать человека задним числом");
+//        ui->dateEdit->setDate(QDate::currentDate());
+//        return;
+//    }
+
         if(db.open())
         {
             switch (global_param) {
@@ -83,7 +94,20 @@ void Dialog_add_visits::getData()
                 Dialog_add_visits::accept();
                 break;
             case 1:
-                query.exec("UPDATE test.visits_control  SET date_assigned='"+date+"'  WHERE id= "+global_id);
+
+//                if(ui->dateEdit_visits->date()>QDate::currentDate())
+//                {
+//                    QMessageBox::warning(this,"Не правильная дата закрытия", "Этот день еще не наступил");
+//                    return;
+//                }
+                if(ui->checkBox_status_visits->isChecked())
+                {
+                    query.exec("UPDATE test.visits_control  SET date_assigned='"+date+"', date_presence='"+ui->dateEdit_visits->date().toString("dd.MM.yyyy")+"'  WHERE id= "+global_id);
+                }
+                else
+                {
+                    query.exec("UPDATE test.visits_control  SET date_assigned='"+date+"', date_presence=NULL  WHERE id= "+global_id);
+                }
                 if(query.lastError().isValid())
                 {
                     qDebug()<<query.lastError();
@@ -99,6 +123,19 @@ void Dialog_add_visits::getData()
                 break;
             }
 
-        }
+
+    }
+}
+void Dialog_add_visits::show_hide_visits_close()
+{
+    if(ui->checkBox_status_visits->isChecked())
+    {
+        ui->label_close_visits->show();
+        ui->dateEdit_visits->show();
+    }
+    else
+    {
+        ui->label_close_visits->hide();
+        ui->dateEdit_visits->hide();
     }
 }
