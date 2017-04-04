@@ -84,7 +84,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->tableView,SIGNAL(customContextMenuRequested(QPoint)),SLOT(context_menu_main_table(QPoint)));
     connect(ui->tableView_ood,SIGNAL(customContextMenuRequested(QPoint)),SLOT(context_menu_ood_table(QPoint)));
     connect(ui->tableWidget_diagnos_patient,SIGNAL(customContextMenuRequested(QPoint)),SLOT(context_menu_diagnos_table(QPoint)));
-    connect(ui->tableWidget_sved_gospital,SIGNAL(customContextMenuRequested(QPoint)),SLOT(context_menu_hospitalization_table(QPoint)));
+    connect(ui->tableView_sved_gosp,SIGNAL(customContextMenuRequested(QPoint)),SLOT(context_menu_hospitalization_table(QPoint)));
     connect(ui->tableWidget_invalid_psi,SIGNAL(customContextMenuRequested(QPoint)),SLOT(context_menu_invalid_table(QPoint)));
     connect(ui->tableView_suicide,SIGNAL(customContextMenuRequested(QPoint)),SLOT(context_menu_suicide_table(QPoint)));
     connect(ui->tableView_list_not_work,SIGNAL(customContextMenuRequested(QPoint)),SLOT(context_menu_list_not_work_table(QPoint)));
@@ -316,18 +316,9 @@ void MainWindow::settings_ui()
 
 
     QTableWidget * diagnos_table = ui->tableWidget_diagnos_patient; //Диагнозы пациентов
-    QTableWidget * gospit_table = ui->tableWidget_sved_gospital;
 
     QTableWidget * invalid_table = ui->tableWidget_invalid_psi;
 
-
-    //QTableWidget * suicid_table = ui->tableWidget_suicid;
-
-
-
-    //Итемы главной таблицы
-    //    QTableWidgetItem * name_1_collumn_main = new QTableWidgetItem();
-    //    QTableWidgetItem * name_2_collumn_main = new QTableWidgetItem();
     QTableWidgetItem * name_3_collumn_main = new QTableWidgetItem();
     QTableWidgetItem * name_4_collumn_main = new QTableWidgetItem();
     QTableWidgetItem * name_5_collumn_main = new QTableWidgetItem();
@@ -381,7 +372,7 @@ void MainWindow::settings_ui()
     diagnos_table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     diagnos_table->verticalHeader()->setDefaultSectionSize(70);
 
-    gospit_table->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
 
 
 
@@ -393,7 +384,7 @@ void MainWindow::settings_ui()
 
 
     diagnos_table->setColumnCount(6);
-    gospit_table->setColumnCount(5);
+    //gospit_table->setColumnCount(5);
 
     invalid_table->setColumnCount(7);
 
@@ -405,7 +396,7 @@ void MainWindow::settings_ui()
 
 
     diagnos_table->hideColumn(0);
-    gospit_table->hideColumn(0);
+    //gospit_table->hideColumn(0);
 
     invalid_table->hideColumn(0);
 
@@ -533,11 +524,6 @@ void MainWindow::settings_ui()
     diagnos_table->setHorizontalHeaderItem(4,name_4_collumn_diagnos_table);
     diagnos_table->setHorizontalHeaderItem(5,name_5_collumn_diagnos_table);
     diagnos_table->setHorizontalHeaderItem(6,name_6_collumn_diagnos_table);
-    //Добавляем итемы на таблицу "Динамика наблюдения"
-    gospit_table->setHorizontalHeaderItem(1,name_1_collumn_gospit);
-    gospit_table->setHorizontalHeaderItem(2,name_2_collumn_gospit);
-    gospit_table->setHorizontalHeaderItem(3,name_3_collumn_gospit);
-    gospit_table->setHorizontalHeaderItem(4,name_4_collumn_gospit);
 
     //Добавляем итемы на таблицу "инвалидность по псих. заболеваниям"
     invalid_table->setHorizontalHeaderItem(1,name_1_collumn_invalid);
@@ -548,7 +534,6 @@ void MainWindow::settings_ui()
     invalid_table->setHorizontalHeaderItem(6,name_6_collumn_invalid);
     //Добавляем итемы на таблицу "суицид"
 
-    // suicid_table->setHorizontalHeaderItem(1,name_1_collumn_suicid);
 
 
 
@@ -860,36 +845,7 @@ void MainWindow::clear_diagnos_table()
         ui->tableWidget_diagnos_patient->removeRow(c);
     }
 }
-void MainWindow::clear_hospitalization_table()
-{
-    qDebug()<<"MainWindow: Function: clear_hospitaliation_table";
-    int iColumns = ui->tableWidget_sved_gospital->columnCount();
-    int iRows = ui->tableWidget_sved_gospital->rowCount();
-    QList<QTableWidgetItem*> myList;
 
-    for(int i = 0; i < iRows; ++i)
-    {
-        for(int j = 0; j < iColumns; ++j)
-        {
-            QTableWidgetItem* pWidget = ui->tableWidget_sved_gospital->item(i, j);
-            myList.append(pWidget);
-            pWidget = 0;
-        }
-    }
-    QListIterator<QTableWidgetItem*> i(myList);
-    while(i.hasNext())
-    {
-        delete i.next();
-    }
-    int c;
-    //    ui->tableWidget_sved_gospital->clear();
-    //    ui->tableWidget_sved_gospital->clearContents();
-    //    ui->mainToolBar->clear();
-    for (c = ui->tableWidget_sved_gospital->rowCount()-1; c >= 0; c--)
-    {
-        ui->tableWidget_sved_gospital->removeRow(c);
-    }
-}
 void MainWindow::clear_invalid_table()
 {
     qDebug()<<"MainWindow: Function: clear_invalid_table";
@@ -1017,7 +973,7 @@ void MainWindow::load_all_info()
     QString path_files_patient = settings->value("path_files_patient").toString();
 
     clear_diagnos_table();
-    clear_hospitalization_table();
+
     clear_invalid_table();
 
     settings_ui();
@@ -1453,9 +1409,9 @@ void MainWindow::load_all_info()
         load_diagnos_table();
         qDebug()<<"diagnos_table";
     }
-    if(ui->tableWidget_sved_gospital->isVisible())
+    if(ui->tableView_sved_gosp->isVisible())
     {
-        load_hospitalization_table();
+        load_model_sved_gosp();
         qDebug()<<"hosp";
     }
     if(ui->tableWidget_invalid_psi->isVisible())
@@ -1522,6 +1478,10 @@ void MainWindow::load_model_sved_gosp()
         QString id = ui->tableView->model()->index(row,0).data(Qt::DisplayRole).toString();
         model_sved_gosp->setFilter("medcard_id ="+id);
         model_sved_gosp->select();
+        ui->tableView_sved_gosp->horizontalHeader()->setSectionResizeMode(2,QHeaderView::Stretch);
+        ui->tableView_sved_gosp->horizontalHeader()->setSectionResizeMode(3,QHeaderView::Stretch);
+        ui->tableView_sved_gosp->horizontalHeader()->setSectionResizeMode(4,QHeaderView::Stretch);
+        ui->tableView_sved_gosp->horizontalHeader()->setSectionResizeMode(5,QHeaderView::Stretch);
     }
 }
 
@@ -1712,100 +1672,7 @@ void MainWindow::load_diagnos_table()
     }
 }
 
-void MainWindow::load_hospitalization_table()
-{
 
-    QSqlDatabase db = QSqlDatabase::database();
-    QSqlQuery query;
-    int selected_tables = ui->tableView->currentIndex().row();
-    if (selected_tables >= 0)
-    {
-        int row = ui->tableView->currentIndex().row();
-        QString id = ui->tableView->model()->index(row,0).data(Qt::DisplayRole).toString();
-        if(db.open())
-        {
-            QSqlQuery query;
-            query.exec("SELECT\
-                       hospitalization.id,\
-                       hospitalization.who_wrote,\
-                       hospitalization.date_up,\
-                       hospitalization.date_down,\
-                       staff.fname,\
-                       staff.name,\
-                       staff.mname\
-                       FROM \
-                       test.hospitalization,\
-                       test.staff\
-                       WHERE\
-                       hospitalization.staff_add_id = staff.id AND delete_row = '0' AND medcard_id="+id);
-                    if(query.lastError().isValid())
-            {
-                    qDebug()<<query.lastError();
-                    QMessageBox::warning(this,"Ошибка SQL","Произошла ошибка при обращении к базе данных");
-        }
-                    int last_row_hospitalization = ui->tableWidget_sved_gospital->rowCount();
-
-                    while (query.next())
-            {
-                QString id_value = query.value(0).toString();
-                int who_value = query.value(1).toInt();
-                QString who_table_value;
-                QString date_up_value = query.value(2).toDate().toString("dd.MM.yyyy");
-                QString date_down_value = query.value(3).toDate().toString("dd.MM.yyyy");
-                QString staff_fio_value;
-                staff_fio_value.append(query.value(4).toString()).append("\n").append(query.value(5).toString()).append("\n").append(query.value(6).toString());
-
-                switch (who_value) {
-                case 0:
-                    who_table_value = "СП";
-                    break;
-                case 1:
-                    who_table_value = "ПНД";
-                    break;
-                case 2:
-                    who_table_value = "Другое";
-                    break;
-                }
-                QTableWidgetItem * id = new QTableWidgetItem();
-                QTableWidgetItem * who = new QTableWidgetItem();
-                QTableWidgetItem * date_up = new QTableWidgetItem();
-                QTableWidgetItem * date_down = new QTableWidgetItem();
-                QTableWidgetItem * staff_fio = new QTableWidgetItem();
-
-                id->setText(id_value);
-                who->setText(who_table_value);
-                date_up->setText(date_up_value);
-                date_down->setText(date_down_value);
-                staff_fio->setText(staff_fio_value);
-
-                QFont font_text;
-                font_text.setPointSize(font_size);
-
-                id->setFont(font_text);
-                who->setFont(font_text);
-                date_up->setFont(font_text);
-                date_down->setFont(font_text);
-                staff_fio->setFont(font_text);
-
-                ui->tableWidget_sved_gospital->insertRow(last_row_hospitalization);
-
-                ui->tableWidget_sved_gospital->setItem(last_row_hospitalization,0,id);
-                ui->tableWidget_sved_gospital->setItem(last_row_hospitalization,1,who);
-                ui->tableWidget_sved_gospital->setItem(last_row_hospitalization,2,date_up);
-                ui->tableWidget_sved_gospital->setItem(last_row_hospitalization,3,date_down);
-                ui->tableWidget_sved_gospital->setItem(last_row_hospitalization,4,staff_fio);
-
-
-            }
-        }
-        else
-        {
-            QMessageBox::warning(this,"Ошибка","Потеряно соединение с базой данных");
-            logs_save log;
-            log.error_log("Database disconect "+QDateTime::currentDateTime().toString("dd.MM.yyyy HH:mm:ss"));
-        }
-    }
-}
 
 void MainWindow::load_invalid_table()
 {
@@ -2139,7 +2006,7 @@ void MainWindow::load_other_info()
         model_dynamic_view->setFilter("medcard_id ="+id);
         model_visits_control->setFilter("medcard_id ="+id);
     }
-    if(ui->tableWidget_sved_gospital->isVisible())
+    if(ui->tableView_sved_gosp->isVisible())
     {
         model_sved_gosp->setFilter("medcard_id ="+id);
     }
@@ -2480,7 +2347,7 @@ void MainWindow::context_menu_hospitalization_table(QPoint pos)
     menu->addAction("Добавить", this, SLOT(add_hospitalization()))->setEnabled(rights_user[10]);
     menu->addAction("Изменить", this, SLOT(edit_hospitalization()))->setEnabled(rights_user[11]); // это можно использовать для прав->setEnabled(false);
     menu->addAction("Удалить", this, SLOT(del_hospitalization()))->setEnabled(rights_user[12]);
-    menu->exec(ui->tableWidget_sved_gospital->mapToGlobal(pos));
+    menu->exec(ui->tableView_sved_gosp->mapToGlobal(pos));
 }
 void MainWindow::context_menu_invalid_table(QPoint pos)
 {
@@ -3089,11 +2956,11 @@ void MainWindow::edit_hospitalization()
     qDebug()<<"MainWindow: Function: edit_hospitaliation";
     Dialog_hospitalization dialog;
     Objects_app obj;
-    int selected_tables = ui->tableWidget_sved_gospital->selectionModel()->selectedRows().count();
-    if (selected_tables == 1)
+    int selected_tables = ui->tableView_sved_gosp->currentIndex().row();
+    if (selected_tables >= 0)
     {
-        int cu_row = ui->tableWidget_sved_gospital->currentRow();
-        QString id = ui->tableWidget_sved_gospital->item(cu_row,0)->text();
+        int row = ui->tableView_sved_gosp->currentIndex().row();
+        QString id = ui->tableView_sved_gosp->model()->index(row,0).data(Qt::DisplayRole).toString();
         dialog.setParam(1,id,obj.staff_id);
         if(dialog.exec())
         {
@@ -3111,11 +2978,11 @@ void MainWindow::del_hospitalization()
     QSqlDatabase db = QSqlDatabase::database();
     QSqlQuery query;
     Objects_app obj;
-    int selected_tables = ui->tableWidget_sved_gospital->selectionModel()->selectedRows().count();
-    if (selected_tables == 1)
+    int selected_tables = ui->tableView_sved_gosp->currentIndex().row();
+    if (selected_tables >= 0)
     {
-        int cu_row = ui->tableWidget_sved_gospital->currentRow();
-        QString id = ui->tableWidget_sved_gospital->item(cu_row,0)->text();
+        int row = ui->tableView_sved_gosp->currentIndex().row();
+        QString id = ui->tableView_sved_gosp->model()->index(row,0).data(Qt::DisplayRole).toString();
         int ret = QMessageBox::warning(this, tr("Удаление госпитализации!"),
                                        tr("Вы точно хотите удалить?"),
                                        QMessageBox::Yes|QMessageBox::No);
@@ -3825,9 +3692,11 @@ void MainWindow::set_table_param()
     model_visits_control = nullptr;
     model_visits_control = new model_visits_control_patient();
 
+    QSortFilterProxyModel *filter_sved_gosp = new QSortFilterProxyModel();
     delete model_sved_gosp;
     model_sved_gosp = nullptr;
     model_sved_gosp = new model_sved_gosp_patient();
+    filter_sved_gosp->setSourceModel(model_sved_gosp);
 
     delete model_invalid;
     model_invalid = nullptr;
@@ -3955,8 +3824,13 @@ void MainWindow::set_table_param()
     model_sved_gosp->setHeaderData(5,Qt::Horizontal,tr("Добавил\nИзменил"));
 
     model_sved_gosp->setFilter("medcard_id = 0");
+    model_sved_gosp->setSort(3,Qt::DescendingOrder);
     model_sved_gosp->select();
-    // model_invalid->setTable();
+
+    ui->tableView_sved_gosp->setModel(model_sved_gosp);
+    ui->tableView_sved_gosp->hideColumn(0);
+    ui->tableView_sved_gosp->hideColumn(1);
+
 
     model_invalid->setHeaderData(0,Qt::Horizontal,tr("id"));
     model_invalid->setHeaderData(1,Qt::Horizontal,tr("medcard_id"));

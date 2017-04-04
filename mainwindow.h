@@ -169,13 +169,13 @@ public slots:
     void load_model_visits_control();
     void load_model_sved_gosp();
     void load_diagnos_table();
-    void load_hospitalization_table();
+
     void load_invalid_table();
     void load_suicide_table();
     void load_ood_table();
     //...
     void clear_diagnos_table();
-    void clear_hospitalization_table();
+
     void clear_invalid_table();
     void find_patients();
     void load_all_info();
