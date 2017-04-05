@@ -3898,11 +3898,20 @@ void MainWindow::load_settings_from_sql()
 void MainWindow::load_translator()
 {
     QTranslator * qt_translator = new QTranslator;
-    if ( !qt_translator->load( "translations\\qt_ru.qm" ) )
+#ifdef _WIN32
+    if ( !qt_translator->load( "translations/qt_ru.qm" ) )
     {
         delete qt_translator;
         qDebug()<<"Load_translation Failed";
     }
+#endif
+#ifdef __linux__
+    if ( !qt_translator->load( "/etc/BDPatient/translations/qt_ru.qm" ) )
+    {
+        delete qt_translator;
+        qDebug()<<"Load_translation Failed";
+    }
+#endif
     qApp->installTranslator( qt_translator );
 }
 void MainWindow::load_area_list()
