@@ -173,7 +173,8 @@ FORMS    += mainwindow.ui \
 
 RESOURCES += \
     images.qrc
+win32{
 LIBS += -L /plugin/sqldrivers
-
+}
 #INCLUDEPATH += C:/ProjectPSI/nonstoklibrary/poppler-0.40.0/qt5/src
 
