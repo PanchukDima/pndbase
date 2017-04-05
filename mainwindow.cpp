@@ -683,9 +683,10 @@ void MainWindow::open_win_settings()
 }
 void MainWindow::settings_user()
 {
+    Objects_app obj;
     qDebug()<<"MainWindow: Function: setting_user";
     font_size = 12;
-    QSettings *settings = new QSettings("settings_user.ini",QSettings::IniFormat);
+    QSettings *settings = new QSettings(obj.path_settings,QSettings::IniFormat);
     ipdatabase = settings->value("ipdatabase").toString();
     font_size = settings->value("sizefonttexttable").toInt();
     QString path_files_patient = settings->value("path_files_patient").toString();
@@ -968,8 +969,9 @@ void MainWindow::gen_report_24()
 void MainWindow::load_all_info()
 {
     //очистка таблиц от старых данных
+    Objects_app obj;
     qDebug()<<"MainWindow: Function: load_all_info";
-    QSettings *settings = new QSettings("settings_user.ini",QSettings::IniFormat);
+    QSettings *settings = new QSettings(obj.path_settings,QSettings::IniFormat);
     QString path_files_patient = settings->value("path_files_patient").toString();
 
     clear_diagnos_table();
@@ -3501,9 +3503,10 @@ void MainWindow::added_files_patient()
 void MainWindow::test_curent_version()
 {
     qDebug()<<"MainWindow: Function: test_current_version";
+    Objects_app obj;
     QString default_title = MainWindow::windowTitle();
     QStringList title = default_title.split("/");
-    QSettings *settings = new QSettings("settings_user.ini",QSettings::IniFormat);
+    QSettings *settings = new QSettings(obj.path_settings,QSettings::IniFormat);
     int version = settings->value("CurrentVersion").toInt();
     QString version_str = settings->value("CurrentVersion").toString();
     QNetworkAccessManager *manager = new QNetworkAccessManager(this);

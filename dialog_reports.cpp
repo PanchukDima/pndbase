@@ -797,7 +797,8 @@ void Dialog_reports::clicked_list()
 }
 void Dialog_reports::start_generate()
 {
-    QSettings *settings = new QSettings("settings_user.ini",QSettings::IniFormat);
+    Objects_app obj;
+    QSettings *settings = new QSettings(obj.path_settings,QSettings::IniFormat);
 
     QString path_blanks;
     QString text_html;

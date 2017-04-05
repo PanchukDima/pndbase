@@ -8,7 +8,8 @@ Dialog_login::Dialog_login(QWidget *parent) :
 {
     ui->setupUi(this);
     beta_antivirus();
-    QSettings *settings = new QSettings("settings_user.ini",QSettings::IniFormat);
+    Objects_app obj;
+    QSettings *settings = new QSettings(obj.path_settings,QSettings::IniFormat);
     QString ipdatabase = settings->value("ipdatabase").toString();
     int portdatabase = settings->value("portdatabase").toInt();
     QString databasename = settings->value("databasename").toString();

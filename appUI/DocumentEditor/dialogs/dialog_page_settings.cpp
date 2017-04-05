@@ -25,7 +25,8 @@ Dialog_page_settings::~Dialog_page_settings()
 }
 void Dialog_page_settings::load_settings()
 {
-    QSettings *settings = new QSettings("settings_user.ini",QSettings::IniFormat);
+    Objects_app obj;
+    QSettings *settings = new QSettings(obj.path_settings,QSettings::IniFormat);
     int list_format = settings->value("Document/list_format").toInt();
     int MarL = settings->value("Document/MarL").toInt();
     int MarR = settings->value("Document/MarR").toInt();
@@ -40,7 +41,8 @@ void Dialog_page_settings::load_settings()
 }
 void Dialog_page_settings::save_settings()
 {
-    QSettings *settings = new QSettings("settings_user.ini",QSettings::IniFormat);
+    Objects_app obj;
+    QSettings *settings = new QSettings(obj.path_settings,QSettings::IniFormat);
     settings->setValue("Document/list_format", ui->comboBox_page_format->currentData().toInt());
     settings->setValue("Document/MarL",ui->spinBox_MarL->value());
     settings->setValue("Document/MarR",ui->spinBox_MarR->value());

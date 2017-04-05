@@ -18,6 +18,7 @@
 
 
 
+#include <Objects/User/objects_app.h>
 #include <signal.h>
 #include <network/broadcastlog.h>
 
@@ -90,6 +91,13 @@ int main(int argc, char *argv[])
     qInstallMessageHandler(myMessageHandler);
     QApplication a(argc, argv);
     MainWindow w;
+    Objects_app obj;
+    #ifdef _WIN32
+        obj.path_settings = "settings_user.ini";
+    #endif
+    #ifdef __linux__
+        obj.path_settings = "/etc/BDPatient/settings_user.ini";
+    #endif
     qDebug()<<"Application Start";
     w.showMaximized();
     return a.exec();

@@ -6,6 +6,7 @@
 #include <QFile>
 #include <QFileDialog>
 #include <QDebug>
+#include <Objects/User/objects_app.h>
 
 namespace Ui {
 class Dialog_copy_files_to_server;

@@ -5,6 +5,7 @@ int Objects_app::staff_position;
 QList <bool> Objects_app::rights_user;
 QStringList Objects_app::servising_area;
 QString Objects_app::str_area_list;
+QString Objects_app::path_settings;
 Objects_app::Objects_app(QObject *parent) : QObject(parent)
 {
 
