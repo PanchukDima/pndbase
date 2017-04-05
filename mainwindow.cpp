@@ -565,9 +565,9 @@ void MainWindow::settings_ui()
         qDebug()<<"Database disconect "+QDateTime::currentDateTime().toString("dd.MM.yyyy HH:mm:ss");
     }
     //Сохраняем настройки сессии для дальнейшего использования
-    QSettings *settings = new QSettings("session.ini",QSettings::IniFormat);
-    settings->setValue("staff_name", staff_name);
-    settings->setValue("staff_id", staff_id);
+//    QSettings *settings = new QSettings("session.ini",QSettings::IniFormat);
+//    settings->setValue("staff_name", staff_name);
+//    settings->setValue("staff_id", staff_id);
 
 
     
