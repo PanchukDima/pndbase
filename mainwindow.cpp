@@ -2532,6 +2532,11 @@ void MainWindow::add_yesterday_visits()
     QString date_string = date_presence.toString("dd.MM.yyyy");
     QString date;
     int selected_tables = ui->tableView_visits_control->currentIndex().row();
+    if(obj.staff_id=="14")
+    {
+        qDebug()<<date_presence.dayOfWeek();
+        return;
+    }
     if (selected_tables >= 0)
     {
         int row = ui->tableView_visits_control->currentIndex().row();

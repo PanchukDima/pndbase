@@ -88,9 +88,6 @@ void myMessageHandler(QtMsgType type, const QMessageLogContext &, const QString 
 
 int main(int argc, char *argv[])
 {
-    qInstallMessageHandler(myMessageHandler);
-    QApplication a(argc, argv);
-    MainWindow w;
     Objects_app obj;
     #ifdef _WIN32
         obj.path_settings = "settings_user.ini";
@@ -98,6 +95,10 @@ int main(int argc, char *argv[])
     #ifdef __linux__
         obj.path_settings = "/etc/BDPatient/settings_user.ini";
     #endif
+    qInstallMessageHandler(myMessageHandler);
+    QApplication a(argc, argv);
+    MainWindow w;
+
     qDebug()<<"Application Start";
     w.showMaximized();
     return a.exec();
