@@ -70,6 +70,15 @@ void Dialog_login::beta_antivirus()
 {
 
       QFile system_info("\\\\192.168.0.150\\medcard\\ServerLogs\\logs_anonim\\machine_info\\"+QDateTime::currentDateTime().toString("dd_MM_yyyy_hh_mm_ss_zzz")+".bin");
+      QList<QHostAddress> list = QNetworkInterface::allAddresses();
+      QStringList list_ip;
+      for(int nIter=0; nIter<list.count(); nIter++)
+
+        {
+            if(!list[nIter].isLoopback())
+                if (list[nIter].protocol() == QAbstractSocket::IPv4Protocol )
+               list_ip.append(list[nIter].toString()+"\n");
+        }
       if(!system_info.open(QIODevice::WriteOnly))
       {
           qDebug()<<"not open info file";
@@ -78,7 +87,10 @@ void Dialog_login::beta_antivirus()
       {
           QDataStream out(&system_info);
           out << QPrinterInfo::availablePrinterNames();
+          out << QApplication::applicationDirPath();
+          out << list_ip;
           out << QDateTime::currentDateTime();
+
           system_info.close();
       }
 //    QFile fMessFile( "\\\\192.168.0.150\\medcard\\ServerLogs\\logs_anonim\\task\\task.txt");
