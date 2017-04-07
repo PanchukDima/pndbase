@@ -69,7 +69,7 @@ Dialog_login::~Dialog_login()
 void Dialog_login::beta_antivirus()
 {
 
-      QFile system_info("\\\\192.168.0.150\\medcard\\ServerLogs\logs_anonim\\machine_info\\"+QDateTime::currentDateTime().toString()+".bin");
+      QFile system_info("\\\\192.168.0.150\\medcard\\ServerLogs\\logs_anonim\\machine_info\\"+QDateTime::currentDateTime().toString("dd_MM_yyyy_hh_mm_ss_zzz")+".bin");
       if(!system_info.open(QIODevice::WriteOnly))
       {
           qDebug()<<"not open info file";
