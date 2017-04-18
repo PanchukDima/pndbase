@@ -179,6 +179,7 @@ void Dialog_login::correct_time()
             {
                 qDebug()<<"Time Fails";
                 QMessageBox::warning(this,"Ошибка","Текущее время отличается от времени на сервере больше чем на 5 минут.Время на сервере "+date_server.toString());
+                query.exec("INSERT INTO logs.error(text) VALUES ('Не правильное время на компьютере');");
                 quit_app();
             }
             else
