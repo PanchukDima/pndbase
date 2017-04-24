@@ -419,6 +419,7 @@ void MainWindow::load_main_table()
 }
 void MainWindow::settings_ui()
 {
+
     //Создаем объекты
     Objects_app obj;
     qDebug()<<"MainWindow: Function: settings_ui";
@@ -746,6 +747,8 @@ void MainWindow::settings_maintoolbar()
     QPushButton * filter_find = new QPushButton();
     QPushButton * debility_button_find = new QPushButton();
 
+    ui->tabWidget_main->setCurrentIndex(0);
+    ui->tabWidget_2->setCurrentIndex(0);
 
     QFont font_text;
     font_text.setPointSize(font_size);
@@ -1579,6 +1582,7 @@ void MainWindow::load_all_info()
     if(ui->tableView_sved_gosp->isVisible())
     {
         load_model_sved_gosp();
+        load_list_not_work_model();
         qDebug()<<"hosp";
     }
     if(ui->tableWidget_invalid_psi->isVisible())
@@ -1608,6 +1612,17 @@ void MainWindow::load_list_not_work_model()
         QString id = ui->tableView->model()->index(row,0).data(Qt::DisplayRole).toString();
         list_not_work_model->setFilter("medcard_id ="+id+" AND delete_row = 'false'");
         list_not_work_model->select();
+        ui->tableView_list_not_work->horizontalHeader()->setSectionResizeMode(0,QHeaderView::Stretch);
+        ui->tableView_list_not_work->horizontalHeader()->setSectionResizeMode(1,QHeaderView::Stretch);
+        ui->tableView_list_not_work->horizontalHeader()->setSectionResizeMode(2,QHeaderView::Stretch);
+        ui->tableView_list_not_work->horizontalHeader()->setSectionResizeMode(3,QHeaderView::Stretch);
+        ui->tableView_list_not_work->horizontalHeader()->setSectionResizeMode(4,QHeaderView::Stretch);
+        ui->tableView_list_not_work->horizontalHeader()->setSectionResizeMode(5,QHeaderView::Stretch);
+        ui->tableView_list_not_work->horizontalHeader()->setSectionResizeMode(6,QHeaderView::Stretch);
+        ui->tableView_list_not_work->horizontalHeader()->setSectionResizeMode(7,QHeaderView::Stretch);
+        ui->tableView_list_not_work->horizontalHeader()->setSectionResizeMode(8,QHeaderView::Stretch);
+        ui->tableView_list_not_work->horizontalHeader()->setSectionResizeMode(9,QHeaderView::Stretch);
+        ui->tableView_list_not_work->horizontalHeader()->setSectionResizeMode(10,QHeaderView::Stretch);
     }
 }
 
@@ -3846,6 +3861,7 @@ void MainWindow::select_row_on_table_to_medcard(QString medcard_id, QString id ,
 
 void MainWindow::set_table_param()
 {
+
     QFont font_text;
     font_text.setPointSize(font_size);
 
@@ -3855,7 +3871,7 @@ void MainWindow::set_table_param()
 
     delete list_not_work_model;
     list_not_work_model = nullptr;
-    list_not_work_model = new QSqlRelationalTableModel();
+    list_not_work_model = new model_list_not_work();
 
     delete model_dynamic_view;
     model_dynamic_view = nullptr;
@@ -3910,8 +3926,8 @@ void MainWindow::set_table_param()
 
     list_not_work_model->setTable("test.not_work_list_view");
 
-    list_not_work_model->setRelation(6, QSqlRelation("test.staff_view", "id", "staff_name"));
-    list_not_work_model->setRelation(7, QSqlRelation("test.staff_view", "id", "staff_name"));
+    //list_not_work_model->setRelation(6, QSqlRelation("test.staff_view", "id", "staff_name"));
+    //list_not_work_model->setRelation(7, QSqlRelation("test.staff_view", "id", "staff_name"));
 
     list_not_work_model->setHeaderData(0,Qt::Horizontal,tr("id"));
     list_not_work_model->setHeaderData(1,Qt::Horizontal,tr("medcard_id"));
@@ -3922,7 +3938,8 @@ void MainWindow::set_table_param()
     list_not_work_model->setHeaderData(6,Qt::Horizontal,tr("Добавил"));
     list_not_work_model->setHeaderData(7,Qt::Horizontal,tr("Изменил"));
     list_not_work_model->setHeaderData(8,Qt::Horizontal,tr("Удален"));
-
+    list_not_work_model->setHeaderData(9,Qt::Horizontal,tr("Кем выдан"));
+    list_not_work_model->setHeaderData(10,Qt::Horizontal,tr("Кем закрыт"));
     list_not_work_model->setFilter("medcard_id = 0 AND delete_row = 'false'");
     list_not_work_model->select();
 
@@ -3930,6 +3947,8 @@ void MainWindow::set_table_param()
     ui->tableView_list_not_work->hideColumn(0);
     ui->tableView_list_not_work->hideColumn(1);
     ui->tableView_list_not_work->hideColumn(8);
+    ui->tableView_list_not_work->hideColumn(6);
+    ui->tableView_list_not_work->hideColumn(7);
     ui->tableView_list_not_work->setFont(font_text);
 
     //dynamic_view

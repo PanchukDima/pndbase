@@ -34,6 +34,7 @@ public slots:
     void changes_code_diagnos(int);
     void changes_name_diagnos(int);
     void load_current_diagnos();
+    void date_count_restart(int type);
 };
 
 #endif // DIALOG_LIST_NOT_WORK_H
