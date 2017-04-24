@@ -55,6 +55,7 @@
 #include "models/model_visits_control_patient.h"
 #include "models/model_sved_gosp_patient.h"
 #include "models/model_ivalid_patient.h"
+#include "models/model_list_not_work.h"
 
 
 //Network Library
@@ -116,7 +117,7 @@ protected:
 private:
     Ui::MainWindow *ui;
     model_main_table *model = nullptr;
-    QSqlRelationalTableModel *list_not_work_model = nullptr;
+    model_list_not_work *list_not_work_model = nullptr;
     QSqlRelationalTableModel *model_ood = nullptr;
     QSqlRelationalTableModel *model_suicide = nullptr;
     model_dynamic_view_patient *model_dynamic_view = nullptr;
