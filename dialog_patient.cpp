@@ -1206,7 +1206,7 @@ void Dialog_patient::add_street()
     QString add_street_text = ui->comboBox_street->currentText();
     if(db.open())
     {
-        query.exec("INSERT INTO test.logs(staff_add_id, date_add, text) VALUES ('"+obj.staff_id+"', '"+QDate::currentDate().toString("dd.MM.yyyy")+"', 'Добавлена улица"+add_street_text+"')");
+        query.exec("INSERT INTO test.logs(staff_add_id, date_add, text) VALUES ('"+obj.staff_id+"', '"+QDate::currentDate().toString("dd.MM.yyyy")+"', '"+obj.staff_name+": Требуется добавить улицу: "+add_street_text+"')");
         if(query.lastError().isValid())
         {
             qDebug()<<query.lastError();
@@ -1215,13 +1215,13 @@ void Dialog_patient::add_street()
 #ifdef _WIN32
   Sleep(100);
 #endif
-        query.exec("INSERT INTO test.street(name, staff_add_id) VALUES ('"+add_street_text+"', '"+obj.staff_id+"')");
+        //query.exec("INSERT INTO test.street(name, staff_add_id) VALUES ('"+add_street_text+"', '"+obj.staff_id+"')");
         if(query.lastError().isValid())
         {
             qDebug()<<query.lastError();
             QMessageBox::warning(this,"Ошибка SQL","Произошла ошибка при обращении к базе данных");
         }
-        QMessageBox::information(this,"Добавление улицы","Добавлена улица :'"+add_street_text+"'");
+        QMessageBox::information(this,"Добавление улицы","Отправлен запрос на добавление улицы :'"+add_street_text+"'");
     }
     put_all_settings();
 }
