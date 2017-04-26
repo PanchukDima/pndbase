@@ -170,6 +170,7 @@ public slots:
     void load_model_visits_control();
     void load_model_sved_gosp();
     void load_diagnos_table();
+    void load_files_patient();
 
     void load_invalid_table();
     void load_suicide_table();
@@ -198,6 +199,7 @@ public slots:
     void close_dynamic_view();
     void edit_dynamic_view();
     void del_dynamic_view();
+    void dialog_add_file_to_patient();
 
     void add_visit();
     void add_today_visit();

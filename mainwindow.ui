@@ -160,7 +160,7 @@ left: 5px; /* move to the right by 5px */
         <enum>QTabWidget::Rounded</enum>
        </property>
        <property name="currentIndex">
-        <number>2</number>
+        <number>6</number>
        </property>
        <property name="documentMode">
         <bool>false</bool>
