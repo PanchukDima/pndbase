@@ -377,9 +377,10 @@ void Dialog_find_filters::find_filter_dynamic_view()
     model_dynamic->setHeaderData(10,Qt::Horizontal,tr("Группа\n наблюдения"));
     model_dynamic->setHeaderData(11,Qt::Horizontal,tr("Участок"));
     model_dynamic->setHeaderData(12,Qt::Horizontal,tr("Район"));
-    model_dynamic->setHeaderData(13,Qt::Horizontal,tr("Помощь\nоказывается с:"));
+    model_dynamic->setHeaderData(13,Qt::Horizontal,tr("Текущее\nнаблюдение"));
     model_dynamic->setHeaderData(14,Qt::Horizontal,tr("Дата\nзакрытия\nдинамики"));
     model_dynamic->setHeaderData(15,Qt::Horizontal, tr("ПТ"));
+    model_dynamic->setHeaderData(16,Qt::Horizontal, tr("Помощь\nоказывается\nс:(первое)"));
 
     ui->tableView_show_filter_dynamic->setModel(model_dynamic);
 
