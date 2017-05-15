@@ -10,7 +10,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>915</width>
+    <width>933</width>
     <height>653</height>
    </rect>
   </property>
@@ -248,6 +248,25 @@ left: 5px; /* move to the right by 5px */
            <property name="text">
             <string>ПТ</string>
            </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="comboBox">
+           <item>
+            <property name="text">
+             <string>Амбулаторно</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Дневной стационар</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>МРО</string>
+            </property>
+           </item>
           </widget>
          </item>
          <item>
