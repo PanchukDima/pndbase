@@ -1415,6 +1415,7 @@ void Dialog_patient::load_comments()
     model_comments->setSort(0,Qt::AscendingOrder);
     model_comments->select();
 
+
     ui->tableView_comments_patient->setFont(font);
     ui->tableView_comments_patient->setModel(model_comments);
     ui->tableView_comments_patient->horizontalHeader()->setSectionResizeMode(5,QHeaderView::Stretch);
