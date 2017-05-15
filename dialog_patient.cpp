@@ -1418,6 +1418,14 @@ void Dialog_patient::load_comments()
 
     ui->tableView_comments_patient->setFont(font);
     ui->tableView_comments_patient->setModel(model_comments);
+
+    if(ui->tableView_comments_patient->model()->rowCount() > 0)
+    {
+        QString num_count;
+        num_count.setNum(ui->tableView_comments_patient->model()->rowCount());
+        ui->tabWidget->setTabText(2,"Комментарии ("+num_count+")");
+    }
+
     ui->tableView_comments_patient->horizontalHeader()->setSectionResizeMode(5,QHeaderView::Stretch);
     ui->tableView_comments_patient->horizontalHeader()->setSectionResizeMode(7,QHeaderView::ResizeToContents);
     ui->tableView_comments_patient->horizontalHeader()->setSectionResizeMode(3,QHeaderView::ResizeToContents);
