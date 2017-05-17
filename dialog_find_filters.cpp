@@ -360,7 +360,7 @@ void Dialog_find_filters::find_filter_dynamic_view()
     {
         append_string.append(" AND pt = 'false' ");
     }
-    qDebug()<<"Dynamic_view:361";
+
     filter_string.append(append_string);
     model_dynamic->setFilter(filter_string);
     model_dynamic->select();
@@ -613,6 +613,14 @@ void Dialog_find_filters::find_filter_diagnos()
     if (!ui->checkBox_see_arhive_diagnos->isChecked())
     {
         string_find.append(" status in(99,100,101) ");
+    }
+    if(ui->checkBox_show_area_list_diagnos->isChecked())
+    {
+        string_find.append(" area_id in("+load_isCheked_list_area()+")");
+    }
+    else
+    {
+        string_find.append(" area_id in("+Obj.str_area_list+")");
     }
     string_find.append(" delete_row = 'false' ");
     string_find.append(" diagnos_id = "+diagnos_id);
