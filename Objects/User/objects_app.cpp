@@ -6,6 +6,9 @@ QList <bool> Objects_app::rights_user;
 QStringList Objects_app::servising_area;
 QString Objects_app::str_area_list;
 QString Objects_app::path_settings;
+QString Objects_app::department_id;
+
+
 Objects_app::Objects_app(QObject *parent) : QObject(parent)
 {
 

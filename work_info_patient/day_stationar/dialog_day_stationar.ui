@@ -16,83 +16,62 @@
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <layout class="QGridLayout" name="gridLayout">
-     <item row="2" column="1">
-      <widget class="QComboBox" name="comboBox_2"/>
-     </item>
-     <item row="0" column="0">
-      <widget class="QLabel" name="label">
-       <property name="text">
-        <string>Дата</string>
+     <item row="0" column="1">
+      <widget class="QDateEdit" name="dateEdit_day_in">
+       <property name="calendarPopup">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
-     <item row="0" column="1">
-      <widget class="QDateEdit" name="dateEdit"/>
+     <item row="2" column="1">
+      <widget class="QDateEdit" name="dateEdit_day_out">
+       <property name="calendarPopup">
+        <bool>true</bool>
+       </property>
+      </widget>
      </item>
      <item row="2" column="0">
       <widget class="QLabel" name="label_3">
        <property name="text">
-        <string>Кем закрыт</string>
+        <string>Дата выбытия</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Дата поступления</string>
        </property>
       </widget>
      </item>
      <item row="1" column="0">
-      <widget class="QLabel" name="label_2">
+      <widget class="QCheckBox" name="checkBox_close">
        <property name="text">
-        <string>Кем выдан</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1">
-      <widget class="QComboBox" name="comboBox"/>
-     </item>
-     <item row="3" column="1">
-      <widget class="QSpinBox" name="spinBox"/>
-     </item>
-     <item row="3" column="0">
-      <widget class="QLabel" name="label_6">
-       <property name="text">
-        <string>Количество дней </string>
+        <string>Выбыл</string>
        </property>
       </widget>
      </item>
     </layout>
    </item>
    <item>
-    <widget class="QGroupBox" name="groupBox">
-     <property name="title">
-      <string>Диагноз</string>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
      </property>
-     <layout class="QHBoxLayout" name="horizontalLayout">
-      <item>
-       <widget class="QLabel" name="label_4">
-        <property name="text">
-         <string>Код</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QComboBox" name="comboBox_4"/>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_5">
-        <property name="text">
-         <string>Наименование</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QComboBox" name="comboBox_3"/>
-      </item>
-     </layout>
-    </widget>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="pushButton_ok">
        <property name="text">
-        <string>PushButton</string>
+        <string>Ок</string>
        </property>
       </widget>
      </item>
@@ -110,9 +89,9 @@
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_2">
+      <widget class="QPushButton" name="pushButton_cancel">
        <property name="text">
-        <string>PushButton</string>
+        <string>Отмена</string>
        </property>
       </widget>
      </item>

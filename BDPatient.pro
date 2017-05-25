@@ -76,7 +76,8 @@ SOURCES += main.cpp\
     appUI/Browser/mainwindow_web_browser.cpp \
     appUI/DocumentEditor/dialogs/dialog_page_settings.cpp \
     work_info_patient/dynamic_view/dialog_edit_other_dynamic_view.cpp \
-    models/model_list_not_work.cpp
+    models/model_list_not_work.cpp \
+    models/model_preparate.cpp
 
 HEADERS  += mainwindow.h \
     dialog_patient.h \
@@ -132,7 +133,8 @@ HEADERS  += mainwindow.h \
     appUI/Browser/mainwindow_web_browser.h \
     appUI/DocumentEditor/dialogs/dialog_page_settings.h \
     work_info_patient/dynamic_view/dialog_edit_other_dynamic_view.h \
-    models/model_list_not_work.h
+    models/model_list_not_work.h \
+    models/model_preparate.h
 
 FORMS    += mainwindow.ui \
     dialog_patient.ui \

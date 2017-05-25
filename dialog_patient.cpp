@@ -457,6 +457,7 @@ void Dialog_patient::put_all_settings()
     QSqlDatabase db = QSqlDatabase::database();
     ui->comboBox_sex->clear();
     ui->comboBox_street->clear();
+    ui->comboBox_department->clear();
     //ui->tableWidget_text_1->setColumnCount(2);
     if(db.open())
     {
@@ -487,6 +488,21 @@ void Dialog_patient::put_all_settings()
         ui->lineEdit_date_end->hide();
         ui->comboBox_why_close->hide();
         ui->checkBox_ds_end_state->isChecked();
+        if(db.open())
+        {
+            query.exec("SELECT id, name  FROM library.departments;");
+            if(query.lastError().isValid())
+            {
+                qDebug()<<query.lastError();
+            }
+            else
+            {
+                while (query.next())
+                {
+                    ui->comboBox_department->addItem(query.value(1).toString(),query.value(0).toString());
+                }
+            }
+        }
 
 
     }
@@ -757,7 +773,7 @@ void Dialog_patient::get_data_sql(int id)
         QString id_str;
         id_str.setNum(id);
         qDebug()<<"patient "+id_str;
-        query.exec("SELECT patient.fname, patient.name, patient.mname, medcard.sex,  patient.serial_passport, patient.number_passport, medcard.birthday, medcard.job_place, medcard.tutor, medcard.pt, medcard.group_lgot_preparat, medcard.area_id, medcard.serial_snils, medcard.district_id, medcard.group_inv_obsh, medcard.polis_serial, medcard.polis_number, patient.vidan, medcard.time_stamp  FROM test.patient, test.medcard  WHERE medcard.patient_id = patient.id AND medcard.id ="+id_str);
+        query.exec("SELECT patient.fname, patient.name, patient.mname, medcard.sex,  patient.serial_passport, patient.number_passport, medcard.birthday, medcard.job_place, medcard.tutor, medcard.pt, medcard.group_lgot_preparat, medcard.area_id, medcard.serial_snils, medcard.district_id, medcard.group_inv_obsh, medcard.polis_serial, medcard.polis_number, patient.vidan, medcard.time_stamp, medcard.department  FROM test.patient, test.medcard  WHERE medcard.patient_id = patient.id AND medcard.id ="+id_str);
         if(query.lastError().isValid())
         {
             qDebug()<<query.lastError();
@@ -784,6 +800,7 @@ void Dialog_patient::get_data_sql(int id)
             QString polis_number_value = query.value(16).toString();
             QString passport_vidan = query.value(17).toString();
             QDateTime date_create_medcard = query.value(18).toDateTime();
+            QString department = query.value(19).toString();
 
 
             ui->lineEdit_fname->setText(fname_value);
@@ -805,6 +822,7 @@ void Dialog_patient::get_data_sql(int id)
             ui->lineEdit_snils->setText(snils_serial_value);
             ui->lineEdit_passport_vidan->setText(passport_vidan);
             ui->dateTimeEdit->setDateTime(date_create_medcard);
+            ui->comboBox_department->setCurrentIndex(ui->comboBox_department->findData(department));
         }
         query.clear();
 #ifdef _WIN32
@@ -902,6 +920,7 @@ void Dialog_patient::apply_send_data_sql()
     QString building = ui->lineEdit_korpuse->text();
     QString flat = ui->lineEdit_room->text();
     QString street_id = ui->comboBox_street->currentData().toString();
+    QString department = ui->comboBox_department->currentData().toString();
 
     QString date_birthday;
 
@@ -1062,7 +1081,8 @@ void Dialog_patient::apply_send_data_sql()
             case 0: //insert
                 if(ui->checkBox_ds_end_state->checkState()==Qt::Unchecked)
                 {
-                    query.exec("SELECT * FROM insert_all_info('"+fname_value+"', '"+name_value+"', '"+oname_value+"', '"+serial_passport+"', '"+number_passport+"', 99, "+obj.staff_id+", '"+passport_vidan_value+"', 'f', '"+sex_value+"', '"+date_birthday+"', '"+job_place_value+"', '"+tutor_value+"', '"+pt_value+"', '"+group_lgot_value+"', "+area_value+", "+district_value+", '"+group_inv_value+"', '"+polis_serial_value+"', '"+polis_number_value+"', '"+snils_serial_value+"', "+street_id+", '"+home+"', '"+building+"', '"+flat+"', '"+telefon_value+"', '"+index_street+"', '"+QDate::currentDate().toString("dd.MM.yyyy")+"', '"+ds_start+"', NULL, '"+why_remove+"', "+direct_value+", "+direct_from_value+")");
+                    query.exec("SELECT * FROM insert_all_info('"+fname_value+"', '"+name_value+"', '"+oname_value+"', '"+serial_passport+"', '"+number_passport+"', 99, "+obj.staff_id+", '"+passport_vidan_value+"', 'f', '"+sex_value+"', '"+date_birthday+"', '"+job_place_value+"', '"+tutor_value+"', '"+pt_value+"', '"+group_lgot_value+"', "+area_value+", "+district_value+", '"+group_inv_value+"', '"+polis_serial_value+"', '"+polis_number_value+"', '"+snils_serial_value+"', "+street_id+", '"+home+"', '"+building+"', '"+flat+"', '"+telefon_value+"', '"+index_street+"', '"+QDate::currentDate().toString("dd.MM.yyyy")+"', '"+ds_start+"', NULL, '"+why_remove+"', "+direct_value+", "+direct_from_value+", "+department+")");
+                    qDebug()<<"SELECT * FROM insert_all_info('"+fname_value+"', '"+name_value+"', '"+oname_value+"', '"+serial_passport+"', '"+number_passport+"', 99, "+obj.staff_id+", '"+passport_vidan_value+"', 'f', '"+sex_value+"', '"+date_birthday+"', '"+job_place_value+"', '"+tutor_value+"', '"+pt_value+"', '"+group_lgot_value+"', "+area_value+", "+district_value+", '"+group_inv_value+"', '"+polis_serial_value+"', '"+polis_number_value+"', '"+snils_serial_value+"', "+street_id+", '"+home+"', '"+building+"', '"+flat+"', '"+telefon_value+"', '"+index_street+"', '"+QDate::currentDate().toString("dd.MM.yyyy")+"', '"+ds_start+"', NULL, '"+why_remove+"', "+direct_value+", "+direct_from_value+", "+department+")";
                     if(query.lastError().isValid())
                     {
                         qDebug()<<query.lastError();
@@ -1071,7 +1091,8 @@ void Dialog_patient::apply_send_data_sql()
                 }
                 else if(ui->checkBox_ds_end_state->checkState()==Qt::Checked)
                 {
-                    query.exec("SELECT * FROM insert_all_info('"+fname_value+"', '"+name_value+"', '"+oname_value+"', '"+serial_passport+"', '"+number_passport+"', "+why_remove+", "+obj.staff_id+", '"+passport_vidan_value+"', 'f', '"+sex_value+"', '"+date_birthday+"', '"+job_place_value+"', '"+tutor_value+"', '"+pt_value+"', '"+group_lgot_value+"', "+area_value+", "+district_value+", '"+group_inv_value+"', '"+polis_serial_value+"', '"+polis_number_value+"', '"+snils_serial_value+"', "+street_id+", '"+home+"', '"+building+"', '"+flat+"', '"+telefon_value+"', '"+index_street+"', '"+QDate::currentDate().toString("dd.MM.yyyy")+"', NULL, '"+ds_end+"', '"+why_remove+"', -1, -1)");
+                    query.exec("SELECT * FROM insert_all_info('"+fname_value+"', '"+name_value+"', '"+oname_value+"', '"+serial_passport+"', '"+number_passport+"', "+why_remove+", "+obj.staff_id+", '"+passport_vidan_value+"', 'f', '"+sex_value+"', '"+date_birthday+"', '"+job_place_value+"', '"+tutor_value+"', '"+pt_value+"', '"+group_lgot_value+"', "+area_value+", "+district_value+", '"+group_inv_value+"', '"+polis_serial_value+"', '"+polis_number_value+"', '"+snils_serial_value+"', "+street_id+", '"+home+"', '"+building+"', '"+flat+"', '"+telefon_value+"', '"+index_street+"', '"+QDate::currentDate().toString("dd.MM.yyyy")+"', NULL, '"+ds_end+"', '"+why_remove+"', -1, -1, "+department+")");
+                    qDebug()<<"SELECT * FROM insert_all_info('"+fname_value+"', '"+name_value+"', '"+oname_value+"', '"+serial_passport+"', '"+number_passport+"', 99, "+obj.staff_id+", '"+passport_vidan_value+"', 'f', '"+sex_value+"', '"+date_birthday+"', '"+job_place_value+"', '"+tutor_value+"', '"+pt_value+"', '"+group_lgot_value+"', "+area_value+", "+district_value+", '"+group_inv_value+"', '"+polis_serial_value+"', '"+polis_number_value+"', '"+snils_serial_value+"', "+street_id+", '"+home+"', '"+building+"', '"+flat+"', '"+telefon_value+"', '"+index_street+"', '"+QDate::currentDate().toString("dd.MM.yyyy")+"', '"+ds_start+"', NULL, '"+why_remove+"', "+direct_value+", "+direct_from_value+", "+department+")";
                     if(query.lastError().isValid())
                     {
                         qDebug()<<query.lastError();
@@ -1093,7 +1114,7 @@ void Dialog_patient::apply_send_data_sql()
 
                 if(db.open())
                 {
-                    query.exec("UPDATE test.medcard SET area_id = '"+area_value+"', sex = "+sex_value+", birthday='"+date_birthday+"', job_place='"+job_place_value+"', tutor='"+tutor_value+"', pt='"+pt_value+"', group_lgot_preparat='"+group_lgot_value+"', serial_snils='"+snils_serial_value+"', polis_number='"+polis_number_value+"', polis_serial = '"+polis_serial_value+"', district_id="+district_value+", group_inv_obsh='"+group_inv_value+"' WHERE id ="+id_str);
+                    query.exec("UPDATE test.medcard SET area_id = '"+area_value+"', sex = "+sex_value+", birthday='"+date_birthday+"', job_place='"+job_place_value+"', tutor='"+tutor_value+"', pt='"+pt_value+"', group_lgot_preparat='"+group_lgot_value+"', serial_snils='"+snils_serial_value+"', polis_number='"+polis_number_value+"', polis_serial = '"+polis_serial_value+"', district_id="+district_value+", group_inv_obsh='"+group_inv_value+"', department="+department+" WHERE id ="+id_str);
                     if(query.lastError().isValid())
                     {
                         qDebug()<<query.lastError();

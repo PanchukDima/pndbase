@@ -15,6 +15,7 @@ public:
     static QStringList servising_area;
     static QString str_area_list;
     static QString path_settings;
+    static QString department_id;
 
 
 

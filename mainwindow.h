@@ -44,6 +44,7 @@
 #include "journal/dialog_rvk.h"
 #include "work_info_patient/list_not_work/dialog_list_not_work.h"
 #include "work_info_patient/dynamic_view/dialog_edit_other_dynamic_view.h"
+#include "work_info_patient/day_stationar/dialog_day_stationar.h"
 
 //models other
 #include <QFileSystemModel>
@@ -116,15 +117,20 @@ protected:
 
 private:
     Ui::MainWindow *ui;
+
+
     model_main_table *model = nullptr;
     model_list_not_work *list_not_work_model = nullptr;
     QSqlRelationalTableModel *model_ood = nullptr;
     QSqlRelationalTableModel *model_suicide = nullptr;
+    QSqlTableModel * model_day_station = nullptr;
     model_dynamic_view_patient *model_dynamic_view = nullptr;
     model_ivalid_patient *model_invalid = nullptr;
     QSqlRelationalTableModel *model_preparate = nullptr;
     model_visits_control_patient *model_visits_control = nullptr;
     model_sved_gosp_patient *model_sved_gosp = nullptr;
+
+
     QFileSystemModel *filemodel;
     QTimer * timer_who_is_online;
     QString selected_id;
@@ -141,6 +147,7 @@ public slots:
     //получаем настройки из базы данных
     void load_settings_from_sql();
     void load_area_list();
+    void load_user_department();
     void load_rights_user();
     void close_old_session();
     void start_new_session();
@@ -171,6 +178,7 @@ public slots:
     void load_model_sved_gosp();
     void load_diagnos_table();
     void load_files_patient();
+    void load_day_station();
 
     void load_invalid_table();
     void load_suicide_table();
@@ -233,6 +241,10 @@ public slots:
     void add_list_not_work();
     void edit_list_not_work();
     void del_list_not_work();
+
+    void add_day_station();
+    void edit_day_station();
+    void del_day_station();
 
     //Отчеты и прочее
     void gen_report_1();

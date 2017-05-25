@@ -251,23 +251,7 @@ left: 5px; /* move to the right by 5px */
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="comboBox">
-           <item>
-            <property name="text">
-             <string>Амбулаторно</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Дневной стационар</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>МРО</string>
-            </property>
-           </item>
-          </widget>
+          <widget class="QComboBox" name="comboBox_department"/>
          </item>
          <item>
           <spacer name="horizontalSpacer_8">
