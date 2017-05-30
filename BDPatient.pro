@@ -77,7 +77,9 @@ SOURCES += main.cpp\
     appUI/DocumentEditor/dialogs/dialog_page_settings.cpp \
     work_info_patient/dynamic_view/dialog_edit_other_dynamic_view.cpp \
     models/model_list_not_work.cpp \
-    models/model_preparate.cpp
+    models/model_preparate.cpp \
+    models/model_data_analizes.cpp \
+    work_info_patient/data_analizes/dialog_data_analizes.cpp
 
 HEADERS  += mainwindow.h \
     dialog_patient.h \
@@ -134,7 +136,9 @@ HEADERS  += mainwindow.h \
     appUI/DocumentEditor/dialogs/dialog_page_settings.h \
     work_info_patient/dynamic_view/dialog_edit_other_dynamic_view.h \
     models/model_list_not_work.h \
-    models/model_preparate.h
+    models/model_preparate.h \
+    models/model_data_analizes.h \
+    work_info_patient/data_analizes/dialog_data_analizes.h
 
 FORMS    += mainwindow.ui \
     dialog_patient.ui \
@@ -173,7 +177,8 @@ FORMS    += mainwindow.ui \
     appUI/TasksUI/window_palner.ui \
     appUI/Browser/mainwindow_web_browser.ui \
     appUI/DocumentEditor/dialogs/dialog_page_settings.ui \
-    work_info_patient/dynamic_view/dialog_edit_other_dynamic_view.ui
+    work_info_patient/dynamic_view/dialog_edit_other_dynamic_view.ui \
+    work_info_patient/data_analizes/dialog_data_analizes.ui
 
 RESOURCES += \
     images.qrc

@@ -45,6 +45,8 @@
 #include "work_info_patient/list_not_work/dialog_list_not_work.h"
 #include "work_info_patient/dynamic_view/dialog_edit_other_dynamic_view.h"
 #include "work_info_patient/day_stationar/dialog_day_stationar.h"
+#include "work_info_patient/preparate/dialog_preparate.h"
+#include "work_info_patient/data_analizes/dialog_data_analizes.h"
 
 //models other
 #include <QFileSystemModel>
@@ -57,6 +59,8 @@
 #include "models/model_sved_gosp_patient.h"
 #include "models/model_ivalid_patient.h"
 #include "models/model_list_not_work.h"
+#include "models/model_preparate.h"
+#include "models/model_data_analizes.h"
 
 
 //Network Library
@@ -126,9 +130,11 @@ private:
     QSqlTableModel * model_day_station = nullptr;
     model_dynamic_view_patient *model_dynamic_view = nullptr;
     model_ivalid_patient *model_invalid = nullptr;
-    QSqlRelationalTableModel *model_preparate = nullptr;
+    //QSqlRelationalTableModel *model_preparate = nullptr;
     model_visits_control_patient *model_visits_control = nullptr;
     model_sved_gosp_patient *model_sved_gosp = nullptr;
+    model_preparate * model_load_preparate = nullptr;
+    model_data_analizes * model_data_analizes_view = nullptr;
 
 
     QFileSystemModel *filemodel;
@@ -179,6 +185,8 @@ public slots:
     void load_diagnos_table();
     void load_files_patient();
     void load_day_station();
+    void load_preparate();
+    void load_data_analizes_table();
 
     void load_invalid_table();
     void load_suicide_table();
@@ -208,6 +216,14 @@ public slots:
     void edit_dynamic_view();
     void del_dynamic_view();
     void dialog_add_file_to_patient();
+
+    void add_preparate();
+    void edit_preparate();
+    void del_preparate();
+
+    void add_data_analizes();
+    void edit_data_analizes();
+    void del_data_analizes();
 
     void add_visit();
     void add_today_visit();

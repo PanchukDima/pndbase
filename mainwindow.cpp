@@ -95,9 +95,6 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->pushButton_add_dynamic_view,SIGNAL(clicked(bool)),SLOT(add_dynamic_view()));
     connect(ui->pushButton_add_hosp,SIGNAL(clicked(bool)),SLOT(add_hospitalization()));
     connect(ui->pushButton_add_not_work_list,SIGNAL(clicked(bool)),SLOT(add_list_not_work()));
-
-    //connect(ui->pushButton_add_day_station,SIGNAL(clicked(bool)),SLOT());
-    //connect(ui->pushButto_add_preparate,SIGNAL(clicked(bool)),SLOT());
     connect(ui->pushButton_add_suicide,SIGNAL(clicked(bool)),SLOT(add_suicide()));
     connect(ui->pushButton_add_ood,SIGNAL(clicked(bool)),SLOT(add_ood()));
     connect(ui->pushButton_add_visits_control,SIGNAL(clicked(bool)),SLOT(add_visit()));
@@ -105,60 +102,46 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->pushButton_yesterday,SIGNAL(clicked(bool)),SLOT(add_yesterday_visits()));
     connect(ui->pushButton_day_before_yesterday,SIGNAL(clicked(bool)),SLOT(add_day_before_yesterday_visits()));
     connect(ui->pushButton_add_day_station,SIGNAL(clicked(bool)),SLOT(add_day_station()));
+    connect(ui->pushButton_add_preparate,SIGNAL(clicked(bool)),SLOT(add_preparate()));
+    connect(ui->pushButton_add_data_analizes,SIGNAL(clicked(bool)),SLOT(add_data_analizes()));
     //Кнопки редактирования
     connect(ui->pushButton_edit_diagnos,SIGNAL(clicked(bool)),SLOT(edit_diagnos_patient()));
     connect(ui->pushButton_edit_hosp,SIGNAL(clicked(bool)),SLOT(edit_hospitalization()));
     connect(ui->pushButton_edit_notwork,SIGNAL(clicked(bool)),SLOT(edit_list_not_work()));
-    //connect(ui->pushButton_edit_day_station,SIGNAL(clicked(bool)),SLOT());
     connect(ui->pushButton_edit_ood,SIGNAL(clicked(bool)),SLOT(edit_ood()));
     connect(ui->pushButton_edit_suicide,SIGNAL(clicked(bool)),SLOT(edit_suicide()));
-    //connect(ui->pushButton_edit_preparate,SIGNAL(clicked(bool)),SLOT());
     connect(ui->pushButton_edit_visits_control,SIGNAL(clicked(bool)),SLOT(edit_visit()));
     connect(ui->pushButton_edit_dynamic_view,SIGNAL(clicked(bool)),SLOT(edit_dynamic_view()));
     connect(ui->pushButton_edit_day_station,SIGNAL(clicked(bool)),SLOT(edit_day_station()));
-
+    connect(ui->pushButton_edit_preparate,SIGNAL(clicked(bool)),SLOT(edit_preparate()));
+    connect(ui->pushButton_edit_data_analizes,SIGNAL(clicked(bool)),SLOT(edit_data_analizes()));
     //Кнопки удаления
     connect(ui->pushButton_del_diagnos,SIGNAL(clicked(bool)),SLOT(del_diagnos_patient()));
     connect(ui->pushButton_close_dynamic_view,SIGNAL(clicked(bool)),SLOT(close_dynamic_view()));
     connect(ui->pushButton_del_hosp,SIGNAL(clicked(bool)),SLOT(del_hospitalization()));
     connect(ui->pushButton_del_notwork,SIGNAL(clicked(bool)),SLOT(del_list_not_work()));
-    //connect(ui->pushButton_del_day_station,SIGNAL(clicked(bool)),SLOT());
     connect(ui->pushButton_del_ood,SIGNAL(clicked(bool)),SLOT(del_ood()));
     connect(ui->pushButton_del_suicide,SIGNAL(clicked(bool)),SLOT(del_suicide()));
-    //connect(ui->pushButton_del_preparate,SIGNAL(clicked(bool)),SLOT());
     connect(ui->pushButton_del_dynamic_view,SIGNAL(clicked(bool)),SLOT(del_dynamic_view()));
     connect(ui->pushButton_del_visits_control,SIGNAL(clicked(bool)),SLOT(del_visit()));
     connect(ui->pushButton_del_day_station,SIGNAL(clicked(bool)),SLOT(del_day_station()));
-
+    connect(ui->pushButton_del_preparate,SIGNAL(clicked(bool)),SLOT(del_preparate()));
+    connect(ui->pushButton_del_data_analizes,SIGNAL(clicked(bool)),SLOT(del_data_analizes()));
     connect(ui->pushButton_add_history_patient,SIGNAL(clicked(bool)),SLOT(dialog_add_file_to_patient()));
-
-
     connect(ui->pushButton_add_invalid,SIGNAL(clicked(bool)),SLOT(add_invalid()));
     connect(ui->pushButton_hide,SIGNAL(clicked(bool)),SLOT(hide_other_info()));
     connect(ui->action_app_window,SIGNAL(triggered(bool)),SLOT(open_app()));
-
-
-
-
     connect(ui->action_journal_rvk,SIGNAL(triggered(bool)),SLOT(open_journal_rvk()));
-
     connect(ui->listView,SIGNAL(doubleClicked(QModelIndex)),SLOT(added_files_patient()));
-
     connect(ui->action_visitors,SIGNAL(triggered(bool)),SLOT(view_visiting()));
     connect(ui->pushButton_visiting_today,SIGNAL(clicked(bool)),SLOT(show_visiting_today()));
     connect(ui->tabWidget_main,SIGNAL(currentChanged(int)),SLOT(load_all_info()));
     connect(ui->tableView->selectionModel(),SIGNAL(selectionChanged(QItemSelection,QItemSelection)),SLOT(load_all_info()));
-
-
-
-
-
 }
 
 
 MainWindow::~MainWindow()
 {
-
     delete ui;
 }
 void MainWindow::loadCommand()
@@ -185,7 +168,6 @@ void MainWindow::loadCommand()
             }
             break;
         }
-
     }
 }
 void MainWindow::I_Online()
@@ -198,18 +180,6 @@ void MainWindow::I_Online()
 
 void MainWindow::closeEvent(QCloseEvent *event)
 {
-    //Сохранение размеров виджетов
-    //    QSettings *settings = new QSettings("UISave.ini",QSettings::IniFormat);
-    //    settings->beginGroup("MainTable");
-    //    settings->setValue("sizeH", ui->tableView->height());
-    //    settings->endGroup();
-    //    settings->beginGroup("Sved_hosp");
-    //    settings->setValue("sizeH", ui->tableWidget_sved_gospital->height());
-    //    settings->endGroup();
-    //    settings->beginGroup("point_time_notwork");
-    //    settings->setValue("sizeH", ui->tableWidget_point_time_notwork->height());
-    //    settings->endGroup();
-
     QFile files_delete("session.ini");
     files_delete.remove();
     QSqlDatabase db = QSqlDatabase::database();
@@ -1000,22 +970,17 @@ void MainWindow::load_all_info()
         load_invalid_table();
         qDebug()<<"invalid";
     }
-    if(ui->tableView_suicide->isVisible())
-    {
-        load_suicide_table();
-        qDebug()<<"suicide";
-    }
-    if(ui->tableView_ood->isVisible())
-    {
-        load_ood_table();
-        qDebug()<<"ood";
-    }
     if(ui->listView->isVisible())
     {
         load_files_patient();
         qDebug()<<"files";
     }
-
+    if(ui->tabWidget_dop->isVisible())
+    {
+        load_suicide_table();
+        load_ood_table();
+        load_data_analizes_table();
+    }
 
 
 }
@@ -1746,7 +1711,7 @@ void MainWindow::load_other_info()
             log.error_log("Database disconect "+QDateTime::currentDateTime().toString("dd.MM.yyyy HH:mm:ss"));
         }
     }
-    if(ui->tableWidget_preparat_patient->isVisible())
+    if(ui->tableView_preparate->isVisible())
     {
 
     }
@@ -1765,6 +1730,35 @@ void MainWindow::load_day_station()
         ui->tableView_day_station->horizontalHeader()->setSectionResizeMode(6,QHeaderView::Stretch);
     }
 }
+void MainWindow::load_preparate()
+{
+    int selected_tables = ui->tableView->currentIndex().row();
+    if (selected_tables >= 0)
+    {
+        int row = ui->tableView->currentIndex().row();
+        QString id = ui->tableView->model()->index(row,0).data(Qt::DisplayRole).toString();
+        model_load_preparate->setFilter("delete_row = false AND medcard_id = "+id);
+        model_load_preparate->select();
+        ui->tableView_preparate->horizontalHeader()->setSectionResizeMode(7,QHeaderView::Stretch);
+        ui->tableView_preparate->horizontalHeader()->setSectionResizeMode(8,QHeaderView::Stretch);
+        ui->tableView_preparate->horizontalHeader()->setSectionResizeMode(9,QHeaderView::Stretch);
+    }
+}
+
+void MainWindow::load_data_analizes_table()
+{
+    int selected_tables = ui->tableView->currentIndex().row();
+    if (selected_tables >= 0)
+    {
+        int row = ui->tableView->currentIndex().row();
+        QString id = ui->tableView->model()->index(row,0).data(Qt::DisplayRole).toString();
+        model_data_analizes_view->setFilter("delete_row = false AND medcard_id = "+id);
+        model_data_analizes_view->select();
+       ui->tableView_data_analizes->horizontalHeader()->setSectionResizeMode(6,QHeaderView::Stretch);
+       ui->tableView_data_analizes->horizontalHeader()->setSectionResizeMode(7,QHeaderView::Stretch);
+    }
+}
+
 void MainWindow::context_menu_dynamic_view(QPoint pos)
 {
     qDebug()<<"MainWindow: Function: context_menu_dynamic_view";
@@ -2790,96 +2784,7 @@ void MainWindow::add_invalid()
         }
     }
 
-    //add_invalid_class invalid;
-    //connect(&invalid,SIGNAL(send_ok()),this,SLOT(add_invalid_ok()));
 
-    //QString date_inst;
-    //QString date_inst_test = validate_date(ui->lineEdit_date_inst->text());
-    //QString date_pereosved;
-    //QString date_pereosved_test;
-    //QString from_other;
-    //QString work_yes;
-    //QString inv_child;
-    //QString first_value;
-    //QString group_inv = ui->comboBox_group_inv->currentData().toString();
-    //QString work_place = ui->comboBox_work_place->currentData().toString();
-    //QString step_lost = ui->lineEdit_stepen_lost->text();
-    //QString dubl = ui->lineEdit_dubl->text();
-    //QString other_recomm = ui->lineEdit_other_recom->text();
-
-
-    //int selected_tables2 = ui->tableView->currentIndex().row();
-    //if (selected_tables2 >= 0)
-    //{
-    //    int row = ui->tableView->currentIndex().row();
-    //    medcard_id = ui->tableView->model()->index(row,0).data(Qt::DisplayRole).toString();
-
-
-    //    if(ui->checkBox_bs->isChecked())
-    //    {
-    //        date_pereosved = "NULL";
-    //    }
-    //    else
-    //    {
-    //        date_pereosved_test = validate_date(ui->lineEdit_date_pereosved->text());
-    //        if(date_pereosved_test=="exit")
-    //        {
-    //            return;
-    //        }
-    //        else
-    //        {
-    //            date_pereosved=date_pereosved_test;
-    //        }
-    //    }
-
-    //if(ui->checkBox_inv_child->isChecked())
-    //{
-    //    inv_child = "true";
-    //}
-    //else
-    //{
-    //    inv_child = "false";
-    //}
-    //if(date_inst_test=="exit")
-    //{
-    //    return;
-    //}
-    //else
-    //{
-    //    date_inst=date_inst_test;
-    //}
-    //if(ui->checkBox_from_other->isChecked())
-    //{
-    //    from_other = "true";
-    //}
-    //else
-    //{
-    //    from_other = "false";
-    //}
-    //if(ui->checkBox_work_yes->isChecked())
-    //{
-    //    work_yes = "true";
-    //}
-    //else
-    //{
-    //    work_yes = "false";
-    //}
-    //if(ui->checkBox_first->isChecked())
-    //{
-    //    first_value = "true";
-    //}
-    //else
-    //{
-    //    first_value = "false";
-    //}
-
-    //invalid.send_data(medcard_id,obj.staff_id,group_inv,from_other,work_yes,date_inst,date_pereosved,inv_child,ui->checkBox_bs->isChecked(),first_value,work_place,step_lost,other_recomm,dubl);
-
-    //}
-    //else
-    //{
-
-    //}
 
 
     Dialog_invalids_patient dialog_inv;
@@ -3120,6 +3025,171 @@ void MainWindow::del_ood()
                 else
                 {
                     query.exec("INSERT INTO test.logs(staff_add_id, date_add, text) VALUES ('"+obj.staff_id+"', '"+QDate::currentDate().toString("dd.MM.yyyy")+"', 'Удалена информация о ООД № "+id+"')");
+                    if(query.lastError().isValid())
+                    {
+                        qDebug()<<query.lastError();
+                        QMessageBox::warning(this,"Ошибка SQL","Произошла ошибка при обращении к базе данных");
+                    }
+                }
+            }
+            load_all_info();
+        }
+    }
+    else
+    {
+        QMessageBox::warning(this,"Ошибка","Нельзя удалить того чего нет)");
+    }
+}
+void MainWindow::add_preparate()
+{
+    Dialog_Preparate dialog;
+    Objects_app obj;
+    int selected_tables = ui->tableView->currentIndex().row();
+    if (selected_tables >= 0)
+    {
+        int row = ui->tableView->currentIndex().row();
+        QString id = ui->tableView->model()->index(row,0).data(Qt::DisplayRole).toString();
+        dialog.setParam(0,id);
+        if(dialog.exec())
+        {
+            model_load_preparate->select();
+        }
+    }
+    else
+    {
+        QMessageBox::warning(this,"Ошибка","Чтобы добавить информацию о препаратах нужно сначала выбрать пациента");
+    }
+}
+void MainWindow::edit_preparate()
+{
+    Dialog_Preparate dialog;
+    Objects_app obj;
+    int selected_tables = ui->tableView_preparate->currentIndex().row();
+    if (selected_tables >= 0)
+    {
+        int row = ui->tableView_preparate->currentIndex().row();
+        QString id = ui->tableView_preparate->model()->index(row,0).data(Qt::DisplayRole).toString();
+        dialog.setParam(1,id);
+        if(dialog.exec())
+        {
+            model_load_preparate->select();
+        }
+    }
+    else
+    {
+        QMessageBox::warning(this,"Ошибка","Чтобы изменить информацию о препаратах нужно сначала выбрать пациента");
+    }
+}
+void MainWindow::del_preparate()
+{
+    QSqlDatabase db = QSqlDatabase::database();
+    QSqlQuery query;
+    Objects_app obj;
+    int selected_tables = ui->tableView_preparate->currentIndex().row();
+    if (selected_tables >= 0)
+    {
+        int row = ui->tableView_preparate->currentIndex().row();
+        QString id = ui->tableView_preparate->model()->index(row,0).data(Qt::DisplayRole).toString();
+        int ret = QMessageBox::warning(this, tr("Удаление информации о препаратах!"),
+                                       tr("Вы точно хотите удалить информацию о препаратах?"),
+                                       QMessageBox::Yes|QMessageBox::No);
+
+        if(ret==16384)
+        {
+            if(db.open())
+            {
+                query.exec("UPDATE test.preparate SET delete_row='true' WHERE id= "+id);
+                if(query.lastError().isValid())
+                {
+                    qDebug()<<query.lastError();
+                    QMessageBox::warning(this,"Ошибка SQL","Произошла ошибка при обращении к базе данных");
+                }
+                else
+                {
+                    query.exec("INSERT INTO test.logs(staff_add_id, date_add, text) VALUES ('"+obj.staff_id+"', '"+QDate::currentDate().toString("dd.MM.yyyy")+"', 'Удалена информация о препаратах № "+id+"')");
+                    if(query.lastError().isValid())
+                    {
+                        qDebug()<<query.lastError();
+                        QMessageBox::warning(this,"Ошибка SQL","Произошла ошибка при обращении к базе данных");
+                    }
+                }
+            }
+            load_all_info();
+        }
+    }
+    else
+    {
+        QMessageBox::warning(this,"Ошибка","Нельзя удалить того чего нет)");
+    }
+}
+
+void MainWindow::add_data_analizes()
+{
+    Dialog_data_analizes dialog;
+    Objects_app obj;
+    int selected_tables = ui->tableView->currentIndex().row();
+    if (selected_tables >= 0)
+    {
+        int row = ui->tableView->currentIndex().row();
+        QString id = ui->tableView->model()->index(row,0).data(Qt::DisplayRole).toString();
+        dialog.setParam(0,id);
+        if(dialog.exec())
+        {
+            model_data_analizes_view->select();
+        }
+    }
+    else
+    {
+        QMessageBox::warning(this,"Ошибка","Чтобы добавить информацию о анализах нужно сначала выбрать пациента");
+    }
+}
+void MainWindow::edit_data_analizes()
+{
+    Dialog_data_analizes dialog;
+    Objects_app obj;
+    int selected_tables = ui->tableView_data_analizes->currentIndex().row();
+    if (selected_tables >= 0)
+    {
+        int row = ui->tableView_data_analizes->currentIndex().row();
+        QString id = ui->tableView_data_analizes->model()->index(row,0).data(Qt::DisplayRole).toString();
+        dialog.setParam(1,id);
+        if(dialog.exec())
+        {
+            model_data_analizes_view->select();
+        }
+    }
+    else
+    {
+        QMessageBox::warning(this,"Ошибка","Чтобы изменить информацию о анализах нужно сначала выбрать пациента");
+    }
+}
+void MainWindow::del_data_analizes()
+{
+    QSqlDatabase db = QSqlDatabase::database();
+    QSqlQuery query;
+    Objects_app obj;
+    int selected_tables = ui->tableView_data_analizes->currentIndex().row();
+    if (selected_tables >= 0)
+    {
+        int row = ui->tableView_data_analizes->currentIndex().row();
+        QString id = ui->tableView_data_analizes->model()->index(row,0).data(Qt::DisplayRole).toString();
+        int ret = QMessageBox::warning(this, tr("Удаление информации о анализах!"),
+                                       tr("Вы точно хотите удалить информацию о анализах?"),
+                                       QMessageBox::Yes|QMessageBox::No);
+
+        if(ret==16384)
+        {
+            if(db.open())
+            {
+                query.exec("UPDATE test.data_analizes SET delete_row='true' WHERE id= "+id);
+                if(query.lastError().isValid())
+                {
+                    qDebug()<<query.lastError();
+                    QMessageBox::warning(this,"Ошибка SQL","Произошла ошибка при обращении к базе данных");
+                }
+                else
+                {
+                    query.exec("INSERT INTO test.logs(staff_add_id, date_add, text) VALUES ('"+obj.staff_id+"', '"+QDate::currentDate().toString("dd.MM.yyyy")+"', 'Удалена информация о анализах № "+id+"')");
                     if(query.lastError().isValid())
                     {
                         qDebug()<<query.lastError();
@@ -3438,6 +3508,14 @@ void MainWindow::set_table_param()
     model_day_station = nullptr;
     model_day_station = new QSqlTableModel();
 
+    delete model_load_preparate;
+    model_load_preparate = nullptr;
+    model_load_preparate = new model_preparate();
+
+    delete model_data_analizes_view;
+    model_data_analizes_view = nullptr;
+    model_data_analizes_view = new model_data_analizes();
+
     model->setTable("patients_find");
     model->setEditStrategy(QSqlTableModel::OnManualSubmit);
 
@@ -3633,6 +3711,53 @@ void MainWindow::set_table_param()
 
     model_day_station->setFilter("medcard_id=0");
     model_day_station->select();
+
+    model_load_preparate->setTable("test.preparate_view");
+
+    model_load_preparate->setHeaderData(0, Qt::Horizontal, tr("id"));
+    model_load_preparate->setHeaderData(1, Qt::Horizontal, tr("Добавил"));
+    model_load_preparate->setHeaderData(2, Qt::Horizontal, tr("Изменил"));
+    model_load_preparate->setHeaderData(3, Qt::Horizontal, tr("Удалена"));
+    model_load_preparate->setHeaderData(4, Qt::Horizontal, tr("Медкарта №"));
+    model_load_preparate->setHeaderData(5, Qt::Horizontal, tr("Описание"));
+    model_load_preparate->setHeaderData(6, Qt::Horizontal, tr("Доза"));
+    model_load_preparate->setHeaderData(7, Qt::Horizontal, tr("Дата\nназначения"));
+    model_load_preparate->setHeaderData(8, Qt::Horizontal, tr("Дата\nВК"));
+    model_load_preparate->setHeaderData(9, Qt::Horizontal, tr("Препарат"));
+
+    model_load_preparate->setFilter("medcard_id=0");
+    model_load_preparate->select();
+
+    ui->tableView_preparate->setModel(model_load_preparate);
+    ui->tableView_preparate->hideColumn(0);
+    ui->tableView_preparate->hideColumn(1);
+    ui->tableView_preparate->hideColumn(2);
+    ui->tableView_preparate->hideColumn(3);
+    ui->tableView_preparate->hideColumn(4);
+    ui->tableView_preparate->hideColumn(5);
+    ui->tableView_preparate->hideColumn(6);
+
+    model_data_analizes_view->setTable("test.data_analizes_view");
+    model_data_analizes_view->setHeaderData(0, Qt::Horizontal, tr("id"));
+    model_data_analizes_view->setHeaderData(1, Qt::Horizontal, tr("Медкарта №"));
+    model_data_analizes_view->setHeaderData(2, Qt::Horizontal, tr("Добавил"));
+    model_data_analizes_view->setHeaderData(3, Qt::Horizontal, tr("Изменил"));
+    model_data_analizes_view->setHeaderData(4, Qt::Horizontal, tr("Удалил"));
+    model_data_analizes_view->setHeaderData(5, Qt::Horizontal, tr("Удалена"));
+    model_data_analizes_view->setHeaderData(6, Qt::Horizontal, tr("Дата\nназначения"));
+    model_data_analizes_view->setHeaderData(7, Qt::Horizontal, tr("Анализ"));
+
+    model_data_analizes_view->setFilter("medcard_id =0");
+    model_data_analizes_view->select();
+
+    ui->tableView_data_analizes->setModel(model_data_analizes_view);
+    ui->tableView_data_analizes->hideColumn(0);
+    ui->tableView_data_analizes->hideColumn(1);
+    ui->tableView_data_analizes->hideColumn(2);
+    ui->tableView_data_analizes->hideColumn(3);
+    ui->tableView_data_analizes->hideColumn(4);
+    ui->tableView_data_analizes->hideColumn(5);
+
 }
 
 void MainWindow::load_settings_from_sql()
@@ -3705,6 +3830,7 @@ void MainWindow::load_area_list()
         if(query.lastError().isValid())
         {
             qDebug()<<query.lastError();
+            qDebug()<<"SELECT area_id FROM test.servising_area where staff_id="+obj.staff_id;
             QMessageBox::warning(this,"Ошибка SQL","Произошла ошибка при обращении к базе данных");
         }
         while(query.next())
