@@ -101,6 +101,7 @@ public slots:
     void create_document();
     void delete_document();
 
+
     //void select_text_document();
     void open_new_document(QString);
 
@@ -114,6 +115,8 @@ public slots:
     void show_dialog_add_patient();
 
     void apply_rights();
+
+
 
 
 

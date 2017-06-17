@@ -81,6 +81,7 @@
     //RVK
 #include <journal/Dialog_add_and_edit/dialog_add_and_edit_journal.h>
 #include <journal/dialog_rvk.h>
+#include <journal/dialog_zapros.h>
 
 //viewer
 #include "work_info_patient/visitors/dialog_visiting_control.h"
@@ -263,8 +264,14 @@ public slots:
     void del_day_station();
 
     //Отчеты и прочее
+    void gen_report();
     void gen_report_1();
+    void gen_report_2();
+    void gen_report_7();
     void gen_report_9(); //Динамика инвалидности
+    void gen_report_12();
+    void gen_report_15();
+    void gen_report_17();
     void gen_report_19();//форма 10
     void gen_report_24();
 
@@ -286,6 +293,7 @@ public slots:
 
     void open_app();
     void open_journal_rvk();
+    void open_journal_zapros();
 
     //Notification
     void notification_server(QString);

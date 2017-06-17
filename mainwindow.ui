@@ -1079,6 +1079,7 @@ left: 5px; /* move to the right by 5px */
       </property>
       <addaction name="action_report_16"/>
       <addaction name="action_report_17"/>
+      <addaction name="action_report"/>
      </widget>
      <widget class="QMenu" name="menu_17">
       <property name="title">
@@ -1104,6 +1105,11 @@ left: 5px; /* move to the right by 5px */
       </property>
       <addaction name="action_report_18"/>
      </widget>
+     <widget class="QMenu" name="menu_2">
+      <property name="title">
+       <string>Без группы</string>
+      </property>
+     </widget>
      <addaction name="menu_11"/>
      <addaction name="menu_12"/>
      <addaction name="menu_14"/>
@@ -1113,13 +1119,14 @@ left: 5px; /* move to the right by 5px */
      <addaction name="menu_18"/>
      <addaction name="menu_19"/>
      <addaction name="action_visitors"/>
+     <addaction name="menu_2"/>
     </widget>
     <widget class="QMenu" name="menu_4">
      <property name="title">
       <string>Журналы</string>
      </property>
      <addaction name="action_journal_rvk"/>
-     <addaction name="action_3"/>
+     <addaction name="action_journal_zapros"/>
     </widget>
     <widget class="QMenu" name="menu_8">
      <property name="title">
@@ -1132,8 +1139,8 @@ left: 5px; /* move to the right by 5px */
     <addaction name="menu_4"/>
     <addaction name="menu_8"/>
     <addaction name="action_settings_program"/>
-    <addaction name="action"/>
     <addaction name="action_filter"/>
+    <addaction name="action"/>
    </widget>
    <addaction name="menu"/>
   </widget>
@@ -1289,7 +1296,7 @@ left: 5px; /* move to the right by 5px */
     <string>Журнал РВК</string>
    </property>
   </action>
-  <action name="action_3">
+  <action name="action_journal_zapros">
    <property name="text">
     <string>Журнал запросов</string>
    </property>
@@ -1307,6 +1314,11 @@ left: 5px; /* move to the right by 5px */
   <action name="action_filter">
    <property name="text">
     <string>Фильтр</string>
+   </property>
+  </action>
+  <action name="action_report">
+   <property name="text">
+    <string>Анализ заболеваемости с ВУТ</string>
    </property>
   </action>
  </widget>

@@ -138,6 +138,7 @@ void Dialog_add_and_edit_journal::input_signal(QString medcard_id)
 {
     id_patient = medcard_id;
     ui->pushButton_select_daignos->setEnabled(true);
+    ui->dateEdit_date_input->setDate(QDate::currentDate());
     init_find_patient();
 }
 void Dialog_add_and_edit_journal::get_sql()
@@ -172,6 +173,7 @@ void Dialog_add_and_edit_journal::setParam(int param, QString id)
     switch (param) {
         case 1:
         load_sql();
+        ui->dateEdit_date_input->setDate(QDate::currentDate());
         break;
     case 2:
         load_in_journal();

@@ -68,12 +68,18 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(rights_update_timer,SIGNAL(timeout()),SLOT(rights_update()));
 
 
-
+    connect(ui->action_report,SIGNAL(triggered(bool)),SLOT(gen_report()));
     connect(ui->action_report_1,SIGNAL(triggered()),SLOT(gen_report_1()));
+    connect(ui->action_report_2,SIGNAL(triggered(bool)),SLOT(gen_report_2()));
+    connect(ui->action_report_15,SIGNAL(triggered(bool)),SLOT(gen_report_15()));
+    connect(ui->action_report_7,SIGNAL(triggered(bool)),SLOT(gen_report_7()));
     connect(ui->action_report_9,SIGNAL(triggered(bool)),SLOT(gen_report_9()));
+    connect(ui->action_report_12,SIGNAL(triggered(bool)),SLOT(gen_report_12()));
+    connect(ui->action_report_17,SIGNAL(triggered(bool)),SLOT(gen_report_17()));
     connect(ui->action_report_forma_10,SIGNAL(triggered(bool)),SLOT(gen_report_19()));
     connect(ui->action_report_24,SIGNAL(triggered(bool)),SLOT(gen_report_24()));
     connect(ui->action_filter,SIGNAL(triggered(bool)),SLOT(open_find_filter()));
+    connect(ui->action_journal_zapros,SIGNAL(triggered(bool)),SLOT(open_journal_zapros()));
 
 
     //connect(ui->tableView,SIGNAL(activated(QModelIndex)),SLOT(load_all_info()));
@@ -838,8 +844,9 @@ void MainWindow::find_patients()
     }
     else
     {
-        qDebug()<<department_list;
+
         department_list.append(obj.department_id);
+        qDebug()<<department_list;
     }
     QStringList list_string_find = string_find.split(" ");
     if(string_find != "")
@@ -882,6 +889,13 @@ void MainWindow::find_patients()
 
 }
 
+void MainWindow::gen_report()
+{
+    Dialog_reports dialog;
+    dialog.gen_report(0);
+    dialog.exec();
+}
+
 void MainWindow::gen_report_1()
 {
     qDebug()<<"MainWindow: Function: gen_report_1";
@@ -889,6 +903,40 @@ void MainWindow::gen_report_1()
     dialog.gen_report(1);
     dialog.exec();
 }
+void MainWindow::gen_report_2()
+{
+    Dialog_reports dialog;
+    dialog.gen_report(2);
+    dialog.exec();
+}
+
+void MainWindow::gen_report_12()
+{
+    Dialog_reports dialog;
+    dialog.gen_report(12);
+    dialog.exec();
+}
+
+void MainWindow::gen_report_15()
+{
+    Dialog_reports dialog;
+    dialog.gen_report(15);
+    dialog.exec();
+}
+void MainWindow::gen_report_17()
+{
+    Dialog_reports dialog;
+    dialog.gen_report(17);
+    dialog.exec();
+}
+
+void MainWindow::gen_report_7()
+{
+    Dialog_reports dialog;
+    dialog.gen_report(7);
+    dialog.exec();
+}
+
 void MainWindow::gen_report_9()
 {
     qDebug()<<"MainWindow: Function: gen_report_9";
@@ -3324,6 +3372,11 @@ void MainWindow::open_app()
 void MainWindow::open_journal_rvk()
 {
     Dialog_RVK dialog;
+    dialog.exec();
+}
+void MainWindow::open_journal_zapros()
+{
+    Dialog_zapros dialog;
     dialog.exec();
 }
 
