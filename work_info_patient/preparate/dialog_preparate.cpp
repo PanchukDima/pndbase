@@ -24,7 +24,8 @@ void Dialog_Preparate::get_sql()
     QString preparete_id = ui->comboBox_preparate_name->currentData().toString();
     switch (global_param) {
     case 0:
-        query.exec("INSERT INTO test.preparate( staff_add_id, deleted_row, staff_edit_id, medcard_id, date_first_appointment, date_vk, preparate_id) VALUES ("+obj.staff_id+", false, 0, "+global_id+", "+date_appointment+", "+date_vk+", "+preparete_id+");");
+        qDebug()<<"INSERT INTO test.preparate( staff_add_id, deleted_row, staff_edit_id, medcard_id, date_first_appointment, date_vk, preparate_id) VALUES ("+obj.staff_id+", false, 0, "+global_id+", '"+date_appointment+"', '"+date_vk+"', "+preparete_id+");";
+        query.exec("INSERT INTO test.preparate( staff_add_id, deleted_row, staff_edit_id, medcard_id, date_first_appointment, date_vk, preparate_id) VALUES ("+obj.staff_id+", false, 0, "+global_id+", '"+date_appointment+"', '"+date_vk+"', "+preparete_id+");");
         if(query.lastError().isValid())
         {
             qDebug()<<query.lastError();
@@ -36,7 +37,7 @@ void Dialog_Preparate::get_sql()
         }
         break;
     case 1:
-        query.exec("UPDATE test.preparate SET  staff_edit_id="+obj.staff_id+", date_first_appointment="+date_appointment+",date_vk="+date_vk+", preparate_id="+preparete_id+" WHERE id ="+global_id);
+        query.exec("UPDATE test.preparate SET  staff_edit_id="+obj.staff_id+", date_first_appointment='"+date_appointment+"',date_vk='"+date_vk+"', preparate_id="+preparete_id+" WHERE id ="+global_id);
         if(query.lastError().isValid())
         {
             qDebug()<<query.lastError();

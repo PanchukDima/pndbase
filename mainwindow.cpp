@@ -1029,6 +1029,10 @@ void MainWindow::load_all_info()
         load_ood_table();
         load_data_analizes_table();
     }
+    if(ui->tableView_preparate->isVisible())
+    {
+        load_preparate();
+    }
 
 
 }
@@ -1785,8 +1789,13 @@ void MainWindow::load_preparate()
     {
         int row = ui->tableView->currentIndex().row();
         QString id = ui->tableView->model()->index(row,0).data(Qt::DisplayRole).toString();
-        model_load_preparate->setFilter("delete_row = false AND medcard_id = "+id);
+        model_load_preparate->setFilter("deleted_row = false AND medcard_id = "+id);
         model_load_preparate->select();
+        if(model_load_preparate->lastError().isValid())
+        {
+            qDebug()<<model_load_preparate->lastError();
+        }
+        qDebug()<<id;
         ui->tableView_preparate->horizontalHeader()->setSectionResizeMode(7,QHeaderView::Stretch);
         ui->tableView_preparate->horizontalHeader()->setSectionResizeMode(8,QHeaderView::Stretch);
         ui->tableView_preparate->horizontalHeader()->setSectionResizeMode(9,QHeaderView::Stretch);
@@ -3778,7 +3787,7 @@ void MainWindow::set_table_param()
     model_load_preparate->setHeaderData(8, Qt::Horizontal, tr("Дата\nВК"));
     model_load_preparate->setHeaderData(9, Qt::Horizontal, tr("Препарат"));
 
-    model_load_preparate->setFilter("medcard_id=0");
+    model_load_preparate->setFilter("medcard_id = 0");
     model_load_preparate->select();
 
     ui->tableView_preparate->setModel(model_load_preparate);
