@@ -3671,6 +3671,7 @@ void MainWindow::set_table_param()
     model_visits_control->setHeaderData(4,Qt::Horizontal,tr("Дата\nявки"));
 
     model_visits_control->setFilter("medcard_id=0");
+    model_visits_control->setSort(2,Qt::DescendingOrder);
     model_visits_control->select();
 
     ui->tableView_visits_control->setModel(model_visits_control);
