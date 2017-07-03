@@ -3155,7 +3155,7 @@ void MainWindow::del_preparate()
         {
             if(db.open())
             {
-                query.exec("UPDATE test.preparate SET delete_row='true' WHERE id= "+id);
+                query.exec("UPDATE test.preparate SET deleted_row='true' WHERE id= "+id);
                 if(query.lastError().isValid())
                 {
                     qDebug()<<query.lastError();

@@ -57,7 +57,7 @@ void Dialog_Preparate::load_library()
     QSqlQuery query;
     if(db.open())
     {
-        query.exec("SELECT id, name FROM library.preparate_list");
+        query.exec("SELECT id, name FROM library.preparate_list order by name");
         if(query.lastError().isValid())
         {
             qDebug()<<query.lastError();
