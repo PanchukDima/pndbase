@@ -160,7 +160,7 @@ left: 5px; /* move to the right by 5px */
         <enum>QTabWidget::Rounded</enum>
        </property>
        <property name="currentIndex">
-        <number>5</number>
+        <number>1</number>
        </property>
        <property name="documentMode">
         <bool>false</bool>
@@ -380,14 +380,14 @@ left: 5px; /* move to the right by 5px */
               <item>
                <widget class="QPushButton" name="pushButton_yesterday">
                 <property name="text">
-                 <string>Пришел вчера</string>
+                 <string>Посещение вчера</string>
                 </property>
                </widget>
               </item>
               <item>
                <widget class="QPushButton" name="pushButton_day_before_yesterday">
                 <property name="text">
-                 <string>Пришел позавчера</string>
+                 <string>Посещение позавчера</string>
                 </property>
                </widget>
               </item>
@@ -768,7 +768,7 @@ left: 5px; /* move to the right by 5px */
             <bool>true</bool>
            </property>
            <property name="currentIndex">
-            <number>2</number>
+            <number>0</number>
            </property>
            <widget class="QWidget" name="tab_2">
             <attribute name="title">
