@@ -81,7 +81,10 @@ SOURCES += main.cpp\
     models/model_data_analizes.cpp \
     work_info_patient/data_analizes/dialog_data_analizes.cpp \
     Other_dialog_windows/dialog_add_contact.cpp \
-    models/journal/model_journal_zapros.cpp
+    models/journal/model_journal_zapros.cpp \
+    work_info_patient/military/mainwindow_list_military.cpp \
+    work_info_patient/prokuratura/mainwindow_police.cpp \
+    work_info_patient/prokuratura/thread_load_data.cpp
 
 HEADERS  += mainwindow.h \
     dialog_patient.h \
@@ -142,7 +145,10 @@ HEADERS  += mainwindow.h \
     models/model_data_analizes.h \
     work_info_patient/data_analizes/dialog_data_analizes.h \
     Other_dialog_windows/dialog_add_contact.h \
-    models/journal/model_journal_zapros.h
+    models/journal/model_journal_zapros.h \
+    work_info_patient/military/mainwindow_list_military.h \
+    work_info_patient/prokuratura/mainwindow_police.h \
+    work_info_patient/prokuratura/thread_load_data.h
 
 FORMS    += mainwindow.ui \
     dialog_patient.ui \
@@ -183,7 +189,9 @@ FORMS    += mainwindow.ui \
     appUI/DocumentEditor/dialogs/dialog_page_settings.ui \
     work_info_patient/dynamic_view/dialog_edit_other_dynamic_view.ui \
     work_info_patient/data_analizes/dialog_data_analizes.ui \
-    Other_dialog_windows/dialog_add_contact.ui
+    Other_dialog_windows/dialog_add_contact.ui \
+    work_info_patient/military/mainwindow_list_military.ui \
+    work_info_patient/prokuratura/mainwindow_police.ui
 
 RESOURCES += \
     images.qrc

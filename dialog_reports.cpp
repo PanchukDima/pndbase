@@ -91,8 +91,6 @@ void Dialog_reports::make_report_vyt()
     html_table.append(make_report_vyt_sql(0,"4","false"));
     html_table.append(make_report_vyt_sql(1,"1,2,3,4","false"));
     html_table.append(make_report_vyt_sql(2,"","false"));
-
-
     html_table.append("</table>");
     ui->webView->setHtml(html_table);
 }

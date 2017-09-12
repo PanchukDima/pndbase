@@ -47,7 +47,8 @@
 #include "work_info_patient/day_stationar/dialog_day_stationar.h"
 #include "work_info_patient/preparate/dialog_preparate.h"
 #include "work_info_patient/data_analizes/dialog_data_analizes.h"
-
+#include "work_info_patient/military/mainwindow_list_military.h"
+#include "work_info_patient/prokuratura/mainwindow_police.h"
 //models other
 #include <QFileSystemModel>
 
@@ -274,6 +275,8 @@ public slots:
     void gen_report_17();
     void gen_report_19();//форма 10
     void gen_report_24();
+    void gen_report_18();
+    void gen_other_3();
 
     void print_medcard();
     void set_status_arhive();

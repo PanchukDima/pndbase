@@ -76,10 +76,12 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->action_report_9,SIGNAL(triggered(bool)),SLOT(gen_report_9()));
     connect(ui->action_report_12,SIGNAL(triggered(bool)),SLOT(gen_report_12()));
     connect(ui->action_report_17,SIGNAL(triggered(bool)),SLOT(gen_report_17()));
+    connect(ui->action_report_18,SIGNAL(triggered(bool)),SLOT(gen_report_18()));
     connect(ui->action_report_forma_10,SIGNAL(triggered(bool)),SLOT(gen_report_19()));
     connect(ui->action_report_24,SIGNAL(triggered(bool)),SLOT(gen_report_24()));
     connect(ui->action_filter,SIGNAL(triggered(bool)),SLOT(open_find_filter()));
     connect(ui->action_journal_zapros,SIGNAL(triggered(bool)),SLOT(open_journal_zapros()));
+    connect(ui->action_3,SIGNAL(triggered(bool)),SLOT(gen_other_3()));
 
 
     //connect(ui->tableView,SIGNAL(activated(QModelIndex)),SLOT(load_all_info()));
@@ -539,7 +541,7 @@ void MainWindow::settings_maintoolbar()
     QPushButton * debility_button_find = new QPushButton();
 
     ui->tabWidget_main->setCurrentIndex(0);
-    ui->tabWidget_2->setCurrentIndex(0);
+    ui->tabWidget_gosp->setCurrentIndex(0);
 
     QFont font_text;
     font_text.setPointSize(font_size);
@@ -929,6 +931,11 @@ void MainWindow::gen_report_17()
     dialog.gen_report(17);
     dialog.exec();
 }
+void MainWindow::gen_report_18()
+{
+    MainWindow_list_military *main = new MainWindow_list_military(this);
+    main->show();
+}
 
 void MainWindow::gen_report_7()
 {
@@ -1006,12 +1013,18 @@ void MainWindow::load_all_info()
         load_diagnos_table();
         qDebug()<<"diagnos_table";
     }
-    if(ui->tableView_sved_gosp->isVisible())
+    //if(ui->tableView_sved_gosp->isVisible())
+    //{
+   //     load_model_sved_gosp();
+//        load_list_not_work_model();
+//        load_day_station();
+//        qDebug()<<"hosp";
+//    }
+    if(ui->tabWidget_gosp->isVisible())
     {
         load_model_sved_gosp();
         load_list_not_work_model();
         load_day_station();
-        qDebug()<<"hosp";
     }
     if(ui->tableWidget_invalid_psi->isVisible())
     {
@@ -1033,6 +1046,7 @@ void MainWindow::load_all_info()
     {
         load_preparate();
     }
+
 
 
 }
@@ -4015,4 +4029,9 @@ void MainWindow::sort_gosp(int i_collumn)
     //filter->setSourceModel(model_sved_gosp);
     //filter->filterAcceptsColumn(i_collumn);
 
+}
+void MainWindow::gen_other_3()
+{
+    MainWindow_police *main = new MainWindow_police(this);
+    main->show();
 }

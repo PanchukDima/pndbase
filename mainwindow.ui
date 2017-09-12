@@ -160,7 +160,7 @@ left: 5px; /* move to the right by 5px */
         <enum>QTabWidget::Rounded</enum>
        </property>
        <property name="currentIndex">
-        <number>1</number>
+        <number>2</number>
        </property>
        <property name="documentMode">
         <bool>false</bool>
@@ -450,9 +450,9 @@ left: 5px; /* move to the right by 5px */
         </attribute>
         <layout class="QVBoxLayout" name="verticalLayout_5">
          <item>
-          <widget class="QTabWidget" name="tabWidget_2">
+          <widget class="QTabWidget" name="tabWidget_gosp">
            <property name="currentIndex">
-            <number>2</number>
+            <number>0</number>
            </property>
            <widget class="QWidget" name="tab">
             <attribute name="title">
@@ -1109,6 +1109,7 @@ left: 5px; /* move to the right by 5px */
       <property name="title">
        <string>Без группы</string>
       </property>
+      <addaction name="action_3"/>
      </widget>
      <addaction name="menu_11"/>
      <addaction name="menu_12"/>
@@ -1319,6 +1320,11 @@ left: 5px; /* move to the right by 5px */
   <action name="action_report">
    <property name="text">
     <string>Анализ заболеваемости с ВУТ</string>
+   </property>
+  </action>
+  <action name="action_3">
+   <property name="text">
+    <string>Прокуратура(Список Д)</string>
    </property>
   </action>
  </widget>

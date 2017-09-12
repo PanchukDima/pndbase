@@ -24,7 +24,7 @@ void Dialog_Preparate::get_sql()
     QString preparete_id = ui->comboBox_preparate_name->currentData().toString();
     switch (global_param) {
     case 0:
-        qDebug()<<"INSERT INTO test.preparate( staff_add_id, deleted_row, staff_edit_id, medcard_id, date_first_appointment, date_vk, preparate_id) VALUES ("+obj.staff_id+", false, 0, "+global_id+", '"+date_appointment+"', '"+date_vk+"', "+preparete_id+");";
+
         query.exec("INSERT INTO test.preparate( staff_add_id, deleted_row, staff_edit_id, medcard_id, date_first_appointment, date_vk, preparate_id) VALUES ("+obj.staff_id+", false, 0, "+global_id+", '"+date_appointment+"', '"+date_vk+"', "+preparete_id+");");
         if(query.lastError().isValid())
         {
@@ -57,7 +57,7 @@ void Dialog_Preparate::load_library()
     QSqlQuery query;
     if(db.open())
     {
-        query.exec("SELECT id, name FROM library.preparate_list order by name");
+        query.exec("SELECT id, international_name FROM library.preparate_list order by international_name WHERE delete_row = false");
         if(query.lastError().isValid())
         {
             qDebug()<<query.lastError();
