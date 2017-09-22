@@ -13,6 +13,8 @@
 #include <QDate>
 #include <windows.h>
 #include <QThread>
+#include <QSettings>
+#include "Objects/User/objects_app.h"
 
 class thread_load_data : public QObject
 {

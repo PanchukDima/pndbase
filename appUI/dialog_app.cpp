@@ -6,9 +6,19 @@ Dialog_app::Dialog_app(QWidget *parent) :
     ui(new Ui::Dialog_app)
 {
     ui->setupUi(this);
+    Objects_app obj;
     this->setWindowModality(Qt::WindowModal);
     this->setWindowFlags(windowFlags()|Qt::WindowMaximizeButtonHint);
     this->setWindowFlags(windowFlags()|Qt::WindowMinimizeButtonHint);
+    if(obj.staff_id == "14")
+    {
+        ui->pushButton_emsrn->setHidden(false);
+        connect(ui->pushButton_emsrn,SIGNAL(clicked()),SLOT(open_emsrn()));
+    }
+    else
+    {
+        ui->pushButton_emsrn->setHidden(true);
+    }
     connect(ui->pushButton_browser,SIGNAL(clicked(bool)),SLOT(open_browser()));
     connect(ui->pushButton_open_chat,SIGNAL(clicked(bool)),SLOT(open_chat()));
     connect(ui->pushButton_doc_edit,SIGNAL(clicked(bool)),SLOT(open_Document_editor()));
@@ -38,4 +48,10 @@ void Dialog_app::open_Document_editor()
 
     WDE->show();
     //WDE->open_document(1,"29");
+}
+void Dialog_app::open_emsrn()
+{
+    Dialog_emsr_find dialog;
+    dialog.setParam(0,"0");
+    dialog.exec();
 }

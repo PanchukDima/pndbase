@@ -84,7 +84,8 @@ SOURCES += main.cpp\
     models/journal/model_journal_zapros.cpp \
     work_info_patient/military/mainwindow_list_military.cpp \
     work_info_patient/prokuratura/mainwindow_police.cpp \
-    work_info_patient/prokuratura/thread_load_data.cpp
+    work_info_patient/prokuratura/thread_load_data.cpp \
+    other_db/emsrn/dialog_emsr_find.cpp
 
 HEADERS  += mainwindow.h \
     dialog_patient.h \
@@ -148,7 +149,8 @@ HEADERS  += mainwindow.h \
     models/journal/model_journal_zapros.h \
     work_info_patient/military/mainwindow_list_military.h \
     work_info_patient/prokuratura/mainwindow_police.h \
-    work_info_patient/prokuratura/thread_load_data.h
+    work_info_patient/prokuratura/thread_load_data.h \
+    other_db/emsrn/dialog_emsr_find.h
 
 FORMS    += mainwindow.ui \
     dialog_patient.ui \
@@ -191,7 +193,8 @@ FORMS    += mainwindow.ui \
     work_info_patient/data_analizes/dialog_data_analizes.ui \
     Other_dialog_windows/dialog_add_contact.ui \
     work_info_patient/military/mainwindow_list_military.ui \
-    work_info_patient/prokuratura/mainwindow_police.ui
+    work_info_patient/prokuratura/mainwindow_police.ui \
+    other_db/emsrn/dialog_emsr_find.ui
 
 RESOURCES += \
     images.qrc

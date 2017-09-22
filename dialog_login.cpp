@@ -22,7 +22,10 @@ Dialog_login::Dialog_login(QWidget *parent) :
     type_sign = settings->value("type_sign").toBool();
 
     QSqlDatabase db = QSqlDatabase::addDatabase("QPSQL");
-
+    QSqlDatabase db_emsrn = QSqlDatabase::addDatabase("QODBC3","emsrn");
+    db_emsrn.setDatabaseName( "DRIVER={SQL Server};Server=10.128.72.254,1434;" );
+    db_emsrn.setUserName("counter");
+    db_emsrn.setPassword("gcpp");
     if(sys_auth)
     {
         QString name = qgetenv("USER");

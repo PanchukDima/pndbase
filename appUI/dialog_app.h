@@ -6,6 +6,8 @@
 #include <appUI/Chat/dialog_chat.h>
 #include <appUI/DocumentEditor/window_document_editor.h>
 #include <appUI/Browser/mainwindow_web_browser.h>
+#include <Objects/User/objects_app.h>
+#include <other_db/emsrn/dialog_emsr_find.h>
 
 namespace Ui {
 class Dialog_app;
@@ -25,6 +27,7 @@ public slots:
     void open_browser();
     void open_chat();
     void open_Document_editor();
+    void open_emsrn();
 };
 
 #endif // DIALOG_APP_H

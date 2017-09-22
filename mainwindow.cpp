@@ -1884,11 +1884,13 @@ void MainWindow::context_menu_list_not_work_table(QPoint pos)
 
 void MainWindow::context_menu_main_table(QPoint pos) //Контекстное меню главной таблицы
 {    
+    Objects_app obj;
     qDebug()<<"MainWindow: Function: context_menu_main_table";
     QMenu *menu = new QMenu;
     QMenu *submenu_journal = new QMenu("Журналы", menu);
     QMenu *sub_menu_rvk = new QMenu("РВК",submenu_journal);
     QMenu *sub_menu_query = new QMenu("Запросов",submenu_journal);
+    QMenu *sub_menu_db = new QMenu("Проверка в");
     //QMenu *submenu_status = new QMenu("Статус", menu);
     menu->addAction("Добавить", this, SLOT(added_info_patient()))->setEnabled(rights_user[18]);
     menu->addAction("Изменить", this, SLOT(edit_info_patient()))->setEnabled(rights_user[19]);
@@ -1905,6 +1907,12 @@ void MainWindow::context_menu_main_table(QPoint pos) //Контекстное м
     sub_menu_query->addAction("Добавить запись", this, SLOT(add_zapis_query()));
     sub_menu_query->addAction("Найти записи",this, SLOT(find_zapis_query()));
     menu->addAction("Документы",this,SLOT(show_document_patient()));
+    if(obj.staff_id == "14")
+    {
+        menu->addSeparator();
+        menu->addMenu(sub_menu_db);
+        sub_menu_db->addAction("ЭМСРН", this ,SLOT(open_emsrn()));
+    }
     menu->exec(ui->tableView->mapToGlobal(pos));
 
 }
@@ -4034,4 +4042,16 @@ void MainWindow::gen_other_3()
 {
     MainWindow_police *main = new MainWindow_police(this);
     main->show();
+}
+void MainWindow::open_emsrn()
+{
+    Dialog_emsr_find dialog;
+    int selected_tables = ui->tableView->currentIndex().row();
+    if (selected_tables >= 0)
+    {
+        int row = ui->tableView->currentIndex().row();
+        QString id = ui->tableView->model()->index(row,0).data(Qt::DisplayRole).toString();
+        dialog.setParam(1,id);
+        dialog.exec();
+    }
 }

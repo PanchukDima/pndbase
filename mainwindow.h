@@ -86,6 +86,7 @@
 
 //viewer
 #include "work_info_patient/visitors/dialog_visiting_control.h"
+#include "other_db/emsrn/dialog_emsr_find.h"
 
 namespace Ui {
 class MainWindow;
@@ -315,6 +316,9 @@ public slots:
     void show_visiting_today();
 
     void sort_gosp(int);
+
+    //other db
+    void open_emsrn();
 
 
 };
