@@ -109,6 +109,7 @@ public slots:
     void add_comments();
     void load_comments();
     void edit_comments();
+    void del_comments();
     void context_menu_comments(QPoint);
     void copy_text_comments();
 

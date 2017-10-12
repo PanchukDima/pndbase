@@ -2186,9 +2186,13 @@ void Dialog_patient::load_comments()
     QFont font;
     font.setPointSize(13);
     model_comments->setTable("test.comments_view");
-    model_comments->setFilter("type = 0 AND medcard_id = "+global_id_str);
+    model_comments->setFilter("delete_row = 'false' AND type = 0 AND medcard_id = "+global_id_str);
     model_comments->setSort(0,Qt::AscendingOrder);
     model_comments->select();
+    if(model_comments->lastError().isValid())
+    {
+        qDebug()<<model_comments->lastError();
+    }
 
 
     ui->tableView_comments_patient->setFont(font);
@@ -2211,6 +2215,8 @@ void Dialog_patient::load_comments()
     //ui->tableView_comments_patient->hideColumn(3);
     ui->tableView_comments_patient->hideColumn(4);
     ui->tableView_comments_patient->hideColumn(6);
+    ui->tableView_comments_patient->hideColumn(8);
+
 }
 void Dialog_patient::context_menu_comments(QPoint pos)
 {
@@ -2229,7 +2235,41 @@ void Dialog_patient::context_menu_comments(QPoint pos)
     {
         menu->addAction("Редактировать", this, SLOT(edit_comments()));
     }
+    switch (obj.staff_id.toInt()) {
+    case 18:
+        menu->addAction("Удалить", this, SLOT(del_comments()));
+        break;
+    case 17:
+        menu->addAction("Удалить", this, SLOT(del_comments()));
+        break;
+    case 14:
+        menu->addAction("Удалить", this, SLOT(del_comments()));
+        break;
+    }
     menu->exec(ui->tableView_comments_patient->mapToGlobal(pos));
+}
+void Dialog_patient::del_comments()
+{
+    QSqlDatabase db = QSqlDatabase::database();
+    QSqlQuery query;
+    int selected_tables = ui->tableView_comments_patient->currentIndex().row();
+    if (selected_tables >= 0)
+    {
+        int row = ui->tableView_comments_patient->currentIndex().row();
+        QString id = ui->tableView_comments_patient->model()->index(row,0).data(Qt::DisplayRole).toString();
+        if(db.open())
+        {
+            query.exec("UPDATE test.comments SET delete_row = 'true' WHERE id = "+id);
+            if(query.lastError().isValid())
+            {
+                qDebug()<<query.lastError();
+            }
+            else
+            {
+                model_comments->select();
+            }
+        }
+    }
 }
 void Dialog_patient::copy_text_comments()
 {
