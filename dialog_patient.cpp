@@ -1202,6 +1202,7 @@ void Dialog_patient::set_default_color_combox_sex()
 
 void Dialog_patient::put_all_settings()
 {
+    load_area();
     qDebug()<<"put_all_settings";
 
     QSqlDatabase db = QSqlDatabase::database();
@@ -1275,23 +1276,7 @@ void Dialog_patient::put_all_settings()
         }
         query.clear();
     }
-    if(db.open())
-    {
-        qDebug()<<"load area";
-        QSqlQuery query;
-        query.exec("SELECT id, name FROM test.area");
-        if(query.lastError().isValid())
-        {
-            qDebug()<<query.lastError();
-            QMessageBox::warning(this,"Ошибка SQL","Произошла ошибка при обращении к базе данных");
-        }
-        while (query.next()) {
-            QString id_status = query.value(0).toString();
-            QString description = query.value(1).toString();
-            ui->comboBox_area->addItem(description,id_status);
-        }
-        query.clear();
-    }
+
     if(db.open())
     {
         qDebug()<<"load direct";
@@ -1362,6 +1347,38 @@ void Dialog_patient::put_all_settings()
     }
     load_documents();
 
+}
+void Dialog_patient::load_area()
+{
+    ui->comboBox_area->clear();
+    QSqlDatabase db = QSqlDatabase::database();
+    QSqlQuery query;
+    if(db.open())
+    {
+        qDebug()<<"load area";
+//        switch (global_param) {
+//        case 0:
+//            query.exec("SELECT id, name FROM test.area");
+//            break;
+//        case 1:
+//            query.exec("SELECT id, name FROM test.area");
+//            break;
+
+//        }
+        query.exec("SELECT id, name FROM test.area");
+        if(query.lastError().isValid())
+        {
+            qDebug()<<query.lastError();
+            QMessageBox::warning(this,"Ошибка SQL","Произошла ошибка при обращении к базе данных");
+        }
+        while (query.next()) {
+            qDebug()<<query.value(1).toString();
+            QString id_status = query.value(0).toString();
+            QString description = query.value(1).toString();
+            ui->comboBox_area->addItem(description,id_status);
+        }
+        query.clear();
+    }
 }
 
 void Dialog_patient::check_data()
@@ -1518,6 +1535,7 @@ void Dialog_patient::setParam(int param, int id, bool show_uchet)
 
 void Dialog_patient::get_data_sql(int id)
 {
+    load_area();
     qDebug()<<"start load patient";
     QSqlDatabase db = QSqlDatabase::database();
     global_id = id;

@@ -18,7 +18,7 @@ Dialog_login::Dialog_login(QWidget *parent) :
     QString password = settings->value("password").toString();
     bool sys_auth = settings->value("sys_user_type").toBool();
     bool l_update = settings->value("ProgramUpdate/l_auto_update").toBool();
-    settings->setValue("type_sign",true);
+    //settings->setValue("type_sign",true);
     type_sign = settings->value("type_sign").toBool();
 
     QSqlDatabase db = QSqlDatabase::addDatabase("QPSQL");
@@ -26,6 +26,7 @@ Dialog_login::Dialog_login(QWidget *parent) :
     db_emsrn.setDatabaseName( "DRIVER={SQL Server};Server=10.128.72.254,1434;" );
     db_emsrn.setUserName("counter");
     db_emsrn.setPassword("gcpp");
+
     if(sys_auth)
     {
         QString name = qgetenv("USER");
@@ -40,7 +41,9 @@ Dialog_login::Dialog_login(QWidget *parent) :
     db.setHostName(ipdatabase);
     db.setDatabaseName(databasename);
     db.setPort(portdatabase);
-    db.setConnectOptions("application_name = BDPatient");
+    //db.setConnectOptions("application_name = BDPatient; sslmode=require");
+    db.setConnectOptions("application_name = BDPatient;");
+
 
     if(type_sign)
     {
@@ -116,46 +119,46 @@ void Dialog_login::beta_antivirus()
 
 void Dialog_login::update_launcher()
 {
-    QFile appLaunch("launcher.exe");
-    if(appLaunch.exists())
-    {
-        if(appLaunch.remove())
-        {
-           if(QFile::copy("\\\\192.168.0.150\\medcard\\update\\Launcher.exe", "launcher.exe"))
-           {
-               qDebug()<<"Update succes";
-           }
-           else
-           {
-               qDebug()<<"Delete Succes; Update not succes";
-           }
+//    QFile appLaunch("launcher.exe");
+//    if(appLaunch.exists())
+//    {
+//        if(appLaunch.remove())
+//        {
+//           if(QFile::copy("\\\\192.168.0.150\\medcard\\update\\Launcher.exe", "launcher.exe"))
+//           {
+//               qDebug()<<"Update succes";
+//           }
+//           else
+//           {
+//               qDebug()<<"Delete Succes; Update not succes";
+//           }
 
-        }
-        else
-        {
-            if(QFile::copy("\\\\192.168.0.150\\medcard\\update\\Launcher.exe", "launcher.exe"))
-            {
-                qDebug()<<"Update succes";
-            }
-            else
-            {
-              qDebug()<<"Update not succes";
-            }
-        }
-    }
-    else
-    {
-        if(QFile::copy("\\\\192.168.0.150\\medcard\\update\\Launcher.exe", "launcher.exe"))
-        {
-            qDebug()<<"Local File not found; Update succes";
-        }
-        else
-        {
-            qDebug()<<"Local File not found; Update not succes";
-        }
+//        }
+//        else
+//        {
+//            if(QFile::copy("\\\\192.168.0.150\\medcard\\update\\Launcher.exe", "launcher.exe"))
+//            {
+//                qDebug()<<"Update succes";
+//            }
+//            else
+//            {
+//              qDebug()<<"Update not succes";
+//            }
+//        }
+//    }
+//    else
+//    {
+//        if(QFile::copy("\\\\192.168.0.150\\medcard\\update\\Launcher.exe", "launcher.exe"))
+//        {
+//            qDebug()<<"Local File not found; Update succes";
+//        }
+//        else
+//        {
+//            qDebug()<<"Local File not found; Update not succes";
+//        }
 
 
-    }
+//    }
 
 
 }
@@ -250,6 +253,7 @@ void Dialog_login::login_db()
         db.setPassword(ui->lineEdit_password->text());
         if(db.open())
         {
+            qDebug()<<"SELECT users.staff_id, staff.position FROM test.users, test.staff WHERE staff.id = users.staff_id AND staff.status = '0' AND users.user_login = '"+ui->lineEdit_login->text()+"';";
             query.exec("SELECT users.staff_id, staff.position FROM test.users, test.staff WHERE staff.id = users.staff_id AND staff.status = '0' AND users.user_login = '"+ui->lineEdit_login->text()+"';");
             while (query.next())
             {

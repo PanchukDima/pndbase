@@ -63,6 +63,7 @@ public slots:
     void get_data_sql(int);
     void apply_send_data_sql();
     void put_all_settings();
+    void load_area();
 
     void ok_send_data_sql();
     void button_cancel();

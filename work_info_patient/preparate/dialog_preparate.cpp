@@ -57,7 +57,7 @@ void Dialog_Preparate::load_library()
     QSqlQuery query;
     if(db.open())
     {
-        query.exec("SELECT id, international_name FROM library.preparate_list order by international_name WHERE delete_row = false");
+        query.exec("SELECT id, international_name FROM library.preparate_list WHERE delete_row = false order by international_name");
         if(query.lastError().isValid())
         {
             qDebug()<<query.lastError();

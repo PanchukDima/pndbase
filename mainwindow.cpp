@@ -716,6 +716,7 @@ void MainWindow::del_info_patient()
     qDebug()<<"MainWindow: Function: del_info_paient";
     QSqlDatabase db = QSqlDatabase::database();
     QSqlQuery query;
+    Objects_app obj;
     int selected_tables = ui->tableView->currentIndex().row();
     if (selected_tables >= 0)
     {
@@ -732,6 +733,15 @@ void MainWindow::del_info_patient()
             {
                 qDebug()<<query.lastError();
                 QMessageBox::warning(this,"Ошибка SQL","Произошла ошибка при обращении к базе данных");
+            }
+            else
+            {
+                query.exec("INSERT INTO test.logs(staff_add_id, date_add, text) VALUES ('"+obj.staff_id+"', '"+QDate::currentDate().toString("dd.MM.yyyy")+"', 'Удалена медкарта № "+id+"')");
+                if(query.lastError().isValid())
+                {
+                    qDebug()<<query.lastError();
+                    QMessageBox::warning(this,"Ошибка SQL","Произошла ошибка при обращении к базе данных");
+                }
             }
             find_patients();
         }
