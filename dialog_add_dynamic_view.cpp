@@ -114,9 +114,14 @@ void Dialog_add_dynamic_view::setParam(int param, QString id,QString staff)
     ui->dateEdit->setDate(QDate::currentDate());
     ui->dateEdit_adn->setDate(QDate::currentDate());
     ui->dateEdit_apl->setDate(QDate::currentDate());
+
     switch (param) {
     case 1:
         load_info_dynamic_view();
+        Dialog_add_dynamic_view::setWindowTitle("Изменение динамики наблюдения");
+        break;
+    case 0:
+        ui->checkBox_state->hide();
         break;
     }
 }
@@ -528,7 +533,14 @@ Dialog_add_dynamic_view::accept();
     case 1:
         if(db.open())
         {
-            query.exec("UPDATE test.dynamic_view SET on_date='"+ui->dateEdit->date().toString("dd.MM.yyyy")+"',  group_disp_view='"+some_d()+"',stop_date='"+ui->dateEdit_off_date->date().toString("dd.MM.yyyy")+"', status='"+state+"' WHERE id = "+global_id);
+            if(ui->checkBox_state->isChecked())
+            {
+                query.exec("UPDATE test.dynamic_view SET on_date='"+ui->dateEdit->date().toString("dd.MM.yyyy")+"',  group_disp_view='"+some_d()+"',stop_date='"+ui->dateEdit_off_date->date().toString("dd.MM.yyyy")+"', status='"+state+"' WHERE id = "+global_id);
+            }
+            else
+            {
+                query.exec("UPDATE test.dynamic_view SET on_date='"+ui->dateEdit->date().toString("dd.MM.yyyy")+"',  group_disp_view='"+some_d()+"',stop_date=NULL, status='"+state+"' WHERE id = "+global_id);
+            }
             Dialog_add_dynamic_view::accept();
         }
         break;

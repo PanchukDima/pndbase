@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>793</width>
-    <height>522</height>
+    <width>804</width>
+    <height>551</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -39,7 +39,11 @@
            </widget>
           </item>
           <item row="0" column="1">
-           <widget class="QDateEdit" name="dateEdit"/>
+           <widget class="QDateEdit" name="dateEdit_input_doc">
+            <property name="calendarPopup">
+             <bool>true</bool>
+            </property>
+           </widget>
           </item>
           <item row="1" column="0">
            <widget class="QLabel" name="label_2">
@@ -49,17 +53,17 @@
            </widget>
           </item>
           <item row="2" column="2">
-           <widget class="QPushButton" name="pushButton">
+           <widget class="QPushButton" name="pushButton_add_contact">
             <property name="text">
              <string>+</string>
             </property>
            </widget>
           </item>
           <item row="1" column="1">
-           <widget class="QLineEdit" name="lineEdit"/>
+           <widget class="QLineEdit" name="lineEdit_input_number_doc"/>
           </item>
           <item row="2" column="1">
-           <widget class="QComboBox" name="comboBox"/>
+           <widget class="QComboBox" name="comboBox_contact"/>
           </item>
           <item row="2" column="3">
            <spacer name="horizontalSpacer_2">
@@ -95,7 +99,7 @@
            </widget>
           </item>
           <item row="1" column="1">
-           <widget class="QLineEdit" name="lineEdit_8"/>
+           <widget class="QLineEdit" name="lineEdit_out_number_doc"/>
           </item>
           <item row="0" column="0">
            <widget class="QLabel" name="label_19">
@@ -105,7 +109,11 @@
            </widget>
           </item>
           <item row="0" column="1">
-           <widget class="QDateEdit" name="dateEdit_4"/>
+           <widget class="QDateEdit" name="dateEdit_out_doc">
+            <property name="calendarPopup">
+             <bool>true</bool>
+            </property>
+           </widget>
           </item>
           <item row="0" column="2">
            <spacer name="horizontalSpacer_3">
@@ -150,10 +158,14 @@
          </widget>
         </item>
         <item row="1" column="1">
-         <widget class="QLineEdit" name="lineEdit_3"/>
+         <widget class="QLineEdit" name="lineEdit_name"/>
         </item>
         <item row="3" column="1">
-         <widget class="QDateEdit" name="dateEdit_2"/>
+         <widget class="QDateEdit" name="dateEdit_birthday">
+          <property name="calendarPopup">
+           <bool>true</bool>
+          </property>
+         </widget>
         </item>
         <item row="3" column="2">
          <widget class="QLabel" name="label_11">
@@ -163,10 +175,10 @@
          </widget>
         </item>
         <item row="0" column="3">
-         <widget class="QComboBox" name="comboBox_2"/>
+         <widget class="QComboBox" name="comboBox_street"/>
         </item>
         <item row="4" column="3">
-         <widget class="QComboBox" name="comboBox_3"/>
+         <widget class="QComboBox" name="comboBox_area"/>
         </item>
         <item row="1" column="2">
          <widget class="QLabel" name="label_9">
@@ -190,10 +202,7 @@
          </widget>
         </item>
         <item row="3" column="3">
-         <widget class="QLineEdit" name="lineEdit_7"/>
-        </item>
-        <item row="2" column="1">
-         <widget class="QLineEdit" name="lineEdit_4"/>
+         <widget class="QLineEdit" name="lineEdit_flat"/>
         </item>
         <item row="3" column="0">
          <widget class="QLabel" name="label_7">
@@ -201,9 +210,6 @@
            <string>Дата рождения</string>
           </property>
          </widget>
-        </item>
-        <item row="6" column="2">
-         <widget class="QComboBox" name="comboBox_5"/>
         </item>
         <item row="0" column="0">
          <widget class="QLabel" name="label_4">
@@ -227,7 +233,7 @@
          </widget>
         </item>
         <item row="1" column="3">
-         <widget class="QLineEdit" name="lineEdit_5"/>
+         <widget class="QLineEdit" name="lineEdit_house"/>
         </item>
         <item row="4" column="2">
          <widget class="QLabel" name="label_12">
@@ -244,13 +250,19 @@
          </widget>
         </item>
         <item row="0" column="1">
-         <widget class="QLineEdit" name="lineEdit_2"/>
+         <widget class="QLineEdit" name="lineEdit_fname"/>
         </item>
         <item row="2" column="3">
-         <widget class="QLineEdit" name="lineEdit_6"/>
+         <widget class="QLineEdit" name="lineEdit_building"/>
         </item>
-        <item row="5" column="2">
-         <widget class="QComboBox" name="comboBox_4"/>
+        <item row="2" column="1">
+         <widget class="QLineEdit" name="lineEdit_oname"/>
+        </item>
+        <item row="5" column="2" colspan="2">
+         <widget class="QComboBox" name="comboBox_code_diagnos"/>
+        </item>
+        <item row="6" column="2" colspan="2">
+         <widget class="QComboBox" name="comboBox_name_diagnos"/>
         </item>
        </layout>
       </item>
@@ -279,32 +291,67 @@
       <item>
        <layout class="QGridLayout" name="gridLayout_3">
         <item row="1" column="1">
-         <widget class="QComboBox" name="comboBox_7"/>
+         <widget class="QComboBox" name="comboBox_who_sign"/>
         </item>
         <item row="1" column="0">
          <widget class="QLabel" name="label_17">
           <property name="text">
-           <string>TextLabel</string>
+           <string>Кем подписано</string>
           </property>
          </widget>
         </item>
         <item row="0" column="0">
          <widget class="QLabel" name="label_16">
           <property name="text">
-           <string>TextLabel</string>
+           <string>Врач, составивший ответ</string>
           </property>
          </widget>
         </item>
         <item row="0" column="1">
-         <widget class="QComboBox" name="comboBox_6"/>
+         <widget class="QComboBox" name="comboBox_doctor_answer"/>
         </item>
         <item row="2" column="1">
-         <widget class="QDateEdit" name="dateEdit_3"/>
+         <widget class="QDateEdit" name="dateEdit_sign">
+          <property name="calendarPopup">
+           <bool>true</bool>
+          </property>
+         </widget>
         </item>
         <item row="2" column="0">
          <widget class="QLabel" name="label_18">
           <property name="text">
-           <string>TextLabel</string>
+           <string>Дата подписи</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QPushButton" name="pushButton_ok">
+          <property name="text">
+           <string>Ок</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_cancel">
+          <property name="text">
+           <string>Отмена</string>
           </property>
          </widget>
         </item>
@@ -328,6 +375,30 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>dateEdit_input_doc</tabstop>
+  <tabstop>lineEdit_input_number_doc</tabstop>
+  <tabstop>comboBox_contact</tabstop>
+  <tabstop>pushButton_add_contact</tabstop>
+  <tabstop>dateEdit_out_doc</tabstop>
+  <tabstop>lineEdit_out_number_doc</tabstop>
+  <tabstop>lineEdit_fname</tabstop>
+  <tabstop>lineEdit_name</tabstop>
+  <tabstop>lineEdit_oname</tabstop>
+  <tabstop>dateEdit_birthday</tabstop>
+  <tabstop>comboBox_street</tabstop>
+  <tabstop>lineEdit_house</tabstop>
+  <tabstop>lineEdit_building</tabstop>
+  <tabstop>lineEdit_flat</tabstop>
+  <tabstop>comboBox_area</tabstop>
+  <tabstop>comboBox_code_diagnos</tabstop>
+  <tabstop>comboBox_name_diagnos</tabstop>
+  <tabstop>comboBox_doctor_answer</tabstop>
+  <tabstop>comboBox_who_sign</tabstop>
+  <tabstop>dateEdit_sign</tabstop>
+  <tabstop>pushButton_ok</tabstop>
+  <tabstop>pushButton_cancel</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

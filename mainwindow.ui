@@ -160,7 +160,7 @@ left: 5px; /* move to the right by 5px */
         <enum>QTabWidget::Rounded</enum>
        </property>
        <property name="currentIndex">
-        <number>1</number>
+        <number>2</number>
        </property>
        <property name="documentMode">
         <bool>false</bool>
@@ -380,14 +380,14 @@ left: 5px; /* move to the right by 5px */
               <item>
                <widget class="QPushButton" name="pushButton_yesterday">
                 <property name="text">
-                 <string>Пришел вчера</string>
+                 <string>Посещение вчера</string>
                 </property>
                </widget>
               </item>
               <item>
                <widget class="QPushButton" name="pushButton_day_before_yesterday">
                 <property name="text">
-                 <string>Пришел позавчера</string>
+                 <string>Посещение позавчера</string>
                 </property>
                </widget>
               </item>
@@ -450,7 +450,7 @@ left: 5px; /* move to the right by 5px */
         </attribute>
         <layout class="QVBoxLayout" name="verticalLayout_5">
          <item>
-          <widget class="QTabWidget" name="tabWidget_2">
+          <widget class="QTabWidget" name="tabWidget_gosp">
            <property name="currentIndex">
             <number>0</number>
            </property>
@@ -498,10 +498,7 @@ left: 5px; /* move to the right by 5px */
               </layout>
              </item>
              <item>
-              <widget class="QTableWidget" name="tableWidget_sved_gospital">
-               <property name="contextMenuPolicy">
-                <enum>Qt::CustomContextMenu</enum>
-               </property>
+              <widget class="QTableView" name="tableView_sved_gosp">
                <property name="editTriggers">
                 <set>QAbstractItemView::NoEditTriggers</set>
                </property>
@@ -566,12 +563,21 @@ left: 5px; /* move to the right by 5px */
                <property name="contextMenuPolicy">
                 <enum>Qt::CustomContextMenu</enum>
                </property>
+               <property name="editTriggers">
+                <set>QAbstractItemView::NoEditTriggers</set>
+               </property>
                <property name="selectionMode">
                 <enum>QAbstractItemView::SingleSelection</enum>
                </property>
                <property name="selectionBehavior">
                 <enum>QAbstractItemView::SelectRows</enum>
                </property>
+               <property name="sortingEnabled">
+                <bool>true</bool>
+               </property>
+               <attribute name="verticalHeaderShowSortIndicator" stdset="0">
+                <bool>true</bool>
+               </attribute>
               </widget>
              </item>
             </layout>
@@ -620,7 +626,7 @@ left: 5px; /* move to the right by 5px */
               </layout>
              </item>
              <item>
-              <widget class="QTableView" name="tableView_2"/>
+              <widget class="QTableView" name="tableView_day_station"/>
              </item>
             </layout>
            </widget>
@@ -731,7 +737,7 @@ left: 5px; /* move to the right by 5px */
           </layout>
          </item>
          <item>
-          <widget class="QTableWidget" name="tableWidget_preparat_patient">
+          <widget class="QTableView" name="tableView_preparate">
            <property name="editTriggers">
             <set>QAbstractItemView::NoEditTriggers</set>
            </property>
@@ -740,9 +746,6 @@ left: 5px; /* move to the right by 5px */
            </property>
            <property name="selectionBehavior">
             <enum>QAbstractItemView::SelectRows</enum>
-           </property>
-           <property name="sortingEnabled">
-            <bool>true</bool>
            </property>
           </widget>
          </item>
@@ -760,7 +763,7 @@ left: 5px; /* move to the right by 5px */
           <number>1</number>
          </property>
          <item>
-          <widget class="QTabWidget" name="tabWidget">
+          <widget class="QTabWidget" name="tabWidget_dop">
            <property name="enabled">
             <bool>true</bool>
            </property>
@@ -892,6 +895,67 @@ left: 5px; /* move to the right by 5px */
              </item>
             </layout>
            </widget>
+           <widget class="QWidget" name="tab_4">
+            <attribute name="title">
+             <string>Данные анализов</string>
+            </attribute>
+            <layout class="QVBoxLayout" name="verticalLayout_14">
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_15">
+               <item>
+                <widget class="QPushButton" name="pushButton_add_data_analizes">
+                 <property name="text">
+                  <string>Добавить</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pushButton_edit_data_analizes">
+                 <property name="text">
+                  <string>Изменить</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pushButton_del_data_analizes">
+                 <property name="text">
+                  <string>Удалить</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_13">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <widget class="QTableView" name="tableView_data_analizes">
+               <property name="editTriggers">
+                <set>QAbstractItemView::AnyKeyPressed|QAbstractItemView::DoubleClicked|QAbstractItemView::EditKeyPressed</set>
+               </property>
+               <property name="selectionMode">
+                <enum>QAbstractItemView::SingleSelection</enum>
+               </property>
+               <property name="selectionBehavior">
+                <enum>QAbstractItemView::SelectRows</enum>
+               </property>
+               <property name="sortingEnabled">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
           </widget>
          </item>
         </layout>
@@ -951,7 +1015,7 @@ left: 5px; /* move to the right by 5px */
      <x>0</x>
      <y>0</y>
      <width>1267</width>
-     <height>26</height>
+     <height>25</height>
     </rect>
    </property>
    <property name="font">
@@ -1015,6 +1079,7 @@ left: 5px; /* move to the right by 5px */
       </property>
       <addaction name="action_report_16"/>
       <addaction name="action_report_17"/>
+      <addaction name="action_report"/>
      </widget>
      <widget class="QMenu" name="menu_17">
       <property name="title">
@@ -1040,6 +1105,12 @@ left: 5px; /* move to the right by 5px */
       </property>
       <addaction name="action_report_18"/>
      </widget>
+     <widget class="QMenu" name="menu_2">
+      <property name="title">
+       <string>Без группы</string>
+      </property>
+      <addaction name="action_3"/>
+     </widget>
      <addaction name="menu_11"/>
      <addaction name="menu_12"/>
      <addaction name="menu_14"/>
@@ -1049,13 +1120,14 @@ left: 5px; /* move to the right by 5px */
      <addaction name="menu_18"/>
      <addaction name="menu_19"/>
      <addaction name="action_visitors"/>
+     <addaction name="menu_2"/>
     </widget>
     <widget class="QMenu" name="menu_4">
      <property name="title">
       <string>Журналы</string>
      </property>
      <addaction name="action_journal_rvk"/>
-     <addaction name="action_3"/>
+     <addaction name="action_journal_zapros"/>
     </widget>
     <widget class="QMenu" name="menu_8">
      <property name="title">
@@ -1068,8 +1140,8 @@ left: 5px; /* move to the right by 5px */
     <addaction name="menu_4"/>
     <addaction name="menu_8"/>
     <addaction name="action_settings_program"/>
-    <addaction name="action"/>
     <addaction name="action_filter"/>
+    <addaction name="action"/>
    </widget>
    <addaction name="menu"/>
   </widget>
@@ -1225,7 +1297,7 @@ left: 5px; /* move to the right by 5px */
     <string>Журнал РВК</string>
    </property>
   </action>
-  <action name="action_3">
+  <action name="action_journal_zapros">
    <property name="text">
     <string>Журнал запросов</string>
    </property>
@@ -1243,6 +1315,16 @@ left: 5px; /* move to the right by 5px */
   <action name="action_filter">
    <property name="text">
     <string>Фильтр</string>
+   </property>
+  </action>
+  <action name="action_report">
+   <property name="text">
+    <string>Анализ заболеваемости с ВУТ</string>
+   </property>
+  </action>
+  <action name="action_3">
+   <property name="text">
+    <string>Прокуратура(Список Д)</string>
    </property>
   </action>
  </widget>

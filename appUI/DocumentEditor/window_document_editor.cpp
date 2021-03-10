@@ -118,7 +118,8 @@ void Window_Document_Editor::setting_ui()
 }
 void Window_Document_Editor::load_settings_page()
 {
-    QSettings *settings = new QSettings("settings_user.ini",QSettings::IniFormat);
+    Objects_app obj;
+    QSettings *settings = new QSettings(obj.path_settings,QSettings::IniFormat);
     int format_page = settings->value("Document/list_format").toInt();
     int MarL = settings->value("Document/MarL").toInt();
     int MarR = settings->value("Document/MarR").toInt();

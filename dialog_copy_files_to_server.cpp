@@ -18,7 +18,8 @@ void Dialog_copy_files_to_server::setParam(QString id, QString staff)
 {
     global_id = id;
     global_staff = staff;
-    QSettings *settings = new QSettings("settings_user.ini",QSettings::IniFormat);
+    Objects_app obj;
+    QSettings *settings = new QSettings(obj.path_settings,QSettings::IniFormat);
     path = settings->value("path_files_patient").toString();
     files_load();
 }

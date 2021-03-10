@@ -31,7 +31,8 @@ void Dialog_settings_user::load_settings()
     ui->comboBox_format_list->addItem("A5",5);
     ui->comboBox_format_list->addItem("A6",6);
 
-    QSettings *settings = new QSettings("settings_user.ini",QSettings::IniFormat);
+    Objects_app obj;
+    QSettings *settings = new QSettings(obj.path_settings,QSettings::IniFormat);
     QString ip_addr = settings->value("ipdatabase").toString();
     QString port = settings->value("portdatabase").toString();
     QString sizefonttable = settings->value("sizefonttexttable").toString();
@@ -100,7 +101,8 @@ void Dialog_settings_user::load_settings()
 
 void Dialog_settings_user::apply_settings()
 {
-    QSettings *settings = new QSettings("settings_user.ini",QSettings::IniFormat);
+    Objects_app obj;
+    QSettings *settings = new QSettings(obj.path_settings,QSettings::IniFormat);
     settings->setValue("ipdatabase", ui->lineEdit_ip_addr->text());
     settings->setValue("portdatabase", ui->lineEdit_port->text());
     settings->setValue("sizefonttexttable", ui->lineEdit_size_font_text_setting->text());

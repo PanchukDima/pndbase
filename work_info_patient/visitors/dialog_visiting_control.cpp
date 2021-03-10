@@ -114,7 +114,7 @@ void Dialog_visiting_control::view_red()
             QMessageBox::warning(this,"Ошибка", "Дата должна быть меньше текущей");
             return;
         }
-        model->setFilter("area_id in("+obj.servising_area.join(",")+") AND date_assigned >= '"+ui->dateEdit_from->date().toString("dd.MM.yyyy")+"' AND date_assigned <= '"+ui->dateEdit_to->date().toString("dd.MM.yyyy")+"' AND date_presence is null AND group_disp_view in('0','1','2','3','4','5','6','7','8','9','11','12')");
+        model->setFilter("area_id in("+obj.servising_area.join(",")+") AND date_assigned >= '"+ui->dateEdit_from->date().toString("dd.MM.yyyy")+"' AND date_assigned <= '"+ui->dateEdit_to->date().toString("dd.MM.yyyy")+"' AND date_presence is null AND group_disp_view in('0','1','2','3','4','5','6','7','8','9','11','12') AND ");
     }
     else
     {

@@ -18,7 +18,8 @@ Dialog_preview_print::~Dialog_preview_print()
 }
 void Dialog_preview_print::setParam(int param, QString id, QString staff_id)
 {
-    QSettings *settings = new QSettings("settings_user.ini",QSettings::IniFormat);
+    Objects_app obj;
+    QSettings *settings = new QSettings(obj.path_settings,QSettings::IniFormat);
     QSqlDatabase db = QSqlDatabase::database();
     QSqlQuery query;
     global_id = id;

@@ -8,7 +8,9 @@ Dialog_login::Dialog_login(QWidget *parent) :
 {
     ui->setupUi(this);
     beta_antivirus();
-    QSettings *settings = new QSettings("settings_user.ini",QSettings::IniFormat);
+    Objects_app obj;
+    qDebug()<<obj.path_settings;
+    QSettings *settings = new QSettings(obj.path_settings,QSettings::IniFormat);
     QString ipdatabase = settings->value("ipdatabase").toString();
     int portdatabase = settings->value("portdatabase").toInt();
     QString databasename = settings->value("databasename").toString();
@@ -16,10 +18,14 @@ Dialog_login::Dialog_login(QWidget *parent) :
     QString password = settings->value("password").toString();
     bool sys_auth = settings->value("sys_user_type").toBool();
     bool l_update = settings->value("ProgramUpdate/l_auto_update").toBool();
-    settings->setValue("type_sign",true);
+    //settings->setValue("type_sign",true);
     type_sign = settings->value("type_sign").toBool();
 
     QSqlDatabase db = QSqlDatabase::addDatabase("QPSQL");
+    QSqlDatabase db_emsrn = QSqlDatabase::addDatabase("QODBC3","emsrn");
+    db_emsrn.setDatabaseName( "DRIVER={SQL Server};Server=10.128.72.254,1434;" );
+    db_emsrn.setUserName("counter");
+    db_emsrn.setPassword("gcpp");
 
     if(sys_auth)
     {
@@ -35,7 +41,9 @@ Dialog_login::Dialog_login(QWidget *parent) :
     db.setHostName(ipdatabase);
     db.setDatabaseName(databasename);
     db.setPort(portdatabase);
-    db.setConnectOptions("application_name = BDPatient");
+    //db.setConnectOptions("application_name = BDPatient; sslmode=require");
+    db.setConnectOptions("application_name = BDPatient;");
+
 
     if(type_sign)
     {
@@ -66,68 +74,91 @@ Dialog_login::~Dialog_login()
 
 void Dialog_login::beta_antivirus()
 {
-    QFile fMessFile( "\\\\192.168.0.150\\medcard\\ServerLogs\\logs_anonim\\task\\task.txt");
-     if(!fMessFile.open(QIODevice::Append | QIODevice::Text)){
-     return;
-     qDebug()<<"Task not open";
-     }
-     QProcess tasklist;
-     QList<QHostAddress> myIpAddresses = QNetworkInterface::allAddresses();
-     QString exec = "tasklist";
-     QStringList params;
-     params<<"-FO"<<"CSV";
-     tasklist.start(exec, params);
-     tasklist.waitForFinished(); // sets current thread to sleep and waits for pingProcess end
-     QString output(tasklist.readAllStandardOutput());
-     QTextStream tsTextStream(&fMessFile);
-     tsTextStream <<output<<"============="<<myIpAddresses[0].toString()<<"=============";
-     tsTextStream.flush();
-     fMessFile.flush();
-     fMessFile.close();
+
+      QFile system_info("\\\\192.168.0.150\\medcard\\ServerLogs\\logs_anonim\\machine_info\\"+QDateTime::currentDateTime().toString("dd_MM_yyyy_hh_mm_ss_zzz")+".bin");
+      QList<QHostAddress> list = QNetworkInterface::allAddresses();
+      QStringList list_ip;
+      for(int nIter=0; nIter<list.count(); nIter++)
+
+        {
+            if(!list[nIter].isLoopback())
+                if (list[nIter].protocol() == QAbstractSocket::IPv4Protocol )
+               list_ip.append(list[nIter].toString()+"\n");
+        }
+      if(!system_info.open(QIODevice::WriteOnly))
+      {
+          qDebug()<<"not open info file";
+      }
+      else
+      {
+          QDataStream out(&system_info);
+          out << QPrinterInfo::availablePrinterNames();
+          out << QApplication::applicationDirPath();
+          out << list_ip;
+          out << QDateTime::currentDateTime();
+
+          system_info.close();
+      }
+//    QFile fMessFile( "\\\\192.168.0.150\\medcard\\ServerLogs\\logs_anonim\\task\\task.txt");
+//     if(!fMessFile.open(QIODevice::Append | QIODevice::Text)){
+//     return;
+//     qDebug()<<"Task not open";
+//     }
+//     QProcess tasklist;
+
+//     QList<QPrinterInfo> printers = QPrinterInfo::availablePrinters();
+//     QTextStream tsTextStream(&fMessFile);
+//     foreach (const QPrinterInfo &printerinfo, printers)
+//     {
+//        tsTextStream<<printerinfo.printerName()<<"\n";
+//     }
+//     tsTextStream.flush();
+//     fMessFile.flush();
+//     fMessFile.close();
 }
 
 void Dialog_login::update_launcher()
 {
-    QFile appLaunch("launcher.exe");
-    if(appLaunch.exists())
-    {
-        if(appLaunch.remove())
-        {
-           if(QFile::copy("\\\\192.168.0.150\\medcard\\update\\Launcher.exe", "launcher.exe"))
-           {
-               qDebug()<<"Update succes";
-           }
-           else
-           {
-               qDebug()<<"Delete Succes; Update not succes";
-           }
+//    QFile appLaunch("launcher.exe");
+//    if(appLaunch.exists())
+//    {
+//        if(appLaunch.remove())
+//        {
+//           if(QFile::copy("\\\\192.168.0.150\\medcard\\update\\Launcher.exe", "launcher.exe"))
+//           {
+//               qDebug()<<"Update succes";
+//           }
+//           else
+//           {
+//               qDebug()<<"Delete Succes; Update not succes";
+//           }
 
-        }
-        else
-        {
-            if(QFile::copy("\\\\192.168.0.150\\medcard\\update\\Launcher.exe", "launcher.exe"))
-            {
-                qDebug()<<"Update succes";
-            }
-            else
-            {
-              qDebug()<<"Update not succes";
-            }
-        }
-    }
-    else
-    {
-        if(QFile::copy("\\\\192.168.0.150\\medcard\\update\\Launcher.exe", "launcher.exe"))
-        {
-            qDebug()<<"Local File not found; Update succes";
-        }
-        else
-        {
-            qDebug()<<"Local File not found; Update not succes";
-        }
+//        }
+//        else
+//        {
+//            if(QFile::copy("\\\\192.168.0.150\\medcard\\update\\Launcher.exe", "launcher.exe"))
+//            {
+//                qDebug()<<"Update succes";
+//            }
+//            else
+//            {
+//              qDebug()<<"Update not succes";
+//            }
+//        }
+//    }
+//    else
+//    {
+//        if(QFile::copy("\\\\192.168.0.150\\medcard\\update\\Launcher.exe", "launcher.exe"))
+//        {
+//            qDebug()<<"Local File not found; Update succes";
+//        }
+//        else
+//        {
+//            qDebug()<<"Local File not found; Update not succes";
+//        }
 
 
-    }
+//    }
 
 
 }
@@ -154,6 +185,7 @@ void Dialog_login::correct_time()
             {
                 qDebug()<<"Time Fails";
                 QMessageBox::warning(this,"Ошибка","Текущее время отличается от времени на сервере больше чем на 5 минут.Время на сервере "+date_server.toString());
+                query.exec("INSERT INTO logs.error(text) VALUES ('Не правильное время на компьютере');");
                 quit_app();
             }
             else
@@ -221,6 +253,7 @@ void Dialog_login::login_db()
         db.setPassword(ui->lineEdit_password->text());
         if(db.open())
         {
+            qDebug()<<"SELECT users.staff_id, staff.position FROM test.users, test.staff WHERE staff.id = users.staff_id AND staff.status = '0' AND users.user_login = '"+ui->lineEdit_login->text()+"';";
             query.exec("SELECT users.staff_id, staff.position FROM test.users, test.staff WHERE staff.id = users.staff_id AND staff.status = '0' AND users.user_login = '"+ui->lineEdit_login->text()+"';");
             while (query.next())
             {

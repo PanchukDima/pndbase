@@ -18,6 +18,7 @@
 
 
 
+#include <Objects/User/objects_app.h>
 #include <signal.h>
 #include <network/broadcastlog.h>
 
@@ -48,7 +49,12 @@ void myMessageHandler(QtMsgType type, const QMessageLogContext &, const QString 
 {
         broadcastLog netlog;
         netlog.broadcastLogInit();
+        #ifdef _WIN32
         QFile fMessFile(qApp->applicationDirPath() + "/logs/myProjectLog"+QDate::currentDate().toString("_MMM_yyyy")+".log");
+        #endif
+        #ifdef __linux__
+            QFile fMessFile("/var/log/BDPatient/"+QDate::currentDate().toString("_MMM_yyyy")+".log");
+        #endif
          if(!fMessFile.open(QIODevice::Append | QIODevice::Text)){
          return;
          }
@@ -82,9 +88,17 @@ void myMessageHandler(QtMsgType type, const QMessageLogContext &, const QString 
 
 int main(int argc, char *argv[])
 {
+    Objects_app obj;
+    #ifdef _WIN32
+        obj.path_settings = "settings_user.ini";
+    #endif
+    #ifdef __linux__
+        obj.path_settings = "/etc/BDPatient/settings_user.ini";
+    #endif
     qInstallMessageHandler(myMessageHandler);
     QApplication a(argc, argv);
     MainWindow w;
+
     qDebug()<<"Application Start";
     w.showMaximized();
     return a.exec();

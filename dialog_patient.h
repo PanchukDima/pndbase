@@ -63,6 +63,7 @@ public slots:
     void get_data_sql(int);
     void apply_send_data_sql();
     void put_all_settings();
+    void load_area();
 
     void ok_send_data_sql();
     void button_cancel();
@@ -101,6 +102,7 @@ public slots:
     void create_document();
     void delete_document();
 
+
     //void select_text_document();
     void open_new_document(QString);
 
@@ -108,12 +110,15 @@ public slots:
     void add_comments();
     void load_comments();
     void edit_comments();
+    void del_comments();
     void context_menu_comments(QPoint);
     void copy_text_comments();
 
     void show_dialog_add_patient();
 
     void apply_rights();
+
+
 
 
 

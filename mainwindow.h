@@ -43,7 +43,12 @@
 #include "work_info_patient/ood/dialog_ood.h"
 #include "journal/dialog_rvk.h"
 #include "work_info_patient/list_not_work/dialog_list_not_work.h"
-
+#include "work_info_patient/dynamic_view/dialog_edit_other_dynamic_view.h"
+#include "work_info_patient/day_stationar/dialog_day_stationar.h"
+#include "work_info_patient/preparate/dialog_preparate.h"
+#include "work_info_patient/data_analizes/dialog_data_analizes.h"
+#include "work_info_patient/military/mainwindow_list_military.h"
+#include "work_info_patient/prokuratura/mainwindow_police.h"
 //models other
 #include <QFileSystemModel>
 
@@ -54,6 +59,9 @@
 #include "models/model_visits_control_patient.h"
 #include "models/model_sved_gosp_patient.h"
 #include "models/model_ivalid_patient.h"
+#include "models/model_list_not_work.h"
+#include "models/model_preparate.h"
+#include "models/model_data_analizes.h"
 
 
 //Network Library
@@ -74,9 +82,11 @@
     //RVK
 #include <journal/Dialog_add_and_edit/dialog_add_and_edit_journal.h>
 #include <journal/dialog_rvk.h>
+#include <journal/dialog_zapros.h>
 
 //viewer
 #include "work_info_patient/visitors/dialog_visiting_control.h"
+#include "other_db/emsrn/dialog_emsr_find.h"
 
 namespace Ui {
 class MainWindow;
@@ -114,15 +124,22 @@ protected:
 
 private:
     Ui::MainWindow *ui;
+
+
     model_main_table *model = nullptr;
-    QSqlRelationalTableModel *list_not_work_model = nullptr;
+    model_list_not_work *list_not_work_model = nullptr;
     QSqlRelationalTableModel *model_ood = nullptr;
     QSqlRelationalTableModel *model_suicide = nullptr;
+    QSqlTableModel * model_day_station = nullptr;
     model_dynamic_view_patient *model_dynamic_view = nullptr;
     model_ivalid_patient *model_invalid = nullptr;
-    QSqlRelationalTableModel *model_preparate = nullptr;
+    //QSqlRelationalTableModel *model_preparate = nullptr;
     model_visits_control_patient *model_visits_control = nullptr;
     model_sved_gosp_patient *model_sved_gosp = nullptr;
+    model_preparate * model_load_preparate = nullptr;
+    model_data_analizes * model_data_analizes_view = nullptr;
+
+
     QFileSystemModel *filemodel;
     QTimer * timer_who_is_online;
     QString selected_id;
@@ -139,6 +156,7 @@ public slots:
     //получаем настройки из базы данных
     void load_settings_from_sql();
     void load_area_list();
+    void load_user_department();
     void load_rights_user();
     void close_old_session();
     void start_new_session();
@@ -168,13 +186,17 @@ public slots:
     void load_model_visits_control();
     void load_model_sved_gosp();
     void load_diagnos_table();
-    void load_hospitalization_table();
+    void load_files_patient();
+    void load_day_station();
+    void load_preparate();
+    void load_data_analizes_table();
+
     void load_invalid_table();
     void load_suicide_table();
     void load_ood_table();
     //...
     void clear_diagnos_table();
-    void clear_hospitalization_table();
+
     void clear_invalid_table();
     void find_patients();
     void load_all_info();
@@ -196,6 +218,15 @@ public slots:
     void close_dynamic_view();
     void edit_dynamic_view();
     void del_dynamic_view();
+    void dialog_add_file_to_patient();
+
+    void add_preparate();
+    void edit_preparate();
+    void del_preparate();
+
+    void add_data_analizes();
+    void edit_data_analizes();
+    void del_data_analizes();
 
     void add_visit();
     void add_today_visit();
@@ -230,11 +261,23 @@ public slots:
     void edit_list_not_work();
     void del_list_not_work();
 
+    void add_day_station();
+    void edit_day_station();
+    void del_day_station();
+
     //Отчеты и прочее
+    void gen_report();
     void gen_report_1();
+    void gen_report_2();
+    void gen_report_7();
     void gen_report_9(); //Динамика инвалидности
+    void gen_report_12();
+    void gen_report_15();
+    void gen_report_17();
     void gen_report_19();//форма 10
     void gen_report_24();
+    void gen_report_18();
+    void gen_other_3();
 
     void print_medcard();
     void set_status_arhive();
@@ -254,6 +297,7 @@ public slots:
 
     void open_app();
     void open_journal_rvk();
+    void open_journal_zapros();
 
     //Notification
     void notification_server(QString);
@@ -272,6 +316,9 @@ public slots:
     void show_visiting_today();
 
     void sort_gosp(int);
+
+    //other db
+    void open_emsrn();
 
 
 };

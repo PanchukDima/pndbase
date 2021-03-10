@@ -28,6 +28,7 @@ public slots:
     void setParam(int,QString,QString);
     void loadData();
     void getData();
+    void show_hide_visits_close();
 };
 
 #endif // DIALOG_ADD_VISITS_H

@@ -6,9 +6,8 @@
 
 QT       += core gui sql printsupport webkitwidgets network
 
-win32:
-{
-    QT += axcontainer
+win32{
+QT += axcontainer
 }
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -75,7 +74,18 @@ SOURCES += main.cpp\
     models/model_visiting_control_all.cpp \
     models/filters/model_filter_invalid.cpp \
     appUI/Browser/mainwindow_web_browser.cpp \
-    appUI/DocumentEditor/dialogs/dialog_page_settings.cpp
+    appUI/DocumentEditor/dialogs/dialog_page_settings.cpp \
+    work_info_patient/dynamic_view/dialog_edit_other_dynamic_view.cpp \
+    models/model_list_not_work.cpp \
+    models/model_preparate.cpp \
+    models/model_data_analizes.cpp \
+    work_info_patient/data_analizes/dialog_data_analizes.cpp \
+    Other_dialog_windows/dialog_add_contact.cpp \
+    models/journal/model_journal_zapros.cpp \
+    work_info_patient/military/mainwindow_list_military.cpp \
+    work_info_patient/prokuratura/mainwindow_police.cpp \
+    work_info_patient/prokuratura/thread_load_data.cpp \
+    other_db/emsrn/dialog_emsr_find.cpp
 
 HEADERS  += mainwindow.h \
     dialog_patient.h \
@@ -129,7 +139,18 @@ HEADERS  += mainwindow.h \
     models/model_visiting_control_all.h \
     models/filters/model_filter_invalid.h \
     appUI/Browser/mainwindow_web_browser.h \
-    appUI/DocumentEditor/dialogs/dialog_page_settings.h
+    appUI/DocumentEditor/dialogs/dialog_page_settings.h \
+    work_info_patient/dynamic_view/dialog_edit_other_dynamic_view.h \
+    models/model_list_not_work.h \
+    models/model_preparate.h \
+    models/model_data_analizes.h \
+    work_info_patient/data_analizes/dialog_data_analizes.h \
+    Other_dialog_windows/dialog_add_contact.h \
+    models/journal/model_journal_zapros.h \
+    work_info_patient/military/mainwindow_list_military.h \
+    work_info_patient/prokuratura/mainwindow_police.h \
+    work_info_patient/prokuratura/thread_load_data.h \
+    other_db/emsrn/dialog_emsr_find.h
 
 FORMS    += mainwindow.ui \
     dialog_patient.ui \
@@ -167,11 +188,18 @@ FORMS    += mainwindow.ui \
     work_info_patient/visitors/dialog_visiting_control.ui \
     appUI/TasksUI/window_palner.ui \
     appUI/Browser/mainwindow_web_browser.ui \
-    appUI/DocumentEditor/dialogs/dialog_page_settings.ui
+    appUI/DocumentEditor/dialogs/dialog_page_settings.ui \
+    work_info_patient/dynamic_view/dialog_edit_other_dynamic_view.ui \
+    work_info_patient/data_analizes/dialog_data_analizes.ui \
+    Other_dialog_windows/dialog_add_contact.ui \
+    work_info_patient/military/mainwindow_list_military.ui \
+    work_info_patient/prokuratura/mainwindow_police.ui \
+    other_db/emsrn/dialog_emsr_find.ui
 
 RESOURCES += \
     images.qrc
+win32{
 LIBS += -L /plugin/sqldrivers
-
+}
 #INCLUDEPATH += C:/ProjectPSI/nonstoklibrary/poppler-0.40.0/qt5/src
 

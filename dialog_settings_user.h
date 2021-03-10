@@ -7,6 +7,8 @@
 #include <QFile>
 #include <QDebug>
 
+#include <Objects/User/objects_app.h>
+
 namespace Ui {
 class Dialog_settings_user;
 }

@@ -23,7 +23,7 @@ QVariant model_visiting_control_all::data(const QModelIndex &index, int role) co
         }
         else if(index.sibling(index.row(),9).data( Qt::DisplayRole ).toDate().isValid())
         {
-                return qVariantFromValue(QColor(Qt::gray));
+                return qVariantFromValue(QColor(Qt::white));
         }
 
     case Qt::DisplayRole:

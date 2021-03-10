@@ -9,6 +9,7 @@
 #include <QSettings>
 #include <QSqlError>
 #include <QMessageBox>
+#include <Objects/User/objects_app.h>
 namespace Ui {
 class Dialog_preview_print;
 }

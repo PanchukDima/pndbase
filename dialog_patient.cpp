@@ -174,10 +174,758 @@ void Dialog_patient::create_document()
 {
     QSqlDatabase db = QSqlDatabase::database();
     QString id_document = ui->comboBox_document->currentData().toString();
+    QString body_doc = NULL;
+    QSqlQuery query;
+
+    int ret = QMessageBox::warning(this, tr("Создание по шаблону?"),
+                                   tr("Создать документ по шаблону?"),
+                                   QMessageBox::Yes|QMessageBox::No);
+
+    if(ret==16384)
+    {
+
+        switch (id_document.toInt()) {
+        case 0:
+
+            break;
+        case 1:
+                body_doc = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Courier'; font-size:12pt; font-weight:400; font-style:normal;\">\n<table style=\"-qt-table-type: root; margin-top:56.693px; margin-bottom:56.693px; margin-left:56.693px; margin-right:56.693px;\">\n<tr>\n<td style=\"border: none;\">\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Calibri'; font-size:14pt; font-weight:600;\">Протокол заседания ВК №</span><span style=\" font-family:'Calibri'; font-size:14pt;\"> </span><span style=\" font-family:'Calibri'; font-size:14pt; font-style:italic;\">___</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Calibri'; font-weight:600;\">Дата:</span><span style=\" font-family:'Calibri';\"> ___________</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Calibri'; font-weight:600;\">Ф.И.О.:  $FIO$</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Calibri'; font-weight:600;\">Дата рождения:  $BIRTHDAY$</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Calibri'; font-weight:600;\">Адрес: $ADRESS$</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Calibri'; font-weight:600;\">Социальный статус</span><span style=\" font-family:'Calibri';\">: ________________________________</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Calibri'; font-weight:600;\">Диагноз: $DIAGNOS$</span> </p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Calibri'; font-weight:600;\"> </span> </p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Calibri'; font-weight:600;\">Цель представления на ВК:</span><span style=\" font-family:'Calibri'; font-weight:600; text-decoration: underline;\">     </span><span style=\" font-family:'Calibri'; text-decoration: underline;\">предоставление академического отпуска</span> </p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Calibri';\"> </span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Calibri'; font-weight:600;\">Анамнестические сведения (особенности течения  и динамика заболевания):</span><span style=\" font-family:'Times New Roman'; text-decoration: underline;\"> </span><span style=\" font-family:'Times New Roman';\">________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-weight:600;\">Страховой анамнез: </span><span style=\" font-family:'Times New Roman'; text-decoration: underline;\">____________________________________________________________________________________________________________________________________________________________________</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-weight:600;\"> </span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Calibri'; font-weight:600;\">Объективно:</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Жалобы:</span><span style=\" font-family:'Times New Roman'; text-decoration: underline;\">________________________________________________________________________________________________________________________________________________________________________________________________________________________________________</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\"> </span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Calibri'; font-weight:600;\">Решение ВК:</span><span style=\" font-family:'Calibri';\">   </span></p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Calibri'; text-decoration: underline;\">По состоянию здоровья предоставить академический отпуск</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">  </p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Calibri'; font-weight:600;\"> </span> </p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Calibri'; font-weight:600;\">Председатель ВК:</span> </p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Calibri'; font-weight:600;\"> </span> </p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Calibri'; font-weight:600;\">Члены ВК:</span> </p></td></tr></table></body></html>";
+                if(db.open())
+                {
+                    query.exec("SELECT \
+                               all_view_patient.id, \
+                               concat(all_view_patient.fname, ' ',\
+                               all_view_patient.name, ' ',\
+                               all_view_patient.mname), \
+                               all_view_patient.birthday, \
+                               concat(street.name, \
+                                                CASE\
+                                                  WHEN address_patient.building ='' THEN ''\
+                                                  ELSE ' корп.'\
+                                                END , \
+                                                address_patient.building, ' д.',\
+                                                address_patient.home, ' кв.',\
+                                                address_patient.flat) AS Street,\
+                               diagnos.code  \
+                             FROM \
+                               test.all_view_patient, \
+                               test.address_patient, \
+                               test.street, \
+                               test.diagnos_patient, \
+                               test.diagnos\
+                             WHERE \
+                               all_view_patient.id = diagnos_patient.medcard_id AND\
+                               address_patient.medcard_id = all_view_patient.id AND\
+                               street.id = address_patient.street_id AND\
+                               diagnos.id = diagnos_patient.diagnos_id AND diagnos_patient.delete_row = false AND diagnos_patient.id_parent is Null AND all_view_patient.id ="+global_id_str);
+                            while(query.next())
+                                {
+                                    body_doc.replace("$FIO$",query.value(1).toString());
+                                    body_doc.replace("$BIRTHDAY$",query.value(2).toDate().toString("dd.MM.yyyy"));
+                                    body_doc.replace("$ADRESS$",query.value(3).toString());
+                                    body_doc.replace("$DIAGNOS$",query.value(4).toString());
+                                }
+                            }
+            break;
+        case 2:
+            body_doc = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Courier'; font-size:12pt; font-weight:400; font-style:normal;\">\n<table border=\"0\" style=\"-qt-table-type: root; margin-top:56.693px; margin-bottom:56.693px; margin-left:56.693px; margin-right:56.693px;\">\n<tr>\n<td style=\"border: none;\">\n<table border=\"0\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px;\" cellspacing=\"0\" cellpadding=\"0\">\n<tr>\n<td width=\"336\" style=\" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;\">\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\"data:image/jpeg;base64,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\" width=\"74\" height=\"83\" style=\"vertical-align: top;\" /> </p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:10pt; text-transform:uppercase;\">          ПРАВИТЕЛЬСТВО санкт-петербурга                        </span></p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:10pt; text-transform:uppercase;\">                            АДМИНИСТРАЦИЯ                               </span></p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:10pt; text-transform:uppercase;\">Выборгского района <br />Санкт-Петербурга</span> </p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:10pt;\">Санкт-Петербургское </span></p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:10pt;\">государственное бюджетное учреждение здравоохранения</span> </p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:10pt;\">«Психоневрологический диспансер №2»</span> </p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:10pt;\">СПб ГБУЗ «ПНД №2»</span> </p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:10pt;\">Фермское шоссе, д. 34, Санкт-Петербург, 197341</span> </p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:10pt;\">Тел./Факс (812) 302-11-01</span> </p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:10pt;\">E-mail: </span><a href=\"mailto:pnd2@zdrav.spb.ru\"><span style=\" font-family:'Times New Roman'; font-size:10pt; text-decoration: underline; color:#0000ff;\">pnd2@zdrav.spb.ru</span></a><span style=\" font-family:'Times New Roman'; font-size:10pt;\"> </span></p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:10pt;\">                    ИНН/КПП 7802091710/781401001</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:10pt;\"> </span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:10pt;\">          От __\u00AD\u00AD\u00AD\u00AD___________     №______________</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:10pt;\">          На №____________     от   ______________</span><span style=\" font-family:'Times New Roman'; font-size:10pt; font-weight:600; text-decoration: underline;\">               </span></p></td>\n<td width=\"319\" style=\" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;\">\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-weight:600;\"> </span> </p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\"> </span> </p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\"> </span> </p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\"> </span> </p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\"> </span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Куда:_______________________</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\"> </span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\"> </span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Кому:_______________________  </span></p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\"> </span> </p></td></tr></table>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:16pt;\"> </span> </p>\n<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:16pt;\">       </span>                                    </p>\n<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\"> </span> </p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-weight:600;\">СПРАВКА</span> </p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">для предоставления академического отпуска</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Calibri'; text-decoration: underline;\">   $FIO$  $BIRTHDAY$</span><span style=\" font-family:'Times New Roman';\">, зарегистрированный(ая) по адресу:</span><span style=\" font-family:'Calibri'; text-decoration: underline;\">   $ADRESS$__</span><span style=\" font-family:'Times New Roman';\">, находился(ась) на студенческой справке: _________________________________________________________________</span><span style=\" font-family:'Times New Roman';\"> </span><span style=\" font-family:'Times New Roman';\">(______ дня(ей)).</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Состояние больного(ой) остаётся неустойчивым, несмотря на проведенную терапию.</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; text-decoration: underline;\">Заключение ВК:</span><span style=\" font-family:'Times New Roman';\"> учитывая необходимость продолжения активного медикаментозного лечения, целесообразно предоставление академического отпуска.</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\"> </span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Председатель ВК: </span></p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">                                                     Члены ВК:                                                                                                                                                  </span></p></td></tr></table></body></html>";
+            if(db.open())
+            {
+                query.exec("SELECT \
+                           all_view_patient.id, \
+                           concat(all_view_patient.fname, ' ',\
+                           all_view_patient.name, ' ',\
+                           all_view_patient.mname), \
+                           all_view_patient.birthday, \
+                           concat(street.name, \
+                                            CASE\
+                                              WHEN address_patient.building ='' THEN ''\
+                                              ELSE ' корп.'\
+                                            END , \
+                                            address_patient.building, ' д.',\
+                                            address_patient.home, ' кв.',\
+                                            address_patient.flat) AS Street,\
+                           diagnos.code  \
+                         FROM \
+                           test.all_view_patient, \
+                           test.address_patient, \
+                           test.street, \
+                           test.diagnos_patient, \
+                           test.diagnos\
+                         WHERE \
+                           all_view_patient.id = diagnos_patient.medcard_id AND\
+                           address_patient.medcard_id = all_view_patient.id AND\
+                           street.id = address_patient.street_id AND\
+                           diagnos.id = diagnos_patient.diagnos_id AND diagnos_patient.delete_row = false AND diagnos_patient.id_parent is Null AND all_view_patient.id ="+global_id_str);
+                        while(query.next())
+                            {
+                                body_doc.replace("$FIO$",query.value(1).toString());
+                                body_doc.replace("$BIRTHDAY$",query.value(2).toDate().toString("dd.MM.yyyy"));
+                                body_doc.replace("$ADRESS$",query.value(3).toString());
+
+                            }
+                        }
+            break;
+        case 3:
+            body_doc = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Courier'; font-size:12pt; font-weight:400; font-style:normal;\">\n<table border=\"0\" style=\"-qt-table-type: root; margin-top:56.693px; margin-bottom:56.693px; margin-left:56.693px; margin-right:56.693px;\">\n<tr>\n<td style=\"border: none;\">\n<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-weight:600;\">00.00.20__                 Эпикриз</span><span style=\" font-family:'Times New Roman';\"> </span><span style=\" font-family:'Times New Roman'; font-weight:600;\">на ВК для предоставления академического отпуска</span><span style=\" font-family:'Times New Roman';\"> </span></p>\n<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\"> </span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Ф.И.О.: </span><span style=\" font-family:'Times New Roman'; text-decoration: underline;\">__$FIO$_________________________________________________________</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Адрес</span><span style=\" font-family:'Times New Roman'; text-decoration: underline;\">:____$ADRESS$</span><span style=\" font-family:'Times New Roman';\">________________________________________________</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Наблюдался(ась) врачом-психиатром  с ________года с диагнозом:  </span><span style=\" font-family:'Times New Roman'; text-decoration: underline;\">___</span><span style=\" font-family:'Times New Roman';\"> </span></p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Инвалидность имеет/не имеет.</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Лечился(ась) в ПБ  </span><span style=\" font-family:'Times New Roman'; text-decoration: underline;\">_(сколько раз)_.</span><span style=\" font-family:'Times New Roman';\"> Последняя выписка из ПБ  в _________году</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Получает поддерживающее лечение:  </span><span style=\" font-family:'Times New Roman'; text-decoration: underline;\">_(препараты)_______________________________________</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Анамнез: (</span><span style=\" font-family:'Times New Roman'; text-decoration: underline;\">подробный в динамике)</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Психический статус:  (</span><span style=\" font-family:'Times New Roman'; text-decoration: underline;\">информативный)</span><span style=\" font-family:'Times New Roman';\">.</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Страховой анамнез: является студентом(кой) ____ курса  (</span><span style=\" font-family:'Times New Roman'; text-decoration: underline;\">название учебного заведения)</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">За   _______ год справка студенту(ке) выдавалась: (</span><span style=\" font-family:'Times New Roman'; text-decoration: underline;\">сколько раз)</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">с ___________ по ____________№ _____  в  количестве  ___</span><span style=\" font-family:'Times New Roman'; text-decoration: underline;\">(количество  дней)</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">с ___________ по ____________№ _____  в  количестве  ____</span><span style=\" font-family:'Times New Roman'; text-decoration: underline;\">(количество  дней)</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Общее число дней нетрудоспособности:</span><span style=\" font-family:'Times New Roman'; text-decoration: underline;\"> ______ (количество дней) </span></p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Диагноз</span><span style=\" font-family:'Times New Roman'; text-decoration: underline;\">:__(из программы последний диагноз)</span><span style=\" font-family:'Times New Roman';\">_________________________________</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\"> Трудоспособен / Нетрудоспособен.</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">На основании освидетельствования пациента(ки) и/или медицинской документации представить на ВК для предоставления академического отпуска.</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\"> </span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">            Заведующий отделением:                                                            /____________________/</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\"> </span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Лечащий врач:                                                                              /____________________/</span> </p></td></tr></table></body></html>";
+            if(db.open())
+            {
+                query.exec("SELECT \
+                           all_view_patient.id, \
+                           concat(all_view_patient.fname, ' ',\
+                           all_view_patient.name, ' ',\
+                           all_view_patient.mname), \
+                           all_view_patient.birthday, \
+                           concat(street.name, \
+                                            CASE\
+                                              WHEN address_patient.building ='' THEN ''\
+                                              ELSE ' корп.'\
+                                            END , \
+                                            address_patient.building, ' д.',\
+                                            address_patient.home, ' кв.',\
+                                            address_patient.flat) AS Street,\
+                           diagnos.code  \
+                         FROM \
+                           test.all_view_patient, \
+                           test.address_patient, \
+                           test.street, \
+                           test.diagnos_patient, \
+                           test.diagnos\
+                         WHERE \
+                           all_view_patient.id = diagnos_patient.medcard_id AND\
+                           address_patient.medcard_id = all_view_patient.id AND\
+                           street.id = address_patient.street_id AND\
+                           diagnos.id = diagnos_patient.diagnos_id AND diagnos_patient.delete_row = false AND diagnos_patient.id_parent is Null AND all_view_patient.id ="+global_id_str);
+                        while(query.next())
+                            {
+                                body_doc.replace("$FIO$",query.value(1).toString());
+                                body_doc.replace("$BIRTHDAY$",query.value(2).toDate().toString("dd.MM.yyyy"));
+                                body_doc.replace("$ADRESS$",query.value(3).toString());
+                                body_doc.replace("$DIAGNOS$",query.value(4).toString());
+
+                            }
+                        }
+            break;
+        case 4:
+            body_doc = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Courier'; font-size:12pt; font-weight:400; font-style:normal;\">\n<table border=\"0\" style=\"-qt-table-type: root; margin-top:56.693px; margin-bottom:56.693px; margin-left:56.693px; margin-right:56.693px;\">\n<tr>\n<td style=\"border: none;\">\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:14pt;\">                                                                </span><span style=\" font-size:12.5pt; font-weight:600;\">АКТ</span> </p>\n<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:12.5pt; font-weight:600;\">психиатрического освидетельствования</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:12.5pt;\"> </span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">На продление амбулаторного принудительного лечения <span style=\" text-decoration: underline;\"></span><span style=\" text-decoration: underline;\">$FIO$</span>, зарегистрированного(ой) по адресу: <span style=\" text-decoration: underline;\"></span><span style=\" text-decoration: underline;\">$ADRESS$,</span> которому(ой) было назначено амбулаторное принудительное лечение в СПб ГБУЗ «ПНД №2», согласно приговору ________________________________ от <span style=\" font-family:'Times New Roman';\">_______________г.</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Освидетельствование проведено комиссией врачей-психиатров в составе: <span style=\" color:#000000;\">Председатель врачебной комиссии: ____________________, </span></p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" color:#000000;\">Члены врачебной комиссии: </span><span style=\" font-family:'Times New Roman'; color:#000000;\">____________________________________________________, Лечащий врач:_____________________________.</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600; text-decoration: underline;\">Обстоятельства дела:</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">__________________________________________________________________________________________________________________________________________________________</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">             </span><span style=\" font-weight:600; text-decoration: underline;\">Анамнез:</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">_______________________________________________________________________________________________________________________________________________________________.</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600; text-decoration: underline;\">На момент осмотра:</span> <span style=\" font-family:'Times New Roman';\">_______________________________________________________________________________________________________________________________________________________________. </span></p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600; text-decoration: underline;\">Заключение:</span> на основании вышеизложенного врачебная комиссия пришла к выводу, что: </p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">1.</span><span style=\" font-family:'Times New Roman'; font-size:7pt;\">                 </span><span style=\" font-family:'Times New Roman';\">_______________________________________________________________.</span> </p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">2.</span><span style=\" font-family:'Times New Roman'; font-size:7pt;\">                 </span><span style=\" font-family:'Times New Roman';\">_______________________________________________________________.</span> </p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">3.</span><span style=\" font-family:'Times New Roman'; font-size:7pt;\">                 </span><span style=\" font-family:'Times New Roman';\">По своему психическому состоянию может присутствовать на суде.</span> </p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\"> </span> </p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">  </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Председатель врачебной комиссии:                                                  /____________________/ </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">  </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Члены врачебной комиссии:                                              <span style=\" font-family:'Times New Roman';\">                 /____________________/</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\"> </span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">                                                                                                                /____________________/ </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">  </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Лечащий врач                                                                                       /____________________/</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:10pt;\"> </span> </p></td></tr></table></body></html>";
+            if(db.open())
+            {
+                query.exec("SELECT \
+                           all_view_patient.id, \
+                           concat(all_view_patient.fname, ' ',\
+                           all_view_patient.name, ' ',\
+                           all_view_patient.mname), \
+                           all_view_patient.birthday, \
+                           concat(street.name, \
+                                            CASE\
+                                              WHEN address_patient.building ='' THEN ''\
+                                              ELSE ' корп.'\
+                                            END , \
+                                            address_patient.building, ' д.',\
+                                            address_patient.home, ' кв.',\
+                                            address_patient.flat) AS Street,\
+                           diagnos.code  \
+                         FROM \
+                           test.all_view_patient, \
+                           test.address_patient, \
+                           test.street, \
+                           test.diagnos_patient, \
+                           test.diagnos\
+                         WHERE \
+                           all_view_patient.id = diagnos_patient.medcard_id AND\
+                           address_patient.medcard_id = all_view_patient.id AND\
+                           street.id = address_patient.street_id AND\
+                           diagnos.id = diagnos_patient.diagnos_id AND diagnos_patient.delete_row = false AND diagnos_patient.id_parent is Null AND all_view_patient.id ="+global_id_str);
+                        while(query.next())
+                            {
+                                body_doc.replace("$FIO$",query.value(1).toString());
+                                body_doc.replace("$BIRTHDAY$",query.value(2).toDate().toString("dd.MM.yyyy"));
+                                body_doc.replace("$ADRESS$",query.value(3).toString());
+                                body_doc.replace("$DIAGNOS$",query.value(4).toString());
+
+                            }
+                        }
+            break;
+        case 5:
+            body_doc = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Courier'; font-size:12pt; font-weight:400; font-style:normal;\">\n<table border=\"0\" style=\"-qt-table-type: root; margin-top:56.693px; margin-bottom:56.693px; margin-left:56.693px; margin-right:56.693px;\">\n<tr>\n<td style=\"border: none;\">\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:14pt; font-weight:600;\">ПРЕДСТАВЛЕНИЕ</span> </p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:14pt;\"> </span> </p>\n<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">            <span style=\" font-size:12.5pt;\">На продление амбулаторного принудительного лечения (АПЛ) $FIO$, зарегистрированному(ой) по адресу: $ADRESS$</span><span style=\" font-size:12.5pt; text-decoration: underline;\">,</span><span style=\" font-size:12.5pt;\"> которому(ой) согласно приговору ______________________________ от </span><span style=\" font-family:'Times New Roman'; font-size:12.5pt;\"> _____________г. была назначена мера пресечения в виде</span><span style=\" font-family:'Times New Roman';\"> </span><span style=\" font-family:'Times New Roman'; font-size:12.5pt;\">амбулаторного принудительного наблюдения и лечения  у психиатра.</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:12.5pt; color:#000000;\">________________г.</span><span style=\" font-size:12.5pt;\"> $FIO$ был(а) освидетельствован(а)  комиссией врачей-психиатров СПб ГБУЗ «ПНД №2», которая пришла к заключению о необходимости продления амбулаторного принудительного лечения.</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:12.5pt;\"> </span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:12.5pt;\">Руководствуясь ст. 102 УК РФ, ходатайствую о продлении амбулаторного принудительного лечения</span><span style=\" font-family:'Times New Roman';\"> $FIO$ </span><span style=\" font-size:12.5pt;\">в СПб ГБУЗ «ПНД №2». </span></p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:12.5pt;\"> </span> </p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:12.5pt;\"> </span> </p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:12.5pt; font-weight:600;\">ПРИЛОЖЕНИЕ:</span> </p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:12.5pt;\">1.</span><span style=\" font-family:'Times New Roman'; font-size:7pt;\">     </span><span style=\" font-size:12.5pt;\">АКТ психиатрического освидетельствования на </span><span style=\" font-family:'Times New Roman';\">___(</span><span style=\" font-family:'Times New Roman'; font-size:12.5pt; text-decoration: underline;\">Ф.И.О. из программы</span><span style=\" font-family:'Times New Roman'; font-size:12.5pt;\">)___ </span><span style=\" font-family:'Times New Roman'; font-size:12.5pt; color:#000000;\">от __________________________г.</span> </p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Calibri'; font-size:12.5pt;\">2.</span><span style=\" font-family:'Times New Roman'; font-size:7pt;\">     </span><span style=\" font-size:12.5pt;\">Копия приговора ___________________________ от </span><span style=\" font-family:'Times New Roman'; font-size:12.5pt;\">___________________г.</span> </p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:12.5pt;\">3.</span><span style=\" font-family:'Times New Roman'; font-size:7pt;\">     </span><span style=\" font-size:12.5pt;\">Копия постановления __________________________ от ________________г.</span> </p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:12.5pt;\">4.</span><span style=\" font-family:'Times New Roman'; font-size:7pt;\">     </span><span style=\" font-size:12.5pt;\">Заявление </span><span style=\" font-family:'Times New Roman';\">___(</span><span style=\" font-family:'Times New Roman'; font-size:12.5pt; text-decoration: underline;\">Ф.И.О. из программы</span><span style=\" font-family:'Times New Roman'; font-size:12.5pt;\">)___ об ознакомлении с актом о продлении принудительного лечения.</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:12.5pt;\"> </span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:12.5pt;\"> </span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:12.5pt;\"> </span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:12.5pt;\">             Главный врач                                                                       О.А. Караулов</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:10pt;\"> </span> </p></td></tr></table></body></html>";
+            if(db.open())
+            {
+                query.exec("SELECT \
+                           all_view_patient.id, \
+                           concat(all_view_patient.fname, ' ',\
+                           all_view_patient.name, ' ',\
+                           all_view_patient.mname), \
+                           all_view_patient.birthday, \
+                           concat(street.name, \
+                                            CASE\
+                                              WHEN address_patient.building ='' THEN ''\
+                                              ELSE ' корп.'\
+                                            END , \
+                                            address_patient.building, ' д.',\
+                                            address_patient.home, ' кв.',\
+                                            address_patient.flat) AS Street,\
+                           diagnos.code  \
+                         FROM \
+                           test.all_view_patient, \
+                           test.address_patient, \
+                           test.street, \
+                           test.diagnos_patient, \
+                           test.diagnos\
+                         WHERE \
+                           all_view_patient.id = diagnos_patient.medcard_id AND\
+                           address_patient.medcard_id = all_view_patient.id AND\
+                           street.id = address_patient.street_id AND\
+                           diagnos.id = diagnos_patient.diagnos_id AND diagnos_patient.delete_row = false AND diagnos_patient.id_parent is Null AND all_view_patient.id ="+global_id_str);
+                        while(query.next())
+                            {
+                                body_doc.replace("$FIO$",query.value(1).toString());
+                                body_doc.replace("$BIRTHDAY$",query.value(2).toDate().toString("dd.MM.yyyy"));
+                                body_doc.replace("$ADRESS$",query.value(3).toString());
+                                body_doc.replace("$DIAGNOS$",query.value(4).toString());
+
+                            }
+                        }
+            break;
+        case 6:
+            body_doc = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Courier'; font-size:12pt; font-weight:400; font-style:normal;\">\n<table border=\"0\" style=\"-qt-table-type: root; margin-top:56.693px; margin-bottom:56.693px; margin-left:56.693px; margin-right:56.693px;\">\n<tr>\n<td style=\"border: none;\">\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-weight:600; text-decoration: underline; color:#000000;\">Дата</span><span style=\" font-weight:600;\">   </span>                          <span style=\" font-family:'Times New Roman'; font-weight:600;\">Эпикриз на ВК</span><span style=\" font-family:'Times New Roman';\"> </span></p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">                                      для решения вопроса о продлении АПЛ/АДН (взятии на АДН)</span> </p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; color:#000000;\"> </span> </p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\"> </span> </p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; text-decoration: underline;\">$FIO$</span> </p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\"> </span> </p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Совершил(а) общественно-опасное деяние от _____________г. по ст. __________________ УК РФ (текст статьи).</span> </p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\"> </span> </p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">_____________________________ суд приговором от ___________ года назначил меру пресечения в отношении $FIO$ $BIRTHDAY$ в виде амбулаторного принудительного наблюдения и лечения  у врача-психиатра.</span> </p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Дата постановки на АПЛ в СПб ГБУЗ &quot;ПНД №2&quot; ______________________г.</span> </p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Постановлением ____________________________ суда от _____________________г. амбулаторное принудительное лечение продлевалось.</span> </p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Анамнез: ________________________________________________________________________________________________________________________________________________________</span> </p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">За истекший период состояние ______________________. Пациент(ка) приходил(а) ежемесячно на прием в СПб ГБУЗ «ПНД №2», рекомендуемую терапию _________________________________. Работает ___________________. Психическое состояние остается неустойчивым.</span> </p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\"> </span> </p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\"> </span> </p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">         Заведующий отделением                                                      /____________________/</span> </p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">       </span></p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">         Лечащий врач                                                                         /____________________/</span> </p></td></tr></table></body></html>";
+            if(db.open())
+            {
+                query.exec("SELECT \
+                           all_view_patient.id, \
+                           concat(all_view_patient.fname, ' ',\
+                           all_view_patient.name, ' ',\
+                           all_view_patient.mname), \
+                           all_view_patient.birthday, \
+                           concat(street.name, \
+                                            CASE\
+                                              WHEN address_patient.building ='' THEN ''\
+                                              ELSE ' корп.'\
+                                            END , \
+                                            address_patient.building, ' д.',\
+                                            address_patient.home, ' кв.',\
+                                            address_patient.flat) AS Street,\
+                           diagnos.code  \
+                         FROM \
+                           test.all_view_patient, \
+                           test.address_patient, \
+                           test.street, \
+                           test.diagnos_patient, \
+                           test.diagnos\
+                         WHERE \
+                           all_view_patient.id = diagnos_patient.medcard_id AND\
+                           address_patient.medcard_id = all_view_patient.id AND\
+                           street.id = address_patient.street_id AND\
+                           diagnos.id = diagnos_patient.diagnos_id AND diagnos_patient.delete_row = false AND diagnos_patient.id_parent is Null AND all_view_patient.id ="+global_id_str);
+                        while(query.next())
+                            {
+                                body_doc.replace("$FIO$",query.value(1).toString());
+                                body_doc.replace("$BIRTHDAY$",query.value(2).toDate().toString("dd.MM.yyyy"));
+                                body_doc.replace("$ADRESS$",query.value(3).toString());
+                                body_doc.replace("$DIAGNOS$",query.value(4).toString());
+
+                            }
+                        }
+            break;
+        case 8:
+            body_doc = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Courier'; font-size:12pt; font-weight:400; font-style:normal;\">\n<table border=\"0\" style=\"-qt-table-type: root; margin-top:56.693px; margin-bottom:56.693px; margin-left:56.693px; margin-right:56.693px;\">\n<tr>\n<td style=\"border: none;\">\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-weight:600;\">Дата:_________                     Эпикриз</span><span style=\" font-family:'Times New Roman';\"> </span><span style=\" font-family:'Times New Roman'; font-weight:600;\">на ВК</span><span style=\" font-family:'Times New Roman';\"> </span></p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">                                                 на изменения диагноза</span> </p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">  </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Наблюдается с ______ года  с диагнозом: </span><span style=\" font-family:'Times New Roman'; text-decoration: underline;\">____________</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Инвалидность: инвалид / не инвалид</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Анамнез:___________________________________________________________________</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Лечился(ась) в психиатрических стационарах (даты), последняя выписка (от какого числа, с каким диагнозом): _____________________________________________________________________________  Получает поддерживающее лечение: </span><span style=\" font-family:'Times New Roman'; text-decoration: underline;\">____(препараты)_____.</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Клиническая картина: __________________________________________________________________________________________________________________________________________________________. </span></p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Психический статус: __________________________________________________________________________________________________________________________________________________________.Диагноз: $DIAGNOS$</span> </p>\n<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; text-decoration: underline;\">Исходя из данных анамнеза и клинической картины, целесообразно сменить </span><span style=\" font-family:'Times New Roman';\">диагноз на:</span><span style=\" font-family:'Times New Roman'; font-weight:600;\">_____________________________________________</span><span style=\" font-family:'Times New Roman';\">F</span><span style=\" font-family:'Times New Roman'; font-weight:600;\">__________</span><span style=\" font-family:'Times New Roman';\">.</span> </p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">            Заведующий отделением:                                         /____________________/</span> </p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">            Лечащий врач:                                                            /____________________/</span> </p></td></tr></table></body></html>";
+            if(db.open())
+            {
+                query.exec("SELECT \
+                           all_view_patient.id, \
+                           concat(all_view_patient.fname, ' ',\
+                           all_view_patient.name, ' ',\
+                           all_view_patient.mname), \
+                           all_view_patient.birthday, \
+                           concat(street.name, \
+                                            CASE\
+                                              WHEN address_patient.building ='' THEN ''\
+                                              ELSE ' корп.'\
+                                            END , \
+                                            address_patient.building, ' д.',\
+                                            address_patient.home, ' кв.',\
+                                            address_patient.flat) AS Street,\
+                           diagnos.code  \
+                         FROM \
+                           test.all_view_patient, \
+                           test.address_patient, \
+                           test.street, \
+                           test.diagnos_patient, \
+                           test.diagnos\
+                         WHERE \
+                           all_view_patient.id = diagnos_patient.medcard_id AND\
+                           address_patient.medcard_id = all_view_patient.id AND\
+                           street.id = address_patient.street_id AND\
+                           diagnos.id = diagnos_patient.diagnos_id AND diagnos_patient.delete_row = false AND diagnos_patient.id_parent is Null AND all_view_patient.id ="+global_id_str);
+                        while(query.next())
+                            {
+                                body_doc.replace("$FIO$",query.value(1).toString());
+                                body_doc.replace("$BIRTHDAY$",query.value(2).toDate().toString("dd.MM.yyyy"));
+                                body_doc.replace("$ADRESS$",query.value(3).toString());
+                                body_doc.replace("$DIAGNOS$",query.value(4).toString());
+
+                            }
+                        }
+            break;
+
+        case 9:
+            body_doc = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Courier'; font-size:12pt; font-weight:400; font-style:normal;\">\n<table border=\"0\" style=\"-qt-table-type: root; margin-top:56.693px; margin-bottom:56.693px; margin-left:56.693px; margin-right:56.693px;\">\n<tr>\n<td style=\"border: none;\">\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:14pt; font-weight:600;\">Протокол заседания ВК </span><span style=\" font-family:'Times New Roman'; font-size:14pt;\">№___</span> </p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">смена диагноза / установления диспансерного наблюдения</span> </p>\n<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:14pt;\">Дата:</span> </p>\n<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:14pt;\">Ф.И.О.: $FIO$</span> </p>\n<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:14pt;\">Возраст: $BIRTHDAY$</span> </p>\n<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:14pt;\">Адрес: $ADRESS$</span></p>\n<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:14pt;\">Социальный статус:  инвалид /не инвалид, ___________________________</span> </p>\n<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:14pt;\">Диагноз: $DIAGNOS$</span> </p>\n<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:14pt;\">Цель представления на ВК:  смена диагноза/установление диспансерного наблюдения.</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:14pt;\">Дополнения к анамнезу, жалобам, психическому статусу:  ______________________________________________________________________________________________________________________________________________________________________________________________________</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:14pt;\">Психический статус: ____________________________________________________________________________________________________________________________________</span> </p>\n<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:14pt;\">Решение ВК: Установить диагноз: ____________________________________. Учитывая наличие хронического, затяжного психического расстройства с тяжелыми стойкими болезненными проявлениями, установить диспансерное наблюдение согласно ст.27 п.1  Закона РФ №3185-1 от 02.07.1992г. </span></p>\n<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:14pt;\"> </span> </p>\n<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:14pt;\">Председатель ВК:</span> </p>\n<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:14pt;\">Члены ВК:</span> </p></td></tr></table></body></html>";
+            if(db.open())
+            {
+                query.exec("SELECT \
+                           all_view_patient.id, \
+                           concat(all_view_patient.fname, ' ',\
+                           all_view_patient.name, ' ',\
+                           all_view_patient.mname), \
+                           all_view_patient.birthday, \
+                           concat(street.name, \
+                                            CASE\
+                                              WHEN address_patient.building ='' THEN ''\
+                                              ELSE ' корп.'\
+                                            END , \
+                                            address_patient.building, ' д.',\
+                                            address_patient.home, ' кв.',\
+                                            address_patient.flat) AS Street,\
+                           diagnos.code  \
+                         FROM \
+                           test.all_view_patient, \
+                           test.address_patient, \
+                           test.street, \
+                           test.diagnos_patient, \
+                           test.diagnos\
+                         WHERE \
+                           all_view_patient.id = diagnos_patient.medcard_id AND\
+                           address_patient.medcard_id = all_view_patient.id AND\
+                           street.id = address_patient.street_id AND\
+                           diagnos.id = diagnos_patient.diagnos_id AND diagnos_patient.delete_row = false AND diagnos_patient.id_parent is Null AND all_view_patient.id ="+global_id_str);
+                        while(query.next())
+                            {
+                                body_doc.replace("$FIO$",query.value(1).toString());
+                                body_doc.replace("$BIRTHDAY$",query.value(2).toDate().toString("dd.MM.yyyy"));
+                                body_doc.replace("$ADRESS$",query.value(3).toString());
+                                body_doc.replace("$DIAGNOS$",query.value(4).toString());
+
+                            }
+                        }
+            break;
+        case 10:
+            body_doc = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Courier'; font-size:12pt; font-weight:400; font-style:normal;\">\n<table border=\"0\" style=\"-qt-table-type: root; margin-top:56.693px; margin-bottom:56.693px; margin-left:56.693px; margin-right:56.693px;\">\n<tr>\n<td style=\"border: none;\">\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:14pt; font-weight:600;\">Протокол заседания ВК </span><span style=\" font-family:'Times New Roman'; font-size:14pt;\">№___</span> </p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">смена диагноза / снятие с диспансерного наблюдения</span> </p>\n<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Дата:</span> </p>\n<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Ф.И.О.: $FIO$</span> </p>\n<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Возраст: $BITHDAY$</span> </p>\n<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Адрес: $ADRESS$</span> </p>\n<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Социальный статус:  инвалид /не инвалид, ___________________________</span> </p>\n<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Диагноз: $DIAGNOS$</span> </p>\n<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Цель представления на ВК:  смена диагноза/снятие с диспансерного наблюдения.</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Психический статус: ____________________________________________________________________________________________________________________________________</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Дополнения к анамнезу, психическому статусу:  __________________________________________________________________________________________________________________________________________________________</span> </p>\n<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Решение ВК: Диагноз: _____________________________________________. Учитывая стойкую ремиссию хронического, затяжного психического расстройства с тяжелыми стойкими болезненными проявлениями, снять с диспансерного наблюдения согласно ст.27 п.1  Закона РФ №3185-1 от 02.07.1992г. и назначить ЛП(лечебную помощь).</span> </p>\n<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\"> </span> </p>\n<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Председатель ВК:</span> </p>\n<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Члены ВК:</span> </p></td></tr></table></body></html>";
+            if(db.open())
+            {
+                query.exec("SELECT \
+                           all_view_patient.id, \
+                           concat(all_view_patient.fname, ' ',\
+                           all_view_patient.name, ' ',\
+                           all_view_patient.mname), \
+                           all_view_patient.birthday, \
+                           concat(street.name, \
+                                            CASE\
+                                              WHEN address_patient.building ='' THEN ''\
+                                              ELSE ' корп.'\
+                                            END , \
+                                            address_patient.building, ' д.',\
+                                            address_patient.home, ' кв.',\
+                                            address_patient.flat) AS Street,\
+                           diagnos.code  \
+                         FROM \
+                           test.all_view_patient, \
+                           test.address_patient, \
+                           test.street, \
+                           test.diagnos_patient, \
+                           test.diagnos\
+                         WHERE \
+                           all_view_patient.id = diagnos_patient.medcard_id AND\
+                           address_patient.medcard_id = all_view_patient.id AND\
+                           street.id = address_patient.street_id AND\
+                           diagnos.id = diagnos_patient.diagnos_id AND diagnos_patient.delete_row = false AND diagnos_patient.id_parent is Null AND all_view_patient.id ="+global_id_str);
+                        while(query.next())
+                            {
+                                body_doc.replace("$FIO$",query.value(1).toString());
+                                body_doc.replace("$BIRTHDAY$",query.value(2).toDate().toString("dd.MM.yyyy"));
+                                body_doc.replace("$ADRESS$",query.value(3).toString());
+                                body_doc.replace("$DIAGNOS$",query.value(4).toString());
+
+                            }
+                        }
+            break;
+        case 11:
+            body_doc = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Courier'; font-size:12pt; font-weight:400; font-style:normal;\">\n<table border=\"0\" style=\"-qt-table-type: root; margin-top:56.693px; margin-bottom:56.693px; margin-left:56.693px; margin-right:56.693px;\">\n<tr>\n<td style=\"border: none;\">\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-weight:600;\">Дата:_________                     Эпикриз</span><span style=\" font-family:'Times New Roman';\"> </span><span style=\" font-family:'Times New Roman'; font-weight:600;\">на ВК</span><span style=\" font-family:'Times New Roman';\"> </span></p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">                                                 для изменения диагноза и прекращения Д-наблюдения</span> </p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">  </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Пациент </span><span style=\" font-family:'Times New Roman'; text-decoration: underline;\"></span><span style=\" font-family:'Times New Roman'; text-decoration: underline;\">$FIO$</span><span style=\" font-family:'Times New Roman';\"> находится на Д-наблюдении с ______ года                  Диагноз: </span><span style=\" font-family:'Times New Roman'; text-decoration: underline;\"></span><span style=\" font-family:'Times New Roman'; text-decoration: underline;\">$DIAGNOS$</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Инвалидность: инвалид / не инвалид</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Лечился в психиатрических стационарах (даты), последняя выписка (от какого числа, с каким диагнозом): _____________________________________________________________________________  Получал лечение: </span><span style=\" font-family:'Times New Roman'; text-decoration: underline;\">____(препараты)_____.</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">В клинике заболевания: __________________________________________________________________________________________________________________________________________________________. </span></p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Психический статус: __________________________________________________________________________________________________________________________________________________________.</span> </p>\n<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Учитывая наличие стойкой ремиссии хронического (затяжного) психического расстройства с тяжёлыми, стойкими (часто обостряющимися) болезненными проявлениями, согласно ст.27 п.1 Закона «О психиатрической помощи и гарантиях прав граждан при её оказании» больной переводится на ЛП(лечебную помощь).</span> </p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">            Заведующий отделением:                                         /____________________/</span> <span style=\" font-family:'Times New Roman';\">            Лечащий врач:                                                            /____________________/</span></p></td></tr></table></body></html>";
+            if(db.open())
+            {
+                query.exec("SELECT \
+                           all_view_patient.id, \
+                           concat(all_view_patient.fname, ' ',\
+                           all_view_patient.name, ' ',\
+                           all_view_patient.mname), \
+                           all_view_patient.birthday, \
+                           concat(street.name, \
+                                            CASE\
+                                              WHEN address_patient.building ='' THEN ''\
+                                              ELSE ' корп.'\
+                                            END , \
+                                            address_patient.building, ' д.',\
+                                            address_patient.home, ' кв.',\
+                                            address_patient.flat) AS Street,\
+                           diagnos.code  \
+                         FROM \
+                           test.all_view_patient, \
+                           test.address_patient, \
+                           test.street, \
+                           test.diagnos_patient, \
+                           test.diagnos\
+                         WHERE \
+                           all_view_patient.id = diagnos_patient.medcard_id AND\
+                           address_patient.medcard_id = all_view_patient.id AND\
+                           street.id = address_patient.street_id AND\
+                           diagnos.id = diagnos_patient.diagnos_id AND diagnos_patient.delete_row = false AND diagnos_patient.id_parent is Null AND all_view_patient.id ="+global_id_str);
+                        while(query.next())
+                            {
+                                body_doc.replace("$FIO$",query.value(1).toString());
+                                body_doc.replace("$BIRTHDAY$",query.value(2).toDate().toString("dd.MM.yyyy"));
+                                body_doc.replace("$ADRESS$",query.value(3).toString());
+                                body_doc.replace("$DIAGNOS$",query.value(4).toString());
+
+                            }
+                        }
+            break;
+        case 12:
+            body_doc = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Courier'; font-size:12pt; font-weight:400; font-style:normal;\">\n<table border=\"0\" style=\"-qt-table-type: root; margin-top:56.693px; margin-bottom:56.693px; margin-left:56.693px; margin-right:56.693px;\">\n<tr>\n<td style=\"border: none;\">\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-weight:600;\">Дата:_________                     Эпикриз</span><span style=\" font-family:'Times New Roman';\"> </span><span style=\" font-family:'Times New Roman'; font-weight:600;\">на ВК</span><span style=\" font-family:'Times New Roman';\"> </span></p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">                                                 для изменения диагноза и установления Д-наблюдения</span> </p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">  </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Получает ЛП с ______ года   Диагноз: </span><span style=\" font-family:'Times New Roman'; text-decoration: underline;\">$</span><span style=\" font-family:'Times New Roman'; text-decoration: underline;\">DIAGNOS$</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Инвалидность: инвалид / не инвалид</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Лечился в психиатрических стационарах (даты), последняя выписка (от какого числа, с каким диагнозом): _____________________________________________________________________________  Получает поддерживающее лечение: </span><span style=\" font-family:'Times New Roman'; text-decoration: underline;\">____(препараты)_____.</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">В клинике заболевания: __________________________________________________________________________________________________________________________________________________________. </span></p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Психический статус: __________________________________________________________________________________________________________________________________________________________.Диагноз: $DIAGNOS$</span> </p>\n<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Учитывая наличие хронического (затяжного) психического расстройства с тяжёлыми, стойкими (часто обостряющимися) болезненными проявлениями, согласно ст.27 п.1 Закона «О психиатрической помощи и гарантиях прав граждан при её оказании» больной нуждается в установлении диспансерного наблюдения, о чём пациенту сообщено.</span> </p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">            Заведующий отделением:                                         /____________________/</span> </p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">            Лечащий врач:                                                            /____________________/</span> </p></td></tr></table></body></html>";
+            if(db.open())
+            {
+                query.exec("SELECT \
+                           all_view_patient.id, \
+                           concat(all_view_patient.fname, ' ',\
+                           all_view_patient.name, ' ',\
+                           all_view_patient.mname), \
+                           all_view_patient.birthday, \
+                           concat(street.name, \
+                                            CASE\
+                                              WHEN address_patient.building ='' THEN ''\
+                                              ELSE ' корп.'\
+                                            END , \
+                                            address_patient.building, ' д.',\
+                                            address_patient.home, ' кв.',\
+                                            address_patient.flat) AS Street,\
+                           diagnos.code  \
+                         FROM \
+                           test.all_view_patient, \
+                           test.address_patient, \
+                           test.street, \
+                           test.diagnos_patient, \
+                           test.diagnos\
+                         WHERE \
+                           all_view_patient.id = diagnos_patient.medcard_id AND\
+                           address_patient.medcard_id = all_view_patient.id AND\
+                           street.id = address_patient.street_id AND\
+                           diagnos.id = diagnos_patient.diagnos_id AND diagnos_patient.delete_row = false AND diagnos_patient.id_parent is Null AND all_view_patient.id ="+global_id_str);
+                        while(query.next())
+                            {
+                                body_doc.replace("$FIO$",query.value(1).toString());
+                                body_doc.replace("$BIRTHDAY$",query.value(2).toDate().toString("dd.MM.yyyy"));
+                                body_doc.replace("$ADRESS$",query.value(3).toString());
+                                body_doc.replace("$DIAGNOS$",query.value(4).toString());
+
+                            }
+                        }
+            break;
+        case 17:
+            body_doc = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Courier'; font-size:12pt; font-weight:400; font-style:normal;\">\n<table border=\"0\" style=\"-qt-table-type: root; margin-top:56.693px; margin-bottom:56.693px; margin-left:56.693px; margin-right:56.693px;\">\n<tr>\n<td style=\"border: none;\">\n<p align=\"center\" style=\" margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Calibri'; font-size:14pt; font-weight:600;\">Протокол заседания ВК №___</span> </p>\n<p align=\"center\" style=\" margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Calibri';\">Повторное / Первичное представление на МСЭ</span> </p>\n<p style=\" margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Calibri'; color:#000000;\">Дата: ________________</span> </p>\n<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Calibri'; color:#000000;\">Ф.И.О.: </span><span style=\" font-family:'Calibri'; text-decoration: underline; color:#000000;\"></span><span style=\" font-family:'Calibri'; text-decoration: underline; color:#000000;\">$FIO$</span> </p>\n<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Calibri'; color:#000000;\">Возраст: </span><span style=\" font-family:'Calibri'; text-decoration: underline; color:#000000;\">$BIRTHDAY$</span> </p>\n<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Calibri'; color:#000000;\">Адрес: </span><span style=\" font-family:'Calibri'; text-decoration: underline; color:#000000;\">$ADRESS$</span> </p>\n<p style=\" margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Calibri'; color:#000000;\">Социальный статус: ________________________________________________________ Группа инвалидности с ___________ года</span><span style=\" font-family:'Calibri'; text-decoration: underline; color:#000000;\">     </span></p>\n<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Calibri'; color:#000000;\">Диагноз: $DIAGNOS$</span> </p>\n<p style=\" margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Calibri'; color:#000000;\">Цель представления на ВК:    </span><span style=\" font-family:'Calibri'; text-decoration: underline; color:#000000;\">Представление на МСЭ для определения/продления группы инвалидности</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Calibri'; color:#000000;\">Анамнез (динамика заболевания в межкомиссионный период): ______________________________________________________________________________________________________________________________________________________</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Calibri'; color:#000000;\">Психический статус при направлении на МСЭ: </span><span style=\" color:#000000;\">____________________________________________________________________________________________________________________________________________________________________</span> </p>\n<p style=\" margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Calibri'; color:#000000;\">Решение ВК:  ________________________________________________________________ </span></p>\n<p style=\" margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Calibri'; color:#000000;\">Председатель ВК:</span><span style=\" font-family:'Calibri'; text-decoration: underline; color:#000000;\">    </span></p>\n<p style=\" margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Calibri'; color:#000000;\">Члены ВК:</span><span style=\" font-family:'Calibri'; text-decoration: underline; color:#000000;\">      </span></p></td></tr></table></body></html>";
+            if(db.open())
+            {
+                query.exec("SELECT \
+                           all_view_patient.id, \
+                           concat(all_view_patient.fname, ' ',\
+                           all_view_patient.name, ' ',\
+                           all_view_patient.mname), \
+                           all_view_patient.birthday, \
+                           concat(street.name, \
+                                            CASE\
+                                              WHEN address_patient.building ='' THEN ''\
+                                              ELSE ' корп.'\
+                                            END , \
+                                            address_patient.building, ' д.',\
+                                            address_patient.home, ' кв.',\
+                                            address_patient.flat) AS Street,\
+                           diagnos.code  \
+                         FROM \
+                           test.all_view_patient, \
+                           test.address_patient, \
+                           test.street, \
+                           test.diagnos_patient, \
+                           test.diagnos\
+                         WHERE \
+                           all_view_patient.id = diagnos_patient.medcard_id AND\
+                           address_patient.medcard_id = all_view_patient.id AND\
+                           street.id = address_patient.street_id AND\
+                           diagnos.id = diagnos_patient.diagnos_id AND diagnos_patient.delete_row = false AND diagnos_patient.id_parent is Null AND all_view_patient.id ="+global_id_str);
+                        while(query.next())
+                            {
+                                body_doc.replace("$FIO$",query.value(1).toString());
+                                body_doc.replace("$BIRTHDAY$",query.value(2).toDate().toString("dd.MM.yyyy"));
+                                body_doc.replace("$ADRESS$",query.value(3).toString());
+                                body_doc.replace("$DIAGNOS$",query.value(4).toString());
+
+                            }
+                        }
+            break;
+        case 18:
+            body_doc = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Courier'; font-size:12pt; font-weight:400; font-style:normal;\">\n<table border=\"0\" style=\"-qt-table-type: root; margin-top:56.693px; margin-bottom:56.693px; margin-left:56.693px; margin-right:56.693px;\">\n<tr>\n<td style=\"border: none;\">\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:600; text-decoration: underline;\">(Число, месяц, год)</span><span style=\" font-weight:600;\">.                             Эпикриз на МСЭ</span> </p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">  </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Наблюдается у врача-психиатра с ______года.    Диагноз: <span style=\" text-decoration: underline;\">$DIAGNOS$</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Инвалидность    <span style=\" text-decoration: underline;\">(из программы)</span> группа    до <span style=\" text-decoration: underline;\">(дата очередного освидетельствования из программы)</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Лечение  в ПБ:   _________________________________________________________                      </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Поддерживающее лечение: <span style=\" text-decoration: underline;\">(препараты из программы) </span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">В клинической картине (адаптивные возможности,  квалификация психического состояния, тип течения настоящего заболевания, обоснование направления на МСЭ): __________________________________________________________________________________________________________________________________________________________Психическое состояние: __________________________________________________________________________________________________________________________________________________________ </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Диагноз<span style=\" text-decoration: underline;\">: $DIAGNOS$</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">            </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Нуждается в продлении/установлении группы инвалидности.           </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">  </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">                        Заведующая отделением:                                 /___________________/ </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">  </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">                        Лечащий врач:                                                   /___________________/ </p></td></tr></table></body></html>";
+            if(db.open())
+            {
+                query.exec("SELECT \
+                           all_view_patient.id, \
+                           concat(all_view_patient.fname, ' ',\
+                           all_view_patient.name, ' ',\
+                           all_view_patient.mname), \
+                           all_view_patient.birthday, \
+                           concat(street.name, \
+                                            CASE\
+                                              WHEN address_patient.building ='' THEN ''\
+                                              ELSE ' корп.'\
+                                            END , \
+                                            address_patient.building, ' д.',\
+                                            address_patient.home, ' кв.',\
+                                            address_patient.flat) AS Street,\
+                           diagnos.code  \
+                         FROM \
+                           test.all_view_patient, \
+                           test.address_patient, \
+                           test.street, \
+                           test.diagnos_patient, \
+                           test.diagnos\
+                         WHERE \
+                           all_view_patient.id = diagnos_patient.medcard_id AND\
+                           address_patient.medcard_id = all_view_patient.id AND\
+                           street.id = address_patient.street_id AND\
+                           diagnos.id = diagnos_patient.diagnos_id AND diagnos_patient.delete_row = false AND diagnos_patient.id_parent is Null AND all_view_patient.id ="+global_id_str);
+                        while(query.next())
+                            {
+                                body_doc.replace("$FIO$",query.value(1).toString());
+                                body_doc.replace("$BIRTHDAY$",query.value(2).toDate().toString("dd.MM.yyyy"));
+                                body_doc.replace("$ADRESS$",query.value(3).toString());
+                                body_doc.replace("$DIAGNOS$",query.value(4).toString());
+
+                            }
+                        }
+            break;
+        case 23:
+            body_doc = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Courier'; font-size:12pt; font-weight:400; font-style:normal;\">\n<table border=\"0\" style=\"-qt-table-type: root; margin-top:56.693px; margin-bottom:56.693px; margin-left:56.693px; margin-right:56.693px;\">\n<tr>\n<td style=\"border: none;\">\n<table border=\"0\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px;\" cellspacing=\"0\" cellpadding=\"0\">\n<tr>\n<td width=\"336\" style=\" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;\">\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\"data:image/jpeg;base64,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\" width=\"74\" height=\"83\" style=\"vertical-align: top;\" /> </p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:10pt; text-transform:uppercase;\">          ПРАВИТЕЛЬСТВО санкт-петербурга                        </span></p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:10pt; text-transform:uppercase;\">                            АДМИНИСТРАЦИЯ                               </span></p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:10pt; text-transform:uppercase;\">Выборгского района <br />Санкт-Петербурга</span> </p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:10pt;\">Санкт-Петербургское </span></p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:10pt;\">государственное бюджетное учреждение здравоохранения</span> </p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:10pt;\">«Психоневрологический диспансер №2»</span> </p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:10pt;\">СПб ГБУЗ «ПНД №2»</span> </p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:10pt;\">Фермское шоссе, д. 34, Санкт-Петербург, 197341</span> </p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:10pt;\">Тел./Факс (812) 302-11-01</span> </p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:10pt;\">E-mail: </span><a href=\"mailto:pnd2@zdrav.spb.ru\"><span style=\" font-family:'Times New Roman'; font-size:10pt; text-decoration: underline; color:#0000ff;\">pnd2@zdrav.spb.ru</span></a><span style=\" font-family:'Times New Roman'; font-size:10pt;\"> </span></p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:10pt;\">                    ИНН/КПП 7802091710/781401001</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:10pt;\"> </span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:10pt;\">          От __\u00AD\u00AD\u00AD\u00AD___________     №______________</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:10pt;\">          На №____________     от   ______________</span><span style=\" font-family:'Times New Roman'; font-size:10pt; font-weight:600; text-decoration: underline;\">               </span></p></td>\n<td width=\"319\" style=\" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;\">\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-weight:600;\"> </span> </p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\"> </span> </p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\"> </span> </p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\"> </span> </p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\"> </span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Куда:_______________________</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\"> </span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\"> </span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Кому:_______________________  </span></p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\"> </span> </p></td></tr></table>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:16pt;\"> </span> </p>\n<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:14pt;\">   На Ваш запрос от __________ №__________ (Вх. СПб ГБУЗ «ПНД №2» №_____ от __________) в связи с ____</span><span style=\" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline;\">(рассмотрением материала КУСП-8649 от 20.12.2015г. или другое)</span><span style=\" font-family:'Times New Roman'; font-size:14pt;\">_________ сообщаем, что гр. $FIO$, $BIRTHDAY$ г.р., проживающий(ая) по адресу:  $ADRESS$ , состоит на диспансерном учете в СПб ГБУЗ «Психоневрологический диспансер №2» с __</span><span style=\" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline;\">(даты)</span><span style=\" font-family:'Times New Roman'; font-size:14pt;\">______ с диагнозом: $DIAGNOS$ .</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:14pt;\">       </span></p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\"> </span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\"> </span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\"> </span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:14pt;\">Заместитель главного врача                                                                                        по медицинской части                                                           А.Н.Саренко                                                                                                                                                                                                                                                                                                                                                                                                                                                                              </span> </p></td></tr></table></body></html>";
+            if(db.open())
+            {
+                query.exec("SELECT \
+                           all_view_patient.id, \
+                           concat(all_view_patient.fname, ' ',\
+                           all_view_patient.name, ' ',\
+                           all_view_patient.mname), \
+                           all_view_patient.birthday, \
+                           concat(street.name, \
+                                            CASE\
+                                              WHEN address_patient.building ='' THEN ''\
+                                              ELSE ' корп.'\
+                                            END , \
+                                            address_patient.building, ' д.',\
+                                            address_patient.home, ' кв.',\
+                                            address_patient.flat) AS Street,\
+                           diagnos.code  \
+                         FROM \
+                           test.all_view_patient, \
+                           test.address_patient, \
+                           test.street, \
+                           test.diagnos_patient, \
+                           test.diagnos\
+                         WHERE \
+                           all_view_patient.id = diagnos_patient.medcard_id AND\
+                           address_patient.medcard_id = all_view_patient.id AND\
+                           street.id = address_patient.street_id AND\
+                           diagnos.id = diagnos_patient.diagnos_id AND diagnos_patient.delete_row = false AND diagnos_patient.id_parent is Null AND all_view_patient.id ="+global_id_str);
+                        while(query.next())
+                            {
+                                body_doc.replace("$FIO$",query.value(1).toString());
+                                body_doc.replace("$BIRTHDAY$",query.value(2).toDate().toString("dd.MM.yyyy"));
+                                body_doc.replace("$ADRESS$",query.value(3).toString());
+                                body_doc.replace("$DIAGNOS$",query.value(4).toString());
+
+                            }
+                        }
+            break;
+        case 24:
+            body_doc = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Courier'; font-size:12pt; font-weight:400; font-style:normal;\">\n<table border=\"0\" style=\"-qt-table-type: root; margin-top:56.693px; margin-bottom:56.693px; margin-left:56.693px; margin-right:56.693px;\">\n<tr>\n<td style=\"border: none;\">\n<table border=\"0\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px;\" cellspacing=\"0\" cellpadding=\"0\">\n<tr>\n<td width=\"336\" style=\" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;\">\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><img src=\"data:image/jpeg;base64,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\" width=\"74\" height=\"83\" style=\"vertical-align: top;\" /> </p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:10pt; text-transform:uppercase;\">          ПРАВИТЕЛЬСТВО санкт-петербурга                        </span></p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:10pt; text-transform:uppercase;\">                            АДМИНИСТРАЦИЯ                               </span></p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:10pt; text-transform:uppercase;\">Выборгского района <br />Санкт-Петербурга</span> </p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:10pt;\">Санкт-Петербургское </span></p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:10pt;\">государственное бюджетное учреждение здравоохранения</span> </p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:10pt;\">«Психоневрологический диспансер №2»</span> </p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:10pt;\">СПб ГБУЗ «ПНД №2»</span> </p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:10pt;\">Фермское шоссе, д. 34, Санкт-Петербург, 197341</span> </p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:10pt;\">Тел./Факс (812) 302-11-01</span> </p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:10pt;\">E-mail: </span><a href=\"mailto:pnd2@zdrav.spb.ru\"><span style=\" font-family:'Times New Roman'; font-size:10pt; text-decoration: underline; color:#0000ff;\">pnd2@zdrav.spb.ru</span></a><span style=\" font-family:'Times New Roman'; font-size:10pt;\"> </span></p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:10pt;\">                    ИНН/КПП 7802091710/781401001</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:10pt;\"> </span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:10pt;\">          От __\u00AD\u00AD\u00AD\u00AD___________     №______________</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:10pt;\">          На №____________     от   ______________</span><span style=\" font-family:'Times New Roman'; font-size:10pt; font-weight:600; text-decoration: underline;\">               </span></p></td>\n<td width=\"319\" style=\" vertical-align:top; padding-left:0; padding-right:0; padding-top:0; padding-bottom:0;\">\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-weight:600;\"> </span> </p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\"> </span> </p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\"> </span> </p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\"> </span> </p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\"> </span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Куда:_______________________</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\"> </span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\"> </span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Кому:_______________________  </span></p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\"> </span> </p></td></tr></table>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:16pt;\"> </span> </p>\n<p style=\"-qt-paragraph-type:empty; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:14pt;\">На Ваш запрос от ___________г. (Вх.СПб ГБУЗ «ПНД№2» №___ от ________г.) сообщаем, что в соответствии со ст. 8,9 Закона РФ от 02.07.1992 N 3185-1 &quot;О психиатрической помощи и гарантиях прав граждан при ее оказании&quot; «Сведения о факте обращения гражданина за психиатрической помощью, состоянии его психического здоровья и диагнозе психического расстройства, иные сведения, полученные при оказании ему психиатрической помощи, составляют врачебную тайну, охраняемую </span><a href=\"consultantplus://offline/ref=778F0029EFCD563DBFA19BC7F87F1A140378012D55F8E239F44D5EB1A5CCADDC7E5FF9960527073BvFH\"><span style=\" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline; color:#000000;\">законом</span></a><span style=\" font-family:'Times New Roman'; font-size:14pt;\">» и требование любых сведений о состоянии здоровья граждан из психиатрических учреждений, кроме получения таких сведений судом, органами следствия и дознания, запрещено. </span></p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:14pt;\">      На основании вышеизложенного сообщить Вам сведения в отношении ______________________________________________________ невозможно.</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:14pt;\">       </span></p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:14pt;\">                                       </span></p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:14pt;\"> </span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:14pt;\">Заместитель главного врача                                                                                                  по медицинской части                                                            А.Н. Саренко</span> </p></td></tr></table></body></html>";
+
+            break;
+        case 25:
+            body_doc = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Courier'; font-size:12pt; font-weight:400; font-style:normal;\">\n<table border=\"0\" style=\"-qt-table-type: root; margin-top:56.693px; margin-bottom:56.693px; margin-left:56.693px; margin-right:56.693px;\">\n<tr>\n<td style=\"border: none;\">\n<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:16pt;\">Согласие</span> </p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Я,____________________________________________________________________________</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:9pt;\">                                                                              Ф.И.О. заполняется собственноручно</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Дата рождения___(из программы)___г.р., зарегистрированный(ая)  по адресу: ___(из программы)___,</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">паспорт ___(из программы)___выдан___(из программы)___,</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">разрешаю сообщать информацию о моем психическом здоровье и иные сведения, содержащие врачебную тайну о моем здоровье, а также отоваривать рецепты на необходимые мне лекарства моему/моей _______________________</span> </p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">ФИО,_______________________________________________________________________</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:9pt;\">                                                                              Ф.И.О. заполняется собственноручно</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">паспорт серия ______ № __________, выдан _______________________________________,</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">и считать указанного мною человека моим доверенным лицом в СПб ГБУЗ «ПНД №2».</span> </p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">_________________г.                                         _________________/_____________________/</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">                                                                                           </span><span style=\" font-family:'Times New Roman'; font-size:9pt;\">подпись                                Ф.И.О.</span> </p>\n<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">  </p></td></tr></table></body></html>";
+            break;
+        case 26:
+            body_doc ="<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Courier'; font-size:12pt; font-weight:400; font-style:normal;\">\n<table border=\"0\" style=\"-qt-table-type: root; margin-top:56.693px; margin-bottom:56.693px; margin-left:56.693px; margin-right:56.693px;\">\n<tr>\n<td style=\"border: none;\">\n<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:16pt;\">Согласие</span> </p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Я,____________________________________________________________________________</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:9pt;\">                                                                              Ф.И.О. заполняется собственноручно</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Дата рождения___(из программы)___г.р., зарегистрированный(ая)  по адресу: ___(из программы)___,</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">паспорт ___(из программы)___выдан___(из программы)___,</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">разрешаю сообщать информацию о моем психическом здоровье и иные сведения содержащие врачебную тайну о моем здоровье в адрес Жилищного отдела Администрации __________________________________ района.</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\"> </span> </p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">_________________г.                                         _________________/_____________________/</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">                                                                                           </span><span style=\" font-family:'Times New Roman'; font-size:9pt;\">подпись                                Ф.И.О.</span> </p>\n<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">  </p></td></tr></table></body></html>" ;
+            break;
+        case 27:
+            body_doc = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Courier'; font-size:12pt; font-weight:400; font-style:normal;\">\n<table border=\"0\" style=\"-qt-table-type: root; margin-top:56.693px; margin-bottom:56.693px; margin-left:56.693px; margin-right:56.693px;\">\n<tr>\n<td style=\"border: none;\">\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:14pt; text-decoration: underline;\">Протокол заседания ВК</span><span style=\" font-family:'Times New Roman'; font-size:14pt;\">  №___</span> </p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">на выдачу справки по форме №135 а-р                                                                                 (приложение №1 к распоряжению Комитета по здравоохранению от 30.03.2007)</span> </p>\n<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Дата: ____________________</span> </p>\n<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Ф.И.О.:  $FIO$</span> </p>\n<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Возраст: $BIRTHDAY$</span> </p>\n<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Адрес: $ADRESS$</span> </p>\n<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Социальный статус:  ___________________________________________________________.</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Диагноз: $DIAGNOS$</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Цель представления на ВК:  решение вопроса о выдаче справки на жилищную комиссию по форме №135а-р (приложение №1 к распоряжению Комитета по здравоохранению от 30.03.2007)</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Дополнения к анамнезу, жалобам, психическому статусу: </span></p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-size:10pt;\">_____________________________________________________________________________________________ </span><span style=\" font-family:'Times New Roman';\">Психический статус:</span><span style=\" font-family:'Times New Roman'; font-size:10pt;\"> _____________________________________________________________________________________________</span> </p>\n<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; text-decoration: underline;\">Решение ВК:</span><span style=\" font-family:'Times New Roman';\"> на основании освидетельствования</span><span style=\" font-family:'Times New Roman'; text-decoration: underline;\">,</span><span style=\" font-family:'Times New Roman';\"> медицинских документов, комиссия установила, что пациент страдает заболеванием, входящим  в Перечень тяжелых форм заболеваний, при которых невозможно совместное проживание граждан в одной квартире, утвержденный постановлением Правительства РФ от 16.06.2006 г. №378 «Об утверждении перечня тяжелых форм хронических заболеваний, при которых невозможно совместное проживание граждан в одной квартире».</span> </p>\n<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">  </p>\n<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Председатель ВК:</span> </p>\n<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Члены ВК:</span> </p></td></tr></table></body></html>";
+            if(db.open())
+            {
+                query.exec("SELECT \
+                           all_view_patient.id, \
+                           concat(all_view_patient.fname, ' ',\
+                           all_view_patient.name, ' ',\
+                           all_view_patient.mname), \
+                           all_view_patient.birthday, \
+                           concat(street.name, \
+                                            CASE\
+                                              WHEN address_patient.building ='' THEN ''\
+                                              ELSE ' корп.'\
+                                            END , \
+                                            address_patient.building, ' д.',\
+                                            address_patient.home, ' кв.',\
+                                            address_patient.flat) AS Street,\
+                           diagnos.code  \
+                         FROM \
+                           test.all_view_patient, \
+                           test.address_patient, \
+                           test.street, \
+                           test.diagnos_patient, \
+                           test.diagnos\
+                         WHERE \
+                           all_view_patient.id = diagnos_patient.medcard_id AND\
+                           address_patient.medcard_id = all_view_patient.id AND\
+                           street.id = address_patient.street_id AND\
+                           diagnos.id = diagnos_patient.diagnos_id AND diagnos_patient.delete_row = false AND diagnos_patient.id_parent is Null AND all_view_patient.id ="+global_id_str);
+                        while(query.next())
+                            {
+                                body_doc.replace("$FIO$",query.value(1).toString());
+                                body_doc.replace("$BIRTHDAY$",query.value(2).toDate().toString("dd.MM.yyyy"));
+                                body_doc.replace("$ADRESS$",query.value(3).toString());
+                                body_doc.replace("$DIAGNOS$",query.value(4).toString());
+
+                            }
+                        }
+            break;
+        case 28:
+            body_doc = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Courier'; font-size:12pt; font-weight:400; font-style:normal;\">\n<table border=\"0\" style=\"-qt-table-type: root; margin-top:56.693px; margin-bottom:56.693px; margin-left:56.693px; margin-right:56.693px;\">\n<tr>\n<td style=\"border: none;\">\n<p align=\"right\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#ffffff;\"><span style=\" font-size:10pt; color:#000000;\">ПРИЛОЖЕНИЕ 1 <br />к распоряжению Комитета по здравоохранению <br />от 30.03.2007 N 135а-р<br /><br /></span></p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#ffffff;\"><span style=\" color:#000000;\">¦Штамп учреждения¦</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">  </p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#ffffff;\"><span style=\" color:#000000;\">СПРАВКА</span> </p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#ffffff;\"><span style=\" color:#000000;\">N ___________от &quot;___&quot;__________ 20__ года</span> </p>\n<p align=\"center\" style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#ffffff;\"><span style=\" color:#000000;\">(номер справки соответствует номеру регистрации по журналу формы N 035/у-02)</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">  </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#ffffff;\"><span style=\" color:#000000;\">    Справка  выдана в целях принятия решения о приеме на учет граждан в  качестве нуждающихся в жилых помещениях в соответствии с </span><a href=\"http://www.bestpravo.ru/federalnoje/ea-akty/i2a.htm\"><span style=\" color:#000000;\">пунктом 4</span></a> части  1  статьи  51  Жилищного  кодекса  Российской Федерации и(или) предоставлении  жилого   помещения   по  договору  социального  найма в соответствии с <a href=\"http://www.bestpravo.ru/federalnoje/ea-akty/i2a.htm\"><span style=\" color:#000000;\">пунктом 3 части 2 статьи 57</span></a><span style=\" color:#000000;\"> Жилищного кодекса РФ</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" color:#000000;\">Гражданину (гражданке) $FIO$</span> <span style=\" color:#000000;\">                                                                     \t\t\t\t</span><span style=\" font-size:9pt; color:#000000;\">(Ф.И.О. полностью)</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#ffffff;\"><span style=\" color:#000000;\">$PASSPORT$</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#ffffff;\"><span style=\" font-size:9pt; color:#000000;\">                 (серия, номер паспорта, кем и когда выдан)</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#ffffff;\"><span style=\" color:#000000;\">Дата рождения $BIRTHDAY$</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#ffffff;\"><span style=\" color:#000000;\">Зарегистрированному(ой) по адресу: $ADRESS$ На  основании  освидетельствования гр. $FIO$, медицинских  документов  комиссия  установила, что  он (она) страдает заболеванием, которое входит в </span><a href=\"http://www.bestpravo.ru/federalnoje/iw-zakony/p6a.htm\"><span style=\" color:#000000;\">Перечень</span></a><span style=\" color:#000000;\"> тяжелых форм заболеваний, при которых  невозможно  совместное  проживание граждан в одной квартире, утвержденный  постановлением Правительства РФ от 16.06.2006 N 378 &quot;Об утверждении перечня тяжелых форм хронических заболеваний, при которых невозможно совместное проживание граждан в одной квартире&quot;.</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" color:#000000;\">Председатель комиссии __________________________________________</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#ffffff;\"><span style=\" color:#000000;\">                                 (Ф.И.О., подпись)</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#ffffff;\"><span style=\" color:#000000;\">Члены комиссии: ________________________________________________</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#ffffff;\"><span style=\" color:#000000;\">                                 (Ф.И.О., подпись)</span> \t\t  <span style=\" color:#000000;\">\t\t\t_______________________________________________</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#ffffff;\"><span style=\" color:#000000;\">                                 (Ф.И.О., подпись)</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#ffffff;\"><span style=\" color:#000000;\">Главный врач     ___________________________________________________                               (подпись и круглая печать учреждения)</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" color:#000000;\"><br /> </span><span style=\" font-size:10pt; color:#000000;\">Примечание. Справка  действительна  в течение трех месяцев с даты выдачи.</span>  </p></td></tr></table></body></html>";
+            if(db.open())
+            {
+                query.exec("SELECT \
+                           all_view_patient.id, \
+                           concat(all_view_patient.fname, ' ',\
+                           all_view_patient.name, ' ',\
+                           all_view_patient.mname), \
+                           all_view_patient.birthday, \
+                           concat(street.name, \
+                                            CASE\
+                                              WHEN address_patient.building ='' THEN ''\
+                                              ELSE ' корп.'\
+                                            END , \
+                                            address_patient.building, ' д.',\
+                                            address_patient.home, ' кв.',\
+                                            address_patient.flat) AS Street,\
+                           diagnos.code  \
+                         FROM \
+                           test.all_view_patient, \
+                           test.address_patient, \
+                           test.street, \
+                           test.diagnos_patient, \
+                           test.diagnos\
+                         WHERE \
+                           all_view_patient.id = diagnos_patient.medcard_id AND\
+                           address_patient.medcard_id = all_view_patient.id AND\
+                           street.id = address_patient.street_id AND\
+                           diagnos.id = diagnos_patient.diagnos_id AND diagnos_patient.delete_row = false AND diagnos_patient.id_parent is Null AND all_view_patient.id ="+global_id_str);
+                        while(query.next())
+                            {
+                                body_doc.replace("$FIO$",query.value(1).toString());
+                                body_doc.replace("$BIRTHDAY$",query.value(2).toDate().toString("dd.MM.yyyy"));
+                                body_doc.replace("$ADRESS$",query.value(3).toString());
+                                body_doc.replace("$DIAGNOS$",query.value(4).toString());
+
+                            }
+                        }
+            break;
+        case 29:
+            body_doc = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Courier'; font-size:12pt; font-weight:400; font-style:normal;\">\n<table border=\"0\" style=\"-qt-table-type: root; margin-top:56.693px; margin-bottom:56.693px; margin-left:56.693px; margin-right:56.693px;\">\n<tr>\n<td style=\"border: none;\">\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-weight:600;\">Дата________________      Эпикриз</span><span style=\" font-family:'Times New Roman';\"> на ВК для  выдачи справки №135 а-р</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Ф.И.О.: $FIO$</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Наследственность _____________. Родился(ась) в _________________, ____________ ребенок в семье. Родители __________________. Раннее развитие без особенностей. Учился(ась) ________________, окончил(а) _______ классов, _____________. С _____ по ____ работал(а) продавцом. В настоящее время проживает с дочерью и матерью в однокомнатной квартире, отношения в семье эпизодически бывают напряженными, что определяется, в том числе, заболеванием пациента(ки). Под наблюдением психиатров с ______ года. Неоднократно госпиталировался(ась) в психитарический стационар, дневной стационар СПб ГБУЗ «ПНД №2». В дебюте заболевания ______. Поддерживающую терапию получает регулярно. На сегодняшний день клиническая картина болезни представлена, в первую очередь, ______________.</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\"> Психический статус: __________________________________________________________</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Диагноз: ___(из программы)___</span> </p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">            На основании освидетельствования пациента и/или медицинской документации представить на ВК для выдачи справки 135 а-р, т.к. его заболевание входит в Перечень тяжёлых форм заболеваний, при которых невозможно совместное проживание граждан в одной квартире, утвержденный постановлением Правительства РФ от 16.06.2006 г. № 378</span> </p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">            Заведующий отделением:                                                /___________________/</span> </p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">            Лечащий врач:                                                                  /___________________/</span> </p></td></tr></table></body></html>";
+            if(db.open())
+            {
+                query.exec("SELECT \
+                           all_view_patient.id, \
+                           concat(all_view_patient.fname, ' ',\
+                           all_view_patient.name, ' ',\
+                           all_view_patient.mname), \
+                           all_view_patient.birthday, \
+                           concat(street.name, \
+                                            CASE\
+                                              WHEN address_patient.building ='' THEN ''\
+                                              ELSE ' корп.'\
+                                            END , \
+                                            address_patient.building, ' д.',\
+                                            address_patient.home, ' кв.',\
+                                            address_patient.flat) AS Street,\
+                           diagnos.code  \
+                         FROM \
+                           test.all_view_patient, \
+                           test.address_patient, \
+                           test.street, \
+                           test.diagnos_patient, \
+                           test.diagnos\
+                         WHERE \
+                           all_view_patient.id = diagnos_patient.medcard_id AND\
+                           address_patient.medcard_id = all_view_patient.id AND\
+                           street.id = address_patient.street_id AND\
+                           diagnos.id = diagnos_patient.diagnos_id AND diagnos_patient.delete_row = false AND diagnos_patient.id_parent is Null AND all_view_patient.id ="+global_id_str);
+                        while(query.next())
+                            {
+                                body_doc.replace("$FIO$",query.value(1).toString());
+                                body_doc.replace("$BIRTHDAY$",query.value(2).toDate().toString("dd.MM.yyyy"));
+                                body_doc.replace("$ADRESS$",query.value(3).toString());
+                                body_doc.replace("$DIAGNOS$",query.value(4).toString());
+
+                            }
+                        }
+            break;
+        case 35:
+            body_doc = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\np, li { white-space: pre-wrap; }\n</style></head><body style=\" font-family:'Courier'; font-size:12pt; font-weight:400; font-style:normal;\">\n<table border=\"0\" style=\"-qt-table-type: root; margin-top:56.693px; margin-bottom:56.693px; margin-left:56.693px; margin-right:56.693px;\">\n<tr>\n<td style=\"border: none;\">\n<p align=\"center\" style=\" margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:16pt; font-weight:600;\">Протокол заседания ВК №  </span><span style=\" font-size:16pt; text-decoration: underline;\">         </span> </p>\n<p align=\"center\" style=\" margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:16pt;\">на изменение диагноза</span><span style=\" font-size:11pt;\">.</span> </p>\n<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; line-height:150%;\"><span style=\" font-size:11pt; font-weight:600;\"> </span> </p>\n<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; line-height:150%;\"><span style=\" font-size:11pt; font-weight:600;\">Дата:</span><span style=\" font-size:11pt;\">  </span><span style=\" font-size:11pt; text-decoration: underline;\">______________</span> </p>\n<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; line-height:150%;\"><span style=\" font-size:11pt; font-weight:600;\">Ф.И.О: $FIO$</span> </p>\n<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; line-height:150%;\"><span style=\" font-size:11pt; font-weight:600;\">Возраст</span><span style=\" font-size:11pt;\">: $BIRTHDAY$ г.р.</span> </p>\n<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; line-height:150%;\"><span style=\" font-size:11pt; font-weight:600;\">Адрес</span><span style=\" font-size:11pt;\">:   $ADRESS$</span></p>\n<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; line-height:150%;\"><span style=\" font-size:11pt; font-weight:600;\">Социальный статус</span><span style=\" font-size:11pt;\">:</span><span style=\" font-size:11pt; text-decoration: underline;\">       инвалид не имеет, не работает. </span></p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; line-height:150%;\"><span style=\" font-weight:600;\">Диагноз</span>:<span style=\" font-family:'Times New Roman';\"> $DIAGNOS$</span></p>\n<p style=\" margin-top:12px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; line-height:150%;\"><span style=\" font-weight:600;\">Цель представления на ВК</span>:  <span style=\" text-decoration: underline;\">изменение диагноза.</span> </p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#ffffff;\"><span style=\" font-weight:600;\">Дополнения к анамнезу. </span><span style=\" font-family:'Times New Roman'; font-weight:600;\">Динамика заболевания:</span> </p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">Наследственность ______________________. Родился в ______________. В родах _______________________. Отмечалось некоторое отставание от сверстников в психофизическом развитии.  В школу пошел с _______ лет, с программой __________________, окончил _____ классов и ________ по специальности _____________________. По специальности ____________. В армии _____________. Семейный статус:______________________. Эпид.анамнез: ____________________________. Аллергоанамнез: ____________________. Вредные привычки: __________________________.  </span></p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman';\">_______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________</span> </p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Times New Roman'; font-weight:600;\">Объективно: </span><span style=\" font-family:'Times New Roman';\">_______________________________________________________________________________________________________________________________________________________________.</span> </p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#ffffff;\"><span style=\" font-family:'Times New Roman';\"> </span> </p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#ffffff;\"><span style=\" font-weight:600;\">         </span><span style=\" font-weight:600;\">Решение ВК:</span> <span style=\" font-family:'Times New Roman'; text-decoration: underline;\">Исходя из данных анамнеза, клинической картины, дополнительных методов обследования целесообразно сменить диагноз на:</span><span style=\" font-family:'Times New Roman'; font-weight:600; text-decoration: underline;\">______________. </span><span style=\" font-family:'Times New Roman'; text-decoration: underline;\">F ________</span> </p>\n<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; background-color:#ffffff;\">  </p>\n<p style=\" margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:11pt;\">         Председатель ВК:</span> </p>\n<p style=\" margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:11pt;\"> </span> </p>\n<p style=\" margin-top:0px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:11pt;\">Члены ВК:</span><span style=\" font-size:11pt; text-decoration: underline;\">                                                                                             </span></p></td></tr></table></body></html>";
+            if(db.open())
+            {
+                query.exec("SELECT \
+                           all_view_patient.id, \
+                           concat(all_view_patient.fname, ' ',\
+                           all_view_patient.name, ' ',\
+                           all_view_patient.mname), \
+                           all_view_patient.birthday, \
+                           concat(street.name, \
+                                            CASE\
+                                              WHEN address_patient.building ='' THEN ''\
+                                              ELSE ' корп.'\
+                                            END , \
+                                            address_patient.building, ' д.',\
+                                            address_patient.home, ' кв.',\
+                                            address_patient.flat) AS Street,\
+                           diagnos.code  \
+                         FROM \
+                           test.all_view_patient, \
+                           test.address_patient, \
+                           test.street, \
+                           test.diagnos_patient, \
+                           test.diagnos\
+                         WHERE \
+                           all_view_patient.id = diagnos_patient.medcard_id AND\
+                           address_patient.medcard_id = all_view_patient.id AND\
+                           street.id = address_patient.street_id AND\
+                           diagnos.id = diagnos_patient.diagnos_id AND diagnos_patient.delete_row = false AND diagnos_patient.id_parent is Null AND all_view_patient.id ="+global_id_str);
+                        while(query.next())
+                            {
+                                body_doc.replace("$FIO$",query.value(1).toString());
+                                body_doc.replace("$BIRTHDAY$",query.value(2).toDate().toString("dd.MM.yyyy"));
+                                body_doc.replace("$ADRESS$",query.value(3).toString());
+                                body_doc.replace("$DIAGNOS$",query.value(4).toString());
+
+                            }
+                        }
+            break;
+        }
+    }
+
+    body_doc.replace("'","''");
+
     if(db.open())
     {
         QSqlQuery query;
-        query.exec("INSERT INTO test.text_info_patients(medcard_id, date_creat, staff_add_id, delete_row, doc_id) VALUES ("+global_id_str+", '"+QDate::currentDate().toString("dd.MM.yyyy")+"', "+global_staff_id+", 'false', "+id_document+") RETURNING id");
+        query.exec("INSERT INTO test.text_info_patients(medcard_id, date_creat, staff_add_id, delete_row, doc_id, text) VALUES ("+global_id_str+", '"+QDate::currentDate().toString("dd.MM.yyyy")+"', "+global_staff_id+", 'false', "+id_document+", '"+body_doc+"') RETURNING id");
         if(query.lastError().isValid())
         {
             qDebug()<<query.lastError();
@@ -197,6 +945,8 @@ void Dialog_patient::create_document()
         qDebug()<<"server lost";
     }
 }
+
+
 void Dialog_patient::delete_document()
 {
     int row = ui->tableView_documents_list->currentIndex().row();
@@ -452,11 +1202,13 @@ void Dialog_patient::set_default_color_combox_sex()
 
 void Dialog_patient::put_all_settings()
 {
+    load_area();
     qDebug()<<"put_all_settings";
 
     QSqlDatabase db = QSqlDatabase::database();
     ui->comboBox_sex->clear();
     ui->comboBox_street->clear();
+    ui->comboBox_department->clear();
     //ui->tableWidget_text_1->setColumnCount(2);
     if(db.open())
     {
@@ -487,6 +1239,21 @@ void Dialog_patient::put_all_settings()
         ui->lineEdit_date_end->hide();
         ui->comboBox_why_close->hide();
         ui->checkBox_ds_end_state->isChecked();
+        if(db.open())
+        {
+            query.exec("SELECT id, name  FROM library.departments;");
+            if(query.lastError().isValid())
+            {
+                qDebug()<<query.lastError();
+            }
+            else
+            {
+                while (query.next())
+                {
+                    ui->comboBox_department->addItem(query.value(1).toString(),query.value(0).toString());
+                }
+            }
+        }
 
 
     }
@@ -509,23 +1276,7 @@ void Dialog_patient::put_all_settings()
         }
         query.clear();
     }
-    if(db.open())
-    {
-        qDebug()<<"load area";
-        QSqlQuery query;
-        query.exec("SELECT id, name FROM test.area");
-        if(query.lastError().isValid())
-        {
-            qDebug()<<query.lastError();
-            QMessageBox::warning(this,"Ошибка SQL","Произошла ошибка при обращении к базе данных");
-        }
-        while (query.next()) {
-            QString id_status = query.value(0).toString();
-            QString description = query.value(1).toString();
-            ui->comboBox_area->addItem(description,id_status);
-        }
-        query.clear();
-    }
+
     if(db.open())
     {
         qDebug()<<"load direct";
@@ -564,7 +1315,7 @@ void Dialog_patient::put_all_settings()
     {
         qDebug()<<"load end table";
         QSqlQuery query;
-        query.exec("SELECT id, description FROM test.end");
+        query.exec("SELECT id, description FROM test.end order by id");
         if(query.lastError().isValid())
         {
             qDebug()<<query.lastError();
@@ -596,6 +1347,38 @@ void Dialog_patient::put_all_settings()
     }
     load_documents();
 
+}
+void Dialog_patient::load_area()
+{
+    ui->comboBox_area->clear();
+    QSqlDatabase db = QSqlDatabase::database();
+    QSqlQuery query;
+    if(db.open())
+    {
+        qDebug()<<"load area";
+//        switch (global_param) {
+//        case 0:
+//            query.exec("SELECT id, name FROM test.area");
+//            break;
+//        case 1:
+//            query.exec("SELECT id, name FROM test.area");
+//            break;
+
+//        }
+        query.exec("SELECT id, name FROM test.area");
+        if(query.lastError().isValid())
+        {
+            qDebug()<<query.lastError();
+            QMessageBox::warning(this,"Ошибка SQL","Произошла ошибка при обращении к базе данных");
+        }
+        while (query.next()) {
+            qDebug()<<query.value(1).toString();
+            QString id_status = query.value(0).toString();
+            QString description = query.value(1).toString();
+            ui->comboBox_area->addItem(description,id_status);
+        }
+        query.clear();
+    }
 }
 
 void Dialog_patient::check_data()
@@ -675,8 +1458,10 @@ void Dialog_patient::setParam(int param, int id, bool show_uchet)
         Dialog_patient::setWindowTitle("Изменение информации пациента в медкарте №"+id_str);
         text_change = false;
         load_comments();
+        ui->comboBox_end->setCurrentIndex(ui->comboBox_end->findData("1"));
         ui->comboBox_end->setCurrentIndex(ui->comboBox_end->findData("11"));
-        ui->comboBox_document->setCurrentIndex(ui->comboBox_document->findData("31"));
+        change_combox_document();
+        //ui->comboBox_document->setCurrentIndex(ui->comboBox_document->findData("31"));
         load_documents();
         get_data_sql(id);
         break;
@@ -736,8 +1521,10 @@ void Dialog_patient::setParam(int param, int id, bool show_uchet)
         Dialog_patient::setWindowTitle("Изменение информации пациента в медкарте №"+id_str);
         text_change = false;
         load_comments();
+        ui->comboBox_end->setCurrentIndex(ui->comboBox_end->findData("1"));
         ui->comboBox_end->setCurrentIndex(ui->comboBox_end->findData("11"));
-        ui->comboBox_document->setCurrentIndex(ui->comboBox_document->findData("31"));
+        change_combox_document();
+        //ui->comboBox_document->setCurrentIndex(ui->comboBox_document->findData("31"));
         load_documents();
         get_data_sql(id);
         ui->tabWidget->setCurrentIndex(1);
@@ -748,6 +1535,7 @@ void Dialog_patient::setParam(int param, int id, bool show_uchet)
 
 void Dialog_patient::get_data_sql(int id)
 {
+    load_area();
     qDebug()<<"start load patient";
     QSqlDatabase db = QSqlDatabase::database();
     global_id = id;
@@ -757,7 +1545,7 @@ void Dialog_patient::get_data_sql(int id)
         QString id_str;
         id_str.setNum(id);
         qDebug()<<"patient "+id_str;
-        query.exec("SELECT patient.fname, patient.name, patient.mname, medcard.sex,  patient.serial_passport, patient.number_passport, medcard.birthday, medcard.job_place, medcard.tutor, medcard.pt, medcard.group_lgot_preparat, medcard.area_id, medcard.serial_snils, medcard.district_id, medcard.group_inv_obsh, medcard.polis_serial, medcard.polis_number, patient.vidan, medcard.time_stamp  FROM test.patient, test.medcard  WHERE medcard.patient_id = patient.id AND medcard.id ="+id_str);
+        query.exec("SELECT patient.fname, patient.name, patient.mname, medcard.sex,  patient.serial_passport, patient.number_passport, medcard.birthday, medcard.job_place, medcard.tutor, medcard.pt, medcard.group_lgot_preparat, medcard.area_id, medcard.serial_snils, medcard.district_id, medcard.group_inv_obsh, medcard.polis_serial, medcard.polis_number, patient.vidan, medcard.time_stamp, medcard.department  FROM test.patient, test.medcard  WHERE medcard.patient_id = patient.id AND medcard.id ="+id_str);
         if(query.lastError().isValid())
         {
             qDebug()<<query.lastError();
@@ -784,6 +1572,7 @@ void Dialog_patient::get_data_sql(int id)
             QString polis_number_value = query.value(16).toString();
             QString passport_vidan = query.value(17).toString();
             QDateTime date_create_medcard = query.value(18).toDateTime();
+            QString department = query.value(19).toString();
 
 
             ui->lineEdit_fname->setText(fname_value);
@@ -805,6 +1594,7 @@ void Dialog_patient::get_data_sql(int id)
             ui->lineEdit_snils->setText(snils_serial_value);
             ui->lineEdit_passport_vidan->setText(passport_vidan);
             ui->dateTimeEdit->setDateTime(date_create_medcard);
+            ui->comboBox_department->setCurrentIndex(ui->comboBox_department->findData(department));
         }
         query.clear();
 #ifdef _WIN32
@@ -902,6 +1692,7 @@ void Dialog_patient::apply_send_data_sql()
     QString building = ui->lineEdit_korpuse->text();
     QString flat = ui->lineEdit_room->text();
     QString street_id = ui->comboBox_street->currentData().toString();
+    QString department = ui->comboBox_department->currentData().toString();
 
     QString date_birthday;
 
@@ -1062,7 +1853,8 @@ void Dialog_patient::apply_send_data_sql()
             case 0: //insert
                 if(ui->checkBox_ds_end_state->checkState()==Qt::Unchecked)
                 {
-                    query.exec("SELECT * FROM insert_all_info('"+fname_value+"', '"+name_value+"', '"+oname_value+"', '"+serial_passport+"', '"+number_passport+"', 99, "+obj.staff_id+", '"+passport_vidan_value+"', 'f', '"+sex_value+"', '"+date_birthday+"', '"+job_place_value+"', '"+tutor_value+"', '"+pt_value+"', '"+group_lgot_value+"', "+area_value+", "+district_value+", '"+group_inv_value+"', '"+polis_serial_value+"', '"+polis_number_value+"', '"+snils_serial_value+"', "+street_id+", '"+home+"', '"+building+"', '"+flat+"', '"+telefon_value+"', '"+index_street+"', '"+QDate::currentDate().toString("dd.MM.yyyy")+"', '"+ds_start+"', NULL, '"+why_remove+"', "+direct_value+", "+direct_from_value+")");
+                    query.exec("SELECT * FROM insert_all_info('"+fname_value+"', '"+name_value+"', '"+oname_value+"', '"+serial_passport+"', '"+number_passport+"', 99, "+obj.staff_id+", '"+passport_vidan_value+"', 'f', '"+sex_value+"', '"+date_birthday+"', '"+job_place_value+"', '"+tutor_value+"', '"+pt_value+"', '"+group_lgot_value+"', "+area_value+", "+district_value+", '"+group_inv_value+"', '"+polis_serial_value+"', '"+polis_number_value+"', '"+snils_serial_value+"', "+street_id+", '"+home+"', '"+building+"', '"+flat+"', '"+telefon_value+"', '"+index_street+"', '"+QDate::currentDate().toString("dd.MM.yyyy")+"', '"+ds_start+"', NULL, '"+why_remove+"', "+direct_value+", "+direct_from_value+", "+department+")");
+                    qDebug()<<"SELECT * FROM insert_all_info('"+fname_value+"', '"+name_value+"', '"+oname_value+"', '"+serial_passport+"', '"+number_passport+"', 99, "+obj.staff_id+", '"+passport_vidan_value+"', 'f', '"+sex_value+"', '"+date_birthday+"', '"+job_place_value+"', '"+tutor_value+"', '"+pt_value+"', '"+group_lgot_value+"', "+area_value+", "+district_value+", '"+group_inv_value+"', '"+polis_serial_value+"', '"+polis_number_value+"', '"+snils_serial_value+"', "+street_id+", '"+home+"', '"+building+"', '"+flat+"', '"+telefon_value+"', '"+index_street+"', '"+QDate::currentDate().toString("dd.MM.yyyy")+"', '"+ds_start+"', NULL, '"+why_remove+"', "+direct_value+", "+direct_from_value+", "+department+")";
                     if(query.lastError().isValid())
                     {
                         qDebug()<<query.lastError();
@@ -1071,7 +1863,8 @@ void Dialog_patient::apply_send_data_sql()
                 }
                 else if(ui->checkBox_ds_end_state->checkState()==Qt::Checked)
                 {
-                    query.exec("SELECT * FROM insert_all_info('"+fname_value+"', '"+name_value+"', '"+oname_value+"', '"+serial_passport+"', '"+number_passport+"', "+why_remove+", "+obj.staff_id+", '"+passport_vidan_value+"', 'f', '"+sex_value+"', '"+date_birthday+"', '"+job_place_value+"', '"+tutor_value+"', '"+pt_value+"', '"+group_lgot_value+"', "+area_value+", "+district_value+", '"+group_inv_value+"', '"+polis_serial_value+"', '"+polis_number_value+"', '"+snils_serial_value+"', "+street_id+", '"+home+"', '"+building+"', '"+flat+"', '"+telefon_value+"', '"+index_street+"', '"+QDate::currentDate().toString("dd.MM.yyyy")+"', NULL, '"+ds_end+"', '"+why_remove+"', -1, -1)");
+                    query.exec("SELECT * FROM insert_all_info('"+fname_value+"', '"+name_value+"', '"+oname_value+"', '"+serial_passport+"', '"+number_passport+"', "+why_remove+", "+obj.staff_id+", '"+passport_vidan_value+"', 'f', '"+sex_value+"', '"+date_birthday+"', '"+job_place_value+"', '"+tutor_value+"', '"+pt_value+"', '"+group_lgot_value+"', "+area_value+", "+district_value+", '"+group_inv_value+"', '"+polis_serial_value+"', '"+polis_number_value+"', '"+snils_serial_value+"', "+street_id+", '"+home+"', '"+building+"', '"+flat+"', '"+telefon_value+"', '"+index_street+"', '"+QDate::currentDate().toString("dd.MM.yyyy")+"', NULL, '"+ds_end+"', '"+why_remove+"', -1, -1, "+department+")");
+                    qDebug()<<"SELECT * FROM insert_all_info('"+fname_value+"', '"+name_value+"', '"+oname_value+"', '"+serial_passport+"', '"+number_passport+"', 99, "+obj.staff_id+", '"+passport_vidan_value+"', 'f', '"+sex_value+"', '"+date_birthday+"', '"+job_place_value+"', '"+tutor_value+"', '"+pt_value+"', '"+group_lgot_value+"', "+area_value+", "+district_value+", '"+group_inv_value+"', '"+polis_serial_value+"', '"+polis_number_value+"', '"+snils_serial_value+"', "+street_id+", '"+home+"', '"+building+"', '"+flat+"', '"+telefon_value+"', '"+index_street+"', '"+QDate::currentDate().toString("dd.MM.yyyy")+"', '"+ds_start+"', NULL, '"+why_remove+"', "+direct_value+", "+direct_from_value+", "+department+")";
                     if(query.lastError().isValid())
                     {
                         qDebug()<<query.lastError();
@@ -1093,7 +1886,7 @@ void Dialog_patient::apply_send_data_sql()
 
                 if(db.open())
                 {
-                    query.exec("UPDATE test.medcard SET area_id = '"+area_value+"', sex = "+sex_value+", birthday='"+date_birthday+"', job_place='"+job_place_value+"', tutor='"+tutor_value+"', pt='"+pt_value+"', group_lgot_preparat='"+group_lgot_value+"', serial_snils='"+snils_serial_value+"', polis_number='"+polis_number_value+"', polis_serial = '"+polis_serial_value+"', district_id="+district_value+", group_inv_obsh='"+group_inv_value+"' WHERE id ="+id_str);
+                    query.exec("UPDATE test.medcard SET area_id = '"+area_value+"', sex = "+sex_value+", birthday='"+date_birthday+"', job_place='"+job_place_value+"', tutor='"+tutor_value+"', pt='"+pt_value+"', group_lgot_preparat='"+group_lgot_value+"', serial_snils='"+snils_serial_value+"', polis_number='"+polis_number_value+"', polis_serial = '"+polis_serial_value+"', district_id="+district_value+", group_inv_obsh='"+group_inv_value+"', department="+department+" WHERE id ="+id_str);
                     if(query.lastError().isValid())
                     {
                         qDebug()<<query.lastError();
@@ -1206,7 +1999,7 @@ void Dialog_patient::add_street()
     QString add_street_text = ui->comboBox_street->currentText();
     if(db.open())
     {
-        query.exec("INSERT INTO test.logs(staff_add_id, date_add, text) VALUES ('"+obj.staff_id+"', '"+QDate::currentDate().toString("dd.MM.yyyy")+"', 'Добавлена улица"+add_street_text+"')");
+        query.exec("INSERT INTO test.logs(staff_add_id, date_add, text) VALUES ('"+obj.staff_id+"', '"+QDate::currentDate().toString("dd.MM.yyyy")+"', '"+obj.staff_name+": Требуется добавить улицу: "+add_street_text+"')");
         if(query.lastError().isValid())
         {
             qDebug()<<query.lastError();
@@ -1215,13 +2008,13 @@ void Dialog_patient::add_street()
 #ifdef _WIN32
   Sleep(100);
 #endif
-        query.exec("INSERT INTO test.street(name, staff_add_id) VALUES ('"+add_street_text+"', '"+obj.staff_id+"')");
+        //query.exec("INSERT INTO test.street(name, staff_add_id) VALUES ('"+add_street_text+"', '"+obj.staff_id+"')");
         if(query.lastError().isValid())
         {
             qDebug()<<query.lastError();
             QMessageBox::warning(this,"Ошибка SQL","Произошла ошибка при обращении к базе данных");
         }
-        QMessageBox::information(this,"Добавление улицы","Добавлена улица :'"+add_street_text+"'");
+        QMessageBox::information(this,"Добавление улицы","Отправлен запрос на добавление улицы :'"+add_street_text+"'");
     }
     put_all_settings();
 }
@@ -1411,12 +2204,25 @@ void Dialog_patient::load_comments()
     QFont font;
     font.setPointSize(13);
     model_comments->setTable("test.comments_view");
-    model_comments->setFilter("type = 0 AND medcard_id = "+global_id_str);
+    model_comments->setFilter("delete_row = 'false' AND type = 0 AND medcard_id = "+global_id_str);
     model_comments->setSort(0,Qt::AscendingOrder);
     model_comments->select();
+    if(model_comments->lastError().isValid())
+    {
+        qDebug()<<model_comments->lastError();
+    }
+
 
     ui->tableView_comments_patient->setFont(font);
     ui->tableView_comments_patient->setModel(model_comments);
+
+    if(ui->tableView_comments_patient->model()->rowCount() > 0)
+    {
+        QString num_count;
+        num_count.setNum(ui->tableView_comments_patient->model()->rowCount());
+        ui->tabWidget->setTabText(2,"Комментарии ("+num_count+")");
+    }
+
     ui->tableView_comments_patient->horizontalHeader()->setSectionResizeMode(5,QHeaderView::Stretch);
     ui->tableView_comments_patient->horizontalHeader()->setSectionResizeMode(7,QHeaderView::ResizeToContents);
     ui->tableView_comments_patient->horizontalHeader()->setSectionResizeMode(3,QHeaderView::ResizeToContents);
@@ -1427,6 +2233,8 @@ void Dialog_patient::load_comments()
     //ui->tableView_comments_patient->hideColumn(3);
     ui->tableView_comments_patient->hideColumn(4);
     ui->tableView_comments_patient->hideColumn(6);
+    ui->tableView_comments_patient->hideColumn(8);
+
 }
 void Dialog_patient::context_menu_comments(QPoint pos)
 {
@@ -1445,7 +2253,41 @@ void Dialog_patient::context_menu_comments(QPoint pos)
     {
         menu->addAction("Редактировать", this, SLOT(edit_comments()));
     }
+    switch (obj.staff_id.toInt()) {
+    case 18:
+        menu->addAction("Удалить", this, SLOT(del_comments()));
+        break;
+    case 17:
+        menu->addAction("Удалить", this, SLOT(del_comments()));
+        break;
+    case 14:
+        menu->addAction("Удалить", this, SLOT(del_comments()));
+        break;
+    }
     menu->exec(ui->tableView_comments_patient->mapToGlobal(pos));
+}
+void Dialog_patient::del_comments()
+{
+    QSqlDatabase db = QSqlDatabase::database();
+    QSqlQuery query;
+    int selected_tables = ui->tableView_comments_patient->currentIndex().row();
+    if (selected_tables >= 0)
+    {
+        int row = ui->tableView_comments_patient->currentIndex().row();
+        QString id = ui->tableView_comments_patient->model()->index(row,0).data(Qt::DisplayRole).toString();
+        if(db.open())
+        {
+            query.exec("UPDATE test.comments SET delete_row = 'true' WHERE id = "+id);
+            if(query.lastError().isValid())
+            {
+                qDebug()<<query.lastError();
+            }
+            else
+            {
+                model_comments->select();
+            }
+        }
+    }
 }
 void Dialog_patient::copy_text_comments()
 {
