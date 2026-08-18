@@ -556,6 +556,7 @@ void MainWindow::settings_maintoolbar()
     font_text.setPointSize(font_size);
 
     str_find_patient = new QLineEdit();
+    str_find_patient->setObjectName("lineEdit_find_patient");
     str_find_patient->setClearButtonEnabled(true);
     str_find_patient->setFont(font_text);
 
