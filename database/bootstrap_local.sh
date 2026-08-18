@@ -7,6 +7,7 @@ db_user="${DB_USER:-pndbase_app}"
 db_host="${DB_HOST:-127.0.0.1}"
 db_port="${DB_PORT:-5432}"
 settings_file="${SETTINGS_FILE:-$root_dir/settings_user.ini}"
+load_test_data="${LOAD_TEST_DATA:-1}"
 
 if [[ ${EUID:-$(id -u)} -ne 0 ]]; then
     echo "Run this script through sudo: sudo $0" >&2
@@ -35,6 +36,9 @@ if [[ "$db_exists" != "1" ]]; then
 fi
 
 runuser -u postgres -- psql -X -v ON_ERROR_STOP=1 -d "$db_name" -f "$root_dir/database/deploy.sql"
+if [[ "$load_test_data" == "1" ]]; then
+    runuser -u postgres -- psql -X -v ON_ERROR_STOP=1 -d "$db_name" -f "$root_dir/database/seed_test_data.sql"
+fi
 runuser -u postgres -- psql -X -v ON_ERROR_STOP=1 -d "$db_name" <<SQL
 GRANT CONNECT ON DATABASE "$db_name" TO "$db_user";
 GRANT USAGE ON SCHEMA public, test, library, messager, reports_library, logs TO "$db_user";
@@ -93,4 +97,5 @@ echo "Database deployment completed."
 echo "Application database: $db_name"
 echo "Application role: $db_user"
 echo "Settings updated: $settings_file"
+echo "Synthetic test data loaded: $load_test_data"
 echo "Bootstrap application login: admin / admin (change it after the first login)."
