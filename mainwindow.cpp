@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include <QDesktopServices>
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -2095,7 +2096,7 @@ void MainWindow::del_day_station()
 void MainWindow::context_menu_diagnos_table(QPoint pos)
 {
     qDebug()<<"MainWindow: Function: context_menu_diagnos_table";
-    bool status;
+    bool status = false;
     int selected_tables = ui->tableWidget_diagnos_patient->selectionModel()->selectedRows().count();
     if (selected_tables == 1)
     {

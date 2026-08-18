@@ -18,7 +18,6 @@
 #include <QNetworkInterface>
 #include <QPrinterInfo>
 #include <QHostInfo>
-#include <QDesktopWidget>
 
 
 #include <Objects/User/objects_app.h>

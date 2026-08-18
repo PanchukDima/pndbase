@@ -6,7 +6,7 @@ Dialog_print_preview::Dialog_print_preview(QWidget *parent) :
     ui(new Ui::Dialog_print_preview)
 {
     ui->setupUi(this);
-    webView = new QWebView();
+    webView = new QTextBrowser();
     ui->verticalLayout->addWidget(webView);
 }
 

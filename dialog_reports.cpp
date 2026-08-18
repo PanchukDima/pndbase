@@ -1,4 +1,5 @@
 #include "dialog_reports.h"
+#include <QDate>
 #include "ui_dialog_reports.h"
 
 

@@ -6,7 +6,7 @@ Dialog_Browser::Dialog_Browser(QWidget *parent) :
     ui(new Ui::Dialog_Browser)
 {
     ui->setupUi(this);
-    webView = new QWebView();
+    webView = new QTextBrowser();
     webView->show();
     ui->verticalLayout_2->addWidget(webView);
     connect(ui->pushButton,SIGNAL(clicked(bool)),SLOT(load_web()));
@@ -21,12 +21,12 @@ void Dialog_Browser::load_web()
 {
     QUrl url = "http://"+ui->lineEdit->text();
     webView->setFocus();
-    webView->load(url);
+    webView->setSource(url);
     webView->show();
 }
 void Dialog_Browser::load_history()
 {
-    webView->page()->history();
+    // QTextBrowser keeps its own navigation history.
     webView->show();
 }
 

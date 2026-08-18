@@ -11,11 +11,11 @@ QVariant model_data_analizes::data(const QModelIndex &index, int role) const
     case Qt::BackgroundRole:
         if(index.sibling(index.row(),7).data( Qt::DisplayRole ).toString() == "RW" && index.sibling(index.row(),6).data( Qt::DisplayRole ).toDate() <= QDate::currentDate().addYears(-1))
         {
-            return qVariantFromValue(QColor(Qt::red));
+            return QVariant::fromValue(QColor(Qt::red));
         }
         if(index.sibling(index.row(),7).data( Qt::DisplayRole ).toString() == "Туберкулез" && index.sibling(index.row(),6).data( Qt::DisplayRole ).toDate() <= QDate::currentDate().addMonths(-6))
         {
-            return qVariantFromValue(QColor(Qt::red));
+            return QVariant::fromValue(QColor(Qt::red));
         }
     case Qt::DisplayRole:
         if(index.column() == 7)

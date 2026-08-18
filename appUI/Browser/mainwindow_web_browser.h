@@ -2,9 +2,7 @@
 #define MAINWINDOW_WEB_BROWSER_H
 
 #include <QMainWindow>
-#include <QWebView>
-#include <QWebDatabase>
-#include <QWebHistory>
+#include <QTextBrowser>
 
 namespace Ui {
 class MainWindow_web_browser;
@@ -17,7 +15,7 @@ class MainWindow_web_browser : public QMainWindow
 public:
     explicit MainWindow_web_browser(QWidget *parent = 0);
     ~MainWindow_web_browser();
-    QWebView * webView;
+    QTextBrowser * webView;
 
 private:
     Ui::MainWindow_web_browser *ui;

@@ -2,7 +2,7 @@
 #define DIALOG_PRINT_PREVIEW_H
 
 #include <QDialog>
-#include <QtWebKitWidgets>
+#include <QTextBrowser>
 
 namespace Ui {
 class Dialog_print_preview;
@@ -15,7 +15,7 @@ class Dialog_print_preview : public QDialog
 public:
     explicit Dialog_print_preview(QWidget *parent = 0);
     ~Dialog_print_preview();
-    QWebView * webView;
+    QTextBrowser * webView;
     QString head_html;
     QString body_html;
     QString footer_html;

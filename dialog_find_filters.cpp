@@ -1,4 +1,5 @@
 #include "dialog_find_filters.h"
+#include <QMenu>
 #include "ui_dialog_find_filters.h"
 
 Dialog_find_filters::Dialog_find_filters(QWidget *parent) :
@@ -546,7 +547,7 @@ void Dialog_find_filters::SaveAsCSV()
 }
 void Dialog_find_filters::Print_result()
 {
-    QWebView *w_view = new QWebView();
+    QTextBrowser *w_view = new QTextBrowser();
     if(ui->tableView->isVisible())
     {
 

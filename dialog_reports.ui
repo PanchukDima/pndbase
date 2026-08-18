@@ -47,7 +47,7 @@
     </layout>
    </item>
    <item>
-    <widget class="QWebView" name="webView" native="true">
+    <widget class="QTextBrowser" name="webView" native="true">
      <property name="url" stdset="0">
       <url>
        <string>about:blank</string>
@@ -97,9 +97,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>QWebView</class>
+   <class>QTextBrowser</class>
    <extends>QWidget</extends>
-   <header>QtWebKitWidgets/QWebView</header>
+   <header>QTextBrowser</header>
   </customwidget>
  </customwidgets>
  <resources/>

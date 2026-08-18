@@ -1,4 +1,6 @@
 #include "dialog_patient.h"
+#include <QMenu>
+#include <QClipboard>
 #include "ui_dialog_patient.h"
 
 Dialog_patient::Dialog_patient(QWidget *parent) :

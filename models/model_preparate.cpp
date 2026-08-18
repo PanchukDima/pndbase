@@ -11,7 +11,7 @@ QVariant model_preparate::data(const QModelIndex &index, int role) const
         case Qt::BackgroundRole:
             if(index.sibling(index.row(),8).data( Qt::DisplayRole ).toDate() <= QDate::currentDate().addMonths(-6))
             {
-                return qVariantFromValue(QColor(Qt::red));
+                return QVariant::fromValue(QColor(Qt::red));
             }
     }
     return  QSqlTableModel::data(index, role);

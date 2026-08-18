@@ -15,8 +15,8 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QWebView" name="webView">
-     <property name="url">
+    <widget class="QTextBrowser" name="webView">
+     <property name="source">
       <url>
        <string>about:blank</string>
       </url>
@@ -72,9 +72,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>QWebView</class>
+   <class>QTextBrowser</class>
    <extends>QWidget</extends>
-   <header>QtWebKitWidgets/QWebView</header>
+   <header>QTextBrowser</header>
   </customwidget>
  </customwidgets>
  <resources/>

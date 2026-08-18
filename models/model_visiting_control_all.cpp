@@ -11,19 +11,19 @@ QVariant model_visiting_control_all::data(const QModelIndex &index, int role) co
     case Qt::BackgroundRole:
         if(index.sibling(index.row(),7).data( Qt::DisplayRole ).toDate()==QDate::currentDate() && index.sibling(index.row(),9).data( Qt::DisplayRole ).toString()=="")
         {
-                return qVariantFromValue(QColor(Qt::green));
+                return QVariant::fromValue(QColor(Qt::green));
         }
         else if(index.sibling(index.row(),7).data( Qt::DisplayRole ).toDate()<QDate::currentDate() && index.sibling(index.row(),9).data( Qt::DisplayRole ).toString()=="")
         {
-                return qVariantFromValue(QColor(Qt::red));
+                return QVariant::fromValue(QColor(Qt::red));
         }
         else if(index.sibling(index.row(),7).data( Qt::DisplayRole ).toDate()>QDate::currentDate())
         {
-                return qVariantFromValue(QColor(Qt::white));
+                return QVariant::fromValue(QColor(Qt::white));
         }
         else if(index.sibling(index.row(),9).data( Qt::DisplayRole ).toDate().isValid())
         {
-                return qVariantFromValue(QColor(Qt::white));
+                return QVariant::fromValue(QColor(Qt::white));
         }
 
     case Qt::DisplayRole:

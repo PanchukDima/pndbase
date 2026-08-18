@@ -6,7 +6,7 @@ MainWindow_web_browser::MainWindow_web_browser(QWidget *parent) :
     ui(new Ui::MainWindow_web_browser)
 {
     ui->setupUi(this);
-    webView = new QWebView();
+    webView = new QTextBrowser();
     ui->verticalLayout_2->addWidget(webView);
     connect(ui->pushButton_load,SIGNAL(clicked(bool)),SLOT(load_web()));
 }
@@ -19,12 +19,12 @@ void MainWindow_web_browser::load_web()
 {
     QUrl url = "http://"+ui->comboBox->currentText();
     webView->setFocus();
-    webView->load(url);
+    webView->setSource(url);
     webView->show();
 }
 void MainWindow_web_browser::load_history()
 {
 
-    webView->page()->history();
+    // QTextBrowser keeps its own navigation history.
     webView->show();
 }

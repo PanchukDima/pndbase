@@ -11,7 +11,7 @@
 #include <QPrintDialog>
 #include <QPrinter>
 #include <QSqlError>
-#include <QWebView>
+#include <QTextBrowser>
 
 #include "models/model_find_table.h"
 #include "models/model_dynamic_view.h"

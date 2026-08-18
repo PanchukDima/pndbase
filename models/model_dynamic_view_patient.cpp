@@ -11,11 +11,11 @@ QVariant model_dynamic_view_patient::data(const QModelIndex &index, int role) co
     case Qt::BackgroundRole:
         if(index.sibling(index.row(),4).data( Qt::DisplayRole ).toString()=="Закрыт")
         {
-            return qVariantFromValue(QColor(Qt::green));
+            return QVariant::fromValue(QColor(Qt::green));
         }
         else
         {
-            return qVariantFromValue(QColor(Qt::white));
+            return QVariant::fromValue(QColor(Qt::white));
         }
     case Qt::DisplayRole:
         if(index.column() == 3)

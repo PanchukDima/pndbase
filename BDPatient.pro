@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui sql printsupport webkitwidgets network
+QT       += core gui sql printsupport network
 
 win32{
 QT += axcontainer
@@ -17,7 +17,7 @@ TEMPLATE = app
 CONFIG+=exceptions
 CONFIG+=rtti
 
-QMAKE_CXXFLAGS += -std=c++0x
+QMAKE_CXXFLAGS += -std=c++17
 
 #TRANSLATIONS = BDPP_ru.ts
 
