@@ -1,4 +1,4 @@
-#include "dialog_settings_user.h"
+#include "ui/settings/dialog_settings_user.h"
 #include "ui_dialog_settings_user.h"
 
 Dialog_settings_user::Dialog_settings_user(QWidget *parent) :

@@ -10,7 +10,7 @@
 #include <QStandardPaths>
 #include <QTextStream>
 
-#include <Objects/User/objects_app.h>
+#include <core/application/application_context.h>
 
 namespace {
 QMutex logMutex;
@@ -73,9 +73,9 @@ int main(int argc, char *argv[])
     logFilePath = logDir + "/logs/bdpatient-" + QDate::currentDate().toString("yyyy-MM") + ".log";
     qInstallMessageHandler(messageHandler);
 
-    Objects_app::path_settings = resolveSettingsPath();
+    ApplicationContext::instance().paths().settingsFile = resolveSettingsPath();
     qInfo() << "Application start";
-    qInfo() << "Settings file:" << Objects_app::path_settings;
+    qInfo() << "Settings file:" << ApplicationContext::instance().paths().settingsFile;
     qInfo() << "Log file:" << logFilePath;
 
     MainWindow window;

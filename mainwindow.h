@@ -23,8 +23,8 @@
 #include <QSpacerItem>
 //
 #include "dialog_patient.h"
-#include "dialog_settings_user.h"
-#include "dialog_login.h"
+#include "ui/settings/dialog_settings_user.h"
+#include "ui/auth/dialog_login.h"
 #include "dialog_registratura.h"
 #include "dialog_reports.h"
 #include "dialog_add_dynamic_view.h"
@@ -37,7 +37,7 @@
 #include "dialog_invalids_patient.h"
 #include "dialog_find_filters.h"
 #include "add_invalid_class.h"
-#include "logs_save.h"
+#include "infrastructure/logging/logs_save.h"
 #include "appUI/Chat/dialog_chat.h"
 #include "work_info_patient/suicide/dialog_suicide.h"
 #include "work_info_patient/ood/dialog_ood.h"

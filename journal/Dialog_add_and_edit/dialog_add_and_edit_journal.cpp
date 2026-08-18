@@ -24,7 +24,6 @@ void Dialog_add_and_edit_journal::open_dialog_select_patient()
     {
         ui->lineEdit_number_medcard->setText(dialog.id);
         id_patient = dialog.id;
-        dialog.deleteLater();
         init_find_patient();
     }
     else

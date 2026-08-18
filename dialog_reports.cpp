@@ -242,6 +242,7 @@ QString Dialog_reports::make_report_vyt_sql(int param, QString id_group,QString 
         }
         return string_table_report(0).arg(a1).arg(a2).arg(a3).arg(a4).arg(a5).arg(a6).arg(a7).arg(a8).arg(a9).arg(a10).arg(a11).arg(a12).arg(a13).arg(a14);
     }
+    return QString();
 }
 
 void Dialog_reports::make_report_1()
@@ -331,7 +332,7 @@ QString Dialog_reports::make_report_2_sql(QString row)
 
         return out.arg(arr[1]).arg(arr[2]).arg(arr[3]);
     }
-    
+    return QString();
 }
 void Dialog_reports::make_report_7()
 {
@@ -372,6 +373,7 @@ QString Dialog_reports::make_report_7_sql(QString key)
 
         return out.arg(arr[1]).arg(arr[2]).arg(arr[3]).arg(arr[4]).arg(arr[5]).arg(arr[6]).arg(arr[7]).arg(arr[8]).arg(arr[9]).arg(arr[10]).arg(arr[11]).arg(arr[12]).arg(arr[13]).arg(arr[14]).arg(arr[15]).arg(arr[16]).arg(arr[17]).arg(arr[18]).arg(arr[19]).arg(arr[20]).arg(arr[21]).arg(arr[22]).arg(arr[23]).arg(arr[24]).arg(arr[25]).arg(arr[26]).arg(arr[27]).arg(arr[28]).arg(arr[29]).arg(arr[30]).arg(arr[31]).arg(arr[32]).arg(arr[33]).arg(arr[34]).arg(arr[35]).arg(arr[36]).arg(arr[37]).arg(arr[38]).arg(arr[39]).arg(arr[40]).arg(arr[41]).arg(arr[42]).arg(arr[43]).arg(arr[44]).arg(arr[45]).arg(arr[46]);
     }
+    return QString();
 }
 void Dialog_reports::make_report_12()
 {
@@ -416,6 +418,7 @@ QString Dialog_reports::make_report_12_sql(QString key)
 
         return out.arg(arr[1]).arg(arr[2]).arg(arr[3]).arg(arr[4]).arg(arr[5]).arg(arr[6]).arg(arr[7]).arg(arr[8]).arg(arr[9]).arg(arr[10]).arg(arr[11]).arg(arr[12]).arg(arr[13]).arg(arr[14]).arg(arr[15]).arg(arr[16]).arg(arr[17]).arg(arr[18]).arg(arr[19]).arg(arr[20]).arg(arr[21]).arg(arr[22]).arg(arr[23]).arg(arr[24]).arg(arr[25]).arg(arr[26]).arg(arr[27]).arg(arr[28]).arg(arr[29]).arg(arr[30]).arg(arr[31]).arg(arr[32]).arg(arr[33]).arg(arr[34]).arg(arr[35]).arg(arr[36]).arg(arr[37]).arg(arr[38]).arg(arr[39]).arg(arr[40]).arg(arr[41]).arg(arr[42]).arg(arr[43]).arg(arr[44]).arg(arr[45]).arg(arr[46]);
     }
+    return QString();
 }
 void Dialog_reports::make_report_17()
 {
@@ -464,8 +467,7 @@ QString Dialog_reports::make_report_17_sql(QString start,QString end)
         }
      return out.arg(arr[1]).arg(arr[2]).arg(arr[3]).arg(arr[4]);
      }
-
-
+     return QString();
 }
 void Dialog_reports::make_report_19_forma_10()
 {
@@ -1299,4 +1301,5 @@ QString Dialog_reports::string_table_report(int key)
     default:
         break;
     }
+    return QString();
 }

@@ -4,7 +4,7 @@
 #include <QDialog>
 #include <QSqlTableModel>
 #include "models/model_main_table.h"
-#include "Objects/User/objects_app.h"
+#include "core/application/application_context.h"
 namespace Ui {
 class Dialog_fast_find_patient_id;
 }

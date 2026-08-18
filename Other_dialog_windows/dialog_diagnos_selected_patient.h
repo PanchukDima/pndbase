@@ -4,7 +4,7 @@
 #include <QDialog>
 #include <QSqlTableModel>
 #include <QDebug>
-#include "Objects/User/objects_app.h"
+#include "core/application/application_context.h"
 
 namespace Ui {
 class Dialog_diagnos_selected_patient;

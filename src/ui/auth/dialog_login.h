@@ -20,9 +20,9 @@
 #include <QHostInfo>
 
 
-#include <Objects/User/objects_app.h>
+#include <core/application/application_context.h>
 
-#include <dialog_settings_user.h>
+#include "ui/settings/dialog_settings_user.h"
 
 
 namespace Ui {

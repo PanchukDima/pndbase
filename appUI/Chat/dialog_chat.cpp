@@ -29,7 +29,8 @@ void Dialog_chat::loadMessages()
             int row = ui->tableView_staff->currentIndex().row();
             QString id = ui->tableView_staff->model()->index(row,0).data(Qt::DisplayRole).toString();
             model_chat->setTable("messager.messages_view");
-            model_chat->setFilter("staff_to = "+ obj.staff_id+" AND staff_from = "+ id);
+            model_chat->setFilter("(staff_to = "+ obj.staff_id+" AND staff_from = "+ id+") OR "
+                                  "(staff_to = "+ id+" AND staff_from = "+ obj.staff_id+")");
             model_chat->select();
             id_message = id;
             select_type_message = 0;
@@ -75,8 +76,12 @@ void Dialog_chat::sendMessages()
     {
         switch (select_type_message) {
         case 0:
-            query.exec("INSERT INTO messager.messages(staff_from, staff_to, message) VALUES ("+id_message+", "+obj.staff_id+", '"+ui->lineEdit_message->text()+"');");
-            if(query.lastError().isValid())
+            query.prepare("INSERT INTO messager.messages(staff_from, staff_to, message) "
+                          "VALUES (:staff_from, :staff_to, :message)");
+            query.bindValue(":staff_from", obj.staff_id.toLongLong());
+            query.bindValue(":staff_to", id_message.toLongLong());
+            query.bindValue(":message", ui->lineEdit_message->text());
+            if(!query.exec())
             {
                 qDebug()<<query.lastError();
                 QMessageBox::warning(this,"Ошибка SQL","Произошла ошибка при обращении к базе данных");
@@ -85,8 +90,12 @@ void Dialog_chat::sendMessages()
             model_chat->select();
             break;
         case 1:
-            query.exec("INSERT INTO messager.group_messages(group_id, staff_add_id, message,) VALUES ("+id_message+", "+obj.staff_id+", '"+ui->lineEdit_message->text()+"');");
-            if(query.lastError().isValid())
+            query.prepare("INSERT INTO messager.group_messages(group_id, staff_add_id, message) "
+                          "VALUES (:group_id, :staff_add_id, :message)");
+            query.bindValue(":group_id", id_message.toLongLong());
+            query.bindValue(":staff_add_id", obj.staff_id.toLongLong());
+            query.bindValue(":message", ui->lineEdit_message->text());
+            if(!query.exec())
             {
                 qDebug()<<query.lastError();
                 QMessageBox::warning(this,"Ошибка SQL","Произошла ошибка при обращении к базе данных");
@@ -108,9 +117,9 @@ void Dialog_chat::loadStaff()
 void Dialog_chat::init_start()
 {
     Objects_app obj;
-    model_staff = new QSqlTableModel();
-    model_groups = new QSqlTableModel();
-    model_chat = new QSqlTableModel();
+    model_staff = new QSqlTableModel(this);
+    model_groups = new QSqlTableModel(this);
+    model_chat = new QSqlTableModel(this);
 
     model_staff->setTable("test.staff_view");
     model_groups->setTable("messager.group");

@@ -15,7 +15,7 @@
 #include <QSqlQuery>
 #include <QSqlError>
 #include <QCloseEvent>
-#include "Objects/User/objects_app.h"
+#include "core/application/application_context.h"
 #include <QMessageBox>
 #include <QDate>
 #include <QSettings>

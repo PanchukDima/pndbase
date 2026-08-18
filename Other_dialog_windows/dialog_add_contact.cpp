@@ -20,8 +20,9 @@ void Dialog_add_contact::save_contact()
     QSqlQuery query;
     if(db.open())
     {
-        query.exec("INSERT INTO library.contact_list(name) VALUES ('"+ui->lineEdit_name->text()+"')");
-        if(query.lastError().isValid())
+        query.prepare("INSERT INTO library.contact_list(name) VALUES (:name)");
+        query.bindValue(":name", ui->lineEdit_name->text().trimmed());
+        if(!query.exec())
         {
             qDebug()<<query.lastError();
             Dialog_add_contact::close();

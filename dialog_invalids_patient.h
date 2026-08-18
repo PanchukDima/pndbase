@@ -8,7 +8,7 @@
 #include <QSql>
 #include <QSqlQuery>
 #include <QDebug>
-#include "Objects/User/objects_app.h"
+#include "core/application/application_context.h"
 
 
 namespace Ui {

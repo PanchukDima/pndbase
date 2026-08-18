@@ -17,7 +17,7 @@
 #include "models/model_dynamic_view.h"
 #include "models/model_diagnos_filter.h"
 #include "models/filters/model_filter_invalid.h"
-#include "Objects/User/objects_app.h"
+#include "core/application/application_context.h"
 #include "dialog_patient.h"
 
 namespace Ui {

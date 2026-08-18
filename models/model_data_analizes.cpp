@@ -17,6 +17,7 @@ QVariant model_data_analizes::data(const QModelIndex &index, int role) const
         {
             return QVariant::fromValue(QColor(Qt::red));
         }
+        break;
     case Qt::DisplayRole:
         if(index.column() == 7)
         {

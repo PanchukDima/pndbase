@@ -25,6 +25,7 @@ QVariant model_visiting_control_all::data(const QModelIndex &index, int role) co
         {
                 return QVariant::fromValue(QColor(Qt::white));
         }
+        break;
 
     case Qt::DisplayRole:
         if(index.column() == 6)

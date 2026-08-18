@@ -1,4 +1,4 @@
-#include "dialog_login.h"
+#include "ui/auth/dialog_login.h"
 #include "ui_dialog_login.h"
 
 
@@ -263,8 +263,15 @@ void Dialog_login::login_db()
         db.setPassword(ui->lineEdit_password->text());
         if(db.open())
         {
-            qDebug()<<"SELECT users.staff_id, staff.position FROM test.users, test.staff WHERE staff.id = users.staff_id AND staff.status = '0' AND users.user_login = '"+ui->lineEdit_login->text()+"';";
-            query.exec("SELECT users.staff_id, staff.position FROM test.users, test.staff WHERE staff.id = users.staff_id AND staff.status = '0' AND users.user_login = '"+ui->lineEdit_login->text()+"';");
+            query.prepare("SELECT users.staff_id, staff.position "
+                          "FROM test.users JOIN test.staff ON staff.id = users.staff_id "
+                          "WHERE staff.status = 0 AND users.user_login = :login");
+            query.bindValue(":login", ui->lineEdit_login->text());
+            if (!query.exec()) {
+                qCritical() << "System-user login SQL error:" << query.lastError().text();
+                QMessageBox::warning(this, "Ошибка SQL", "Произошла ошибка при обращении к базе данных");
+                return;
+            }
             while (query.next())
             {
 

@@ -3,7 +3,7 @@
 
 #include <QDialog>
 #include <QSettings>
-#include <Objects/User/objects_app.h>
+#include <core/application/application_context.h>
 
 namespace Ui {
 class Dialog_page_settings;

@@ -21,7 +21,7 @@
 
 #include "dialog_edit_print.h"
 #include "ui/Print/dialog_print_preview.h"
-#include "Objects/User/objects_app.h"
+#include "core/application/application_context.h"
 #include <appUI/DocumentEditor/window_document_editor.h>
 
 

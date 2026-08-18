@@ -3,7 +3,7 @@
 
 #include <QDialog>
 #include <QDebug>
-#include <Objects/User/objects_app.h>
+#include <core/application/application_context.h>
 #include "models/model_visiting_control_all.h"
 #include <QSqlError>
 #include <QMessageBox>

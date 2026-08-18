@@ -51,7 +51,7 @@ MainWindow::MainWindow(QWidget *parent) :
         timer_who_is_online->start(5000);
 
         connect(timer_who_is_online,SIGNAL(timeout()),SLOT(I_Online()));
-        udpSocket = new QUdpSocket();
+        udpSocket = new QUdpSocket(this);
         udpSocket->bind(7979, QUdpSocket::ShareAddress);
         connect(udpSocket, SIGNAL(readyRead()), this, SLOT(loadCommand()));
 
@@ -184,9 +184,8 @@ void MainWindow::loadCommand()
 void MainWindow::I_Online()
 {
     QByteArray datagram = "1{split}"+session_id.toUtf8()+"{split}"+staff_name.toUtf8();
-    QUdpSocket * udpSocketSender_service = new QUdpSocket();
-    udpSocketSender_service->writeDatagram(datagram.data(), datagram.size(), QHostAddress::Broadcast, 7980);
-    udpSocketSender_service->close();
+    QUdpSocket udpSocketSenderService;
+    udpSocketSenderService.writeDatagram(datagram, QHostAddress::Broadcast, 7980);
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)

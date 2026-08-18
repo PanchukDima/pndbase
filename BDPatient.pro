@@ -18,14 +18,15 @@ CONFIG+=exceptions
 CONFIG+=rtti
 
 QMAKE_CXXFLAGS += -std=c++17
+INCLUDEPATH += src
 
 #TRANSLATIONS = BDPP_ru.ts
 
-SOURCES += main.cpp\
+SOURCES += src/app/main.cpp\
         mainwindow.cpp \
     dialog_patient.cpp \
-    dialog_settings_user.cpp \
-    dialog_login.cpp \
+    src/ui/settings/dialog_settings_user.cpp \
+    src/ui/auth/dialog_login.cpp \
     dialog_registratura.cpp \
     dialog_reports.cpp \
     dialog_add_dynamic_view.cpp \
@@ -38,7 +39,7 @@ SOURCES += main.cpp\
     dialog_invalids_patient.cpp \
     dialog_find_filters.cpp \
     add_invalid_class.cpp \
-    logs_save.cpp \
+    src/infrastructure/logging/logs_save.cpp \
     models/model_main_table.cpp \
     models/model_find_table.cpp \
     dialog_edit_print.cpp \
@@ -53,7 +54,7 @@ SOURCES += main.cpp\
     work_info_patient/preparate/dialog_preparate.cpp \
     work_info_patient/day_stationar/dialog_day_stationar.cpp \
     work_info_patient/ood/dialog_ood.cpp \
-    Objects/User/objects_app.cpp \
+    src/core/application/application_context.cpp \
     journal/dialog_rvk.cpp \
     journal/Dialog_add_and_edit/dialog_add_and_edit_journal.cpp \
     Other_dialog_windows/dialog_fast_find_patient_id.cpp \
@@ -88,9 +89,11 @@ SOURCES += main.cpp\
     other_db/emsrn/dialog_emsr_find.cpp
 
 HEADERS  += mainwindow.h \
+    src/core/application/application_paths.h \
+    src/domain/user/user_session.h \
     dialog_patient.h \
-    dialog_settings_user.h \
-    dialog_login.h \
+    src/ui/settings/dialog_settings_user.h \
+    src/ui/auth/dialog_login.h \
     dialog_registratura.h \
     dialog_reports.h \
     dialog_add_dynamic_view.h \
@@ -103,7 +106,7 @@ HEADERS  += mainwindow.h \
     dialog_invalids_patient.h \
     dialog_find_filters.h \
     add_invalid_class.h \
-    logs_save.h \
+    src/infrastructure/logging/logs_save.h \
     models/model_main_table.h \
     models/model_find_table.h \
     dialog_edit_print.h \
@@ -118,7 +121,7 @@ HEADERS  += mainwindow.h \
     work_info_patient/preparate/dialog_preparate.h \
     work_info_patient/day_stationar/dialog_day_stationar.h \
     work_info_patient/ood/dialog_ood.h \
-    Objects/User/objects_app.h \
+    src/core/application/application_context.h \
     journal/dialog_rvk.h \
     journal/Dialog_add_and_edit/dialog_add_and_edit_journal.h \
     Other_dialog_windows/dialog_fast_find_patient_id.h \
@@ -154,8 +157,8 @@ HEADERS  += mainwindow.h \
 
 FORMS    += mainwindow.ui \
     dialog_patient.ui \
-    dialog_settings_user.ui \
-    dialog_login.ui \
+    src/ui/settings/dialog_settings_user.ui \
+    src/ui/auth/dialog_login.ui \
     dialog_registratura.ui \
     dialog_reports.ui \
     dialog_add_dynamic_view.ui \
@@ -202,4 +205,3 @@ win32{
 LIBS += -L /plugin/sqldrivers
 }
 #INCLUDEPATH += C:/ProjectPSI/nonstoklibrary/poppler-0.40.0/qt5/src
-

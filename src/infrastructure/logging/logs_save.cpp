@@ -1,4 +1,4 @@
-#include "logs_save.h"
+#include "infrastructure/logging/logs_save.h"
 
 logs_save::logs_save(QObject *parent) : QObject(parent)
 {

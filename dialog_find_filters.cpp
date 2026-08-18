@@ -679,7 +679,7 @@ void Dialog_find_filters::view_patient_info()
 {
     Dialog_patient dialog;
     Objects_app obj;
-    int medcard_id;
+    int medcard_id = -1;
     if(ui->tableView->isVisible())
     {
         int selected_tables = ui->tableView->currentIndex().row();
@@ -707,14 +707,16 @@ void Dialog_find_filters::view_patient_info()
             medcard_id = ui->tableView_show_filter_dynamic->model()->index(row,1).data(Qt::DisplayRole).toInt();
         }
     }
-    dialog.setParam(2,medcard_id,obj.rights_user[29]);
+    if (medcard_id < 0)
+        return;
+    dialog.setParam(2,medcard_id,obj.rights_user.value(29));
     dialog.exec();
 }
 void Dialog_find_filters::edit_patient_info()
 {
     Dialog_patient dialog;
     Objects_app obj;
-    int medcard_id;
+    int medcard_id = -1;
     if(ui->tableView->isVisible())
     {
         int selected_tables = ui->tableView->currentIndex().row();
@@ -742,7 +744,9 @@ void Dialog_find_filters::edit_patient_info()
             medcard_id = ui->tableView_show_filter_dynamic->model()->index(row,1).data(Qt::DisplayRole).toInt();
         }
     }
-    dialog.setParam(1,medcard_id,obj.rights_user[29]);
+    if (medcard_id < 0)
+        return;
+    dialog.setParam(1,medcard_id,obj.rights_user.value(29));
     dialog.exec();
 }
 void Dialog_find_filters::del_patient()

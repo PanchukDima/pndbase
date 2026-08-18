@@ -643,6 +643,7 @@ bool Dialog_add_dynamic_view::check_data(int param)
         }
         break;
     }
+    return false;
 }
 
 QString Dialog_add_dynamic_view::some_d()
@@ -675,7 +676,7 @@ QString Dialog_add_dynamic_view::some_d()
     {
         return "7";
     }
-
+    return QString();
 }
 void Dialog_add_dynamic_view::show_hide_close_date()
 {
