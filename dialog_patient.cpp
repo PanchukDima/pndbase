@@ -1227,7 +1227,13 @@ void Dialog_patient::put_all_settings()
             QString code_street = query.value(0).toString();
             ui->comboBox_street->addItem(street, code_street);
         }
-        ui->comboBox_street->setCurrentIndex(ui->comboBox_street->findData("25"));
+        // New installations use id=1 for the service value "Не указана".
+        // The legacy id=25 may still exist in older databases.
+        int defaultStreetIndex = ui->comboBox_street->findData("25");
+        if (defaultStreetIndex < 0)
+            defaultStreetIndex = ui->comboBox_street->findData("1");
+        if (defaultStreetIndex >= 0)
+            ui->comboBox_street->setCurrentIndex(defaultStreetIndex);
         ui->comboBox_sex->addItem("Ж","false");
         ui->comboBox_sex->addItem("М","true");
         ui->comboBox_area_street->addItem("Выборгский район", "1");
@@ -1694,10 +1700,9 @@ void Dialog_patient::apply_send_data_sql()
     QString building = ui->lineEdit_korpuse->text();
     QString flat = ui->lineEdit_room->text();
     QString street_id = ui->comboBox_street->currentData().toString();
-    // The street is optional. An empty value previously produced `..., , ...`
-    // in insert_all_info(), so PostgreSQL rejected the whole patient insert and
-    // the newly entered patient could not subsequently be found.
-    const QString street_id_sql = street_id.isEmpty() ? QStringLiteral("NULL") : street_id;
+    // test.address_patient.street_id is NOT NULL. Use the seeded service value
+    // "Не указана" when an older UI/database combination has no selected item.
+    const QString street_id_sql = street_id.isEmpty() ? QStringLiteral("1") : street_id;
     QString department = ui->comboBox_department->currentData().toString();
 
     QString date_birthday;
