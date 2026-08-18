@@ -1694,6 +1694,10 @@ void Dialog_patient::apply_send_data_sql()
     QString building = ui->lineEdit_korpuse->text();
     QString flat = ui->lineEdit_room->text();
     QString street_id = ui->comboBox_street->currentData().toString();
+    // The street is optional. An empty value previously produced `..., , ...`
+    // in insert_all_info(), so PostgreSQL rejected the whole patient insert and
+    // the newly entered patient could not subsequently be found.
+    const QString street_id_sql = street_id.isEmpty() ? QStringLiteral("NULL") : street_id;
     QString department = ui->comboBox_department->currentData().toString();
 
     QString date_birthday;
@@ -1855,7 +1859,7 @@ void Dialog_patient::apply_send_data_sql()
             case 0: //insert
                 if(ui->checkBox_ds_end_state->checkState()==Qt::Unchecked)
                 {
-                    query.exec("SELECT * FROM insert_all_info('"+fname_value+"', '"+name_value+"', '"+oname_value+"', '"+serial_passport+"', '"+number_passport+"', 99, "+obj.staff_id+", '"+passport_vidan_value+"', 'f', '"+sex_value+"', '"+date_birthday+"', '"+job_place_value+"', '"+tutor_value+"', '"+pt_value+"', '"+group_lgot_value+"', "+area_value+", "+district_value+", '"+group_inv_value+"', '"+polis_serial_value+"', '"+polis_number_value+"', '"+snils_serial_value+"', "+street_id+", '"+home+"', '"+building+"', '"+flat+"', '"+telefon_value+"', '"+index_street+"', '"+QDate::currentDate().toString("dd.MM.yyyy")+"', '"+ds_start+"', NULL, '"+why_remove+"', "+direct_value+", "+direct_from_value+", "+department+")");
+                    query.exec("SELECT * FROM insert_all_info('"+fname_value+"', '"+name_value+"', '"+oname_value+"', '"+serial_passport+"', '"+number_passport+"', 99, "+obj.staff_id+", '"+passport_vidan_value+"', 'f', '"+sex_value+"', '"+date_birthday+"', '"+job_place_value+"', '"+tutor_value+"', '"+pt_value+"', '"+group_lgot_value+"', "+area_value+", "+district_value+", '"+group_inv_value+"', '"+polis_serial_value+"', '"+polis_number_value+"', '"+snils_serial_value+"', "+street_id_sql+", '"+home+"', '"+building+"', '"+flat+"', '"+telefon_value+"', '"+index_street+"', '"+QDate::currentDate().toString("dd.MM.yyyy")+"', '"+ds_start+"', NULL, '"+why_remove+"', "+direct_value+", "+direct_from_value+", "+department+")");
                     qDebug()<<"SELECT * FROM insert_all_info('"+fname_value+"', '"+name_value+"', '"+oname_value+"', '"+serial_passport+"', '"+number_passport+"', 99, "+obj.staff_id+", '"+passport_vidan_value+"', 'f', '"+sex_value+"', '"+date_birthday+"', '"+job_place_value+"', '"+tutor_value+"', '"+pt_value+"', '"+group_lgot_value+"', "+area_value+", "+district_value+", '"+group_inv_value+"', '"+polis_serial_value+"', '"+polis_number_value+"', '"+snils_serial_value+"', "+street_id+", '"+home+"', '"+building+"', '"+flat+"', '"+telefon_value+"', '"+index_street+"', '"+QDate::currentDate().toString("dd.MM.yyyy")+"', '"+ds_start+"', NULL, '"+why_remove+"', "+direct_value+", "+direct_from_value+", "+department+")";
                     if(query.lastError().isValid())
                     {
@@ -1865,7 +1869,7 @@ void Dialog_patient::apply_send_data_sql()
                 }
                 else if(ui->checkBox_ds_end_state->checkState()==Qt::Checked)
                 {
-                    query.exec("SELECT * FROM insert_all_info('"+fname_value+"', '"+name_value+"', '"+oname_value+"', '"+serial_passport+"', '"+number_passport+"', "+why_remove+", "+obj.staff_id+", '"+passport_vidan_value+"', 'f', '"+sex_value+"', '"+date_birthday+"', '"+job_place_value+"', '"+tutor_value+"', '"+pt_value+"', '"+group_lgot_value+"', "+area_value+", "+district_value+", '"+group_inv_value+"', '"+polis_serial_value+"', '"+polis_number_value+"', '"+snils_serial_value+"', "+street_id+", '"+home+"', '"+building+"', '"+flat+"', '"+telefon_value+"', '"+index_street+"', '"+QDate::currentDate().toString("dd.MM.yyyy")+"', NULL, '"+ds_end+"', '"+why_remove+"', -1, -1, "+department+")");
+                    query.exec("SELECT * FROM insert_all_info('"+fname_value+"', '"+name_value+"', '"+oname_value+"', '"+serial_passport+"', '"+number_passport+"', "+why_remove+", "+obj.staff_id+", '"+passport_vidan_value+"', 'f', '"+sex_value+"', '"+date_birthday+"', '"+job_place_value+"', '"+tutor_value+"', '"+pt_value+"', '"+group_lgot_value+"', "+area_value+", "+district_value+", '"+group_inv_value+"', '"+polis_serial_value+"', '"+polis_number_value+"', '"+snils_serial_value+"', "+street_id_sql+", '"+home+"', '"+building+"', '"+flat+"', '"+telefon_value+"', '"+index_street+"', '"+QDate::currentDate().toString("dd.MM.yyyy")+"', NULL, '"+ds_end+"', '"+why_remove+"', -1, -1, "+department+")");
                     qDebug()<<"SELECT * FROM insert_all_info('"+fname_value+"', '"+name_value+"', '"+oname_value+"', '"+serial_passport+"', '"+number_passport+"', 99, "+obj.staff_id+", '"+passport_vidan_value+"', 'f', '"+sex_value+"', '"+date_birthday+"', '"+job_place_value+"', '"+tutor_value+"', '"+pt_value+"', '"+group_lgot_value+"', "+area_value+", "+district_value+", '"+group_inv_value+"', '"+polis_serial_value+"', '"+polis_number_value+"', '"+snils_serial_value+"', "+street_id+", '"+home+"', '"+building+"', '"+flat+"', '"+telefon_value+"', '"+index_street+"', '"+QDate::currentDate().toString("dd.MM.yyyy")+"', '"+ds_start+"', NULL, '"+why_remove+"', "+direct_value+", "+direct_from_value+", "+department+")";
                     if(query.lastError().isValid())
                     {
