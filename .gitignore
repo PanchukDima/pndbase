@@ -1,2 +1,4 @@
 BDPatient.pro.user
 BDPatient.pro.*
+build-linux/
+build-*/

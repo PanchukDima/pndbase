@@ -1,108 +1,86 @@
 #include "mainwindow.h"
-#include "logs_save.h"
-
-#ifdef _WIN32
-    #include <windows.h>
-#endif
 
 #include <QApplication>
-#include <QDebug>
-#include <QSql>
 #include <QDateTime>
-#include <QtDebug>
-#include <QDebug>
+#include <QDir>
 #include <QFile>
+#include <QFileInfo>
+#include <QMutex>
+#include <QMutexLocker>
+#include <QStandardPaths>
 #include <QTextStream>
-#include <QStyleFactory>
-#include <QSplashScreen>
-
-
 
 #include <Objects/User/objects_app.h>
-#include <signal.h>
-#include <network/broadcastlog.h>
 
-void handler_sigsegv(int signum)
+namespace {
+QMutex logMutex;
+QString logFilePath;
+
+QString resolveSettingsPath()
 {
-    logs_save logs;
-#ifdef _WIN32
-    MessageBoxA(NULL,"SIGSEGV Error!","POSIX Signal",MB_ICONSTOP);
-#endif
-    // открепить обработчик и явно завершить приложение
-    logs.error_log("SIGSEGV Error! POSIX Signal " + QDateTime::currentDateTime().toString("dd.MM.yyyy HH:mm:ss"));
-    signal(signum, SIG_DFL);
+    const QString envPath = qEnvironmentVariable("BDPATIENT_SETTINGS");
+    const QStringList candidates = {
+        envPath,
+        QDir::current().filePath("settings_user.ini"),
+        QDir(QCoreApplication::applicationDirPath()).filePath("settings_user.ini"),
+        QDir(QCoreApplication::applicationDirPath()).filePath("../settings_user.ini"),
+        QStringLiteral("/etc/BDPatient/settings_user.ini")
+    };
 
+    for (const QString &candidate : candidates) {
+        if (!candidate.isEmpty() && QFileInfo::exists(candidate))
+            return QFileInfo(candidate).canonicalFilePath();
+    }
+
+    return QDir::current().filePath("settings_user.ini");
 }
 
-void handler_sigfpe(int signum)
+void messageHandler(QtMsgType type, const QMessageLogContext &context, const QString &message)
 {
-    logs_save logs;
-#ifdef _WIN32
-    MessageBoxA(NULL,"SIGFPE Error!","POSIX Signal",MB_ICONSTOP);
-#endif
-    // открепить обработчик и явно завершить приложение
-    logs.error_log("SIGFPE Error! POSIX Signal" + QDateTime::currentDateTime().toString("dd.MM.yyyy HH:mm:ss"));
-    signal(signum, SIG_DFL);
+    QMutexLocker locker(&logMutex);
+    QFile file(logFilePath);
+    if (!file.open(QIODevice::Append | QIODevice::Text))
+        return;
 
+    const char *level = "INFO";
+    switch (type) {
+    case QtDebugMsg: level = "DEBUG"; break;
+    case QtInfoMsg: level = "INFO"; break;
+    case QtWarningMsg: level = "WARN"; break;
+    case QtCriticalMsg: level = "ERROR"; break;
+    case QtFatalMsg: level = "FATAL"; break;
+    }
+
+    QTextStream stream(&file);
+    stream << QDateTime::currentDateTime().toString("yyyy-MM-dd HH:mm:ss.zzz")
+           << " [" << level << "] " << message;
+    if (context.file)
+        stream << " (" << context.file << ':' << context.line << ')';
+    stream << '\n';
+    stream.flush();
 }
-void myMessageHandler(QtMsgType type, const QMessageLogContext &, const QString & msg)
-{
-        broadcastLog netlog;
-        netlog.broadcastLogInit();
-        #ifdef _WIN32
-        QFile fMessFile(qApp->applicationDirPath() + "/logs/myProjectLog"+QDate::currentDate().toString("_MMM_yyyy")+".log");
-        #endif
-        #ifdef __linux__
-            QFile fMessFile("/var/log/BDPatient/"+QDate::currentDate().toString("_MMM_yyyy")+".log");
-        #endif
-         if(!fMessFile.open(QIODevice::Append | QIODevice::Text)){
-         return;
-         }
-         QString sCurrDateTime = "[" + QDateTime::currentDateTime().toString("dd.MM.yyyy hh:mm:ss.zzz") + "]";
-         QTextStream tsTextStream(&fMessFile);
-         switch(type){
-         case QtDebugMsg:
-         tsTextStream << QString("myProjectLogDebug%1: %2\n").arg(sCurrDateTime).arg(msg);
-         netlog.sendLogs(msg);
-         break;
-         case QtWarningMsg:
-         tsTextStream << QString("myProjectLogWarning%1: %2\n").arg(sCurrDateTime).arg(msg);
-         netlog.sendLogs(msg);
-         break;
-         case QtCriticalMsg:
-         tsTextStream << QString("myProjectLogCritical%1: %2\n").arg(sCurrDateTime).arg(msg);
-         netlog.sendLogs(msg);
-         break;
-         case QtFatalMsg:
-         tsTextStream << QString("myProjectLogFatal%1: %2\n").arg(sCurrDateTime).arg(msg);
-         netlog.sendLogs(msg);
-         abort();
-             break;
-         default:
-             break;
-         }
-         tsTextStream.flush();
-         fMessFile.flush();
-         fMessFile.close();
 }
 
 int main(int argc, char *argv[])
 {
-    Objects_app obj;
-    #ifdef _WIN32
-        obj.path_settings = "settings_user.ini";
-    #endif
-    #ifdef __linux__
-        obj.path_settings = "/etc/BDPatient/settings_user.ini";
-    #endif
-    qInstallMessageHandler(myMessageHandler);
-    QApplication a(argc, argv);
-    MainWindow w;
+    QApplication app(argc, argv);
+    QApplication::setApplicationName("BDPatient");
 
-    qDebug()<<"Application Start";
-    w.showMaximized();
-    return a.exec();
+    QString logDir = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);
+    if (logDir.isEmpty())
+        logDir = QDir::currentPath();
+    QDir().mkpath(logDir + "/logs");
+    logFilePath = logDir + "/logs/bdpatient-" + QDate::currentDate().toString("yyyy-MM") + ".log";
+    qInstallMessageHandler(messageHandler);
 
+    Objects_app::path_settings = resolveSettingsPath();
+    qInfo() << "Application start";
+    qInfo() << "Settings file:" << Objects_app::path_settings;
+    qInfo() << "Log file:" << logFilePath;
 
-
+    MainWindow window;
+    window.showMaximized();
+    const int result = app.exec();
+    qInfo() << "Application exit" << result;
+    return result;
 }

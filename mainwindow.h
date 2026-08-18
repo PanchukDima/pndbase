@@ -116,7 +116,7 @@ public:
 
     bool fff;
 
-    QUdpSocket * udpSocket;
+    QUdpSocket * udpSocket = nullptr;
 
 
 protected:
@@ -141,7 +141,7 @@ private:
 
 
     QFileSystemModel *filemodel;
-    QTimer * timer_who_is_online;
+    QTimer * timer_who_is_online = nullptr;
     QString selected_id;
 
 

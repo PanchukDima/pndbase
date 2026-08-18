@@ -61,7 +61,9 @@ MainWindow::MainWindow(QWidget *parent) :
     }
     else
     {
-        exit(0);
+        qInfo() << "Main window initialization cancelled after login dialog";
+        QTimer::singleShot(0, qApp, &QCoreApplication::quit);
+        return;
     }
 
     QTimer * rights_update_timer = new QTimer(this);
@@ -189,22 +191,29 @@ void MainWindow::I_Online()
 
 void MainWindow::closeEvent(QCloseEvent *event)
 {
+    qInfo() << "Closing main window, session" << session_id;
+    if (timer_who_is_online)
+        timer_who_is_online->stop();
+
     QFile files_delete("session.ini");
     files_delete.remove();
     QSqlDatabase db = QSqlDatabase::database();
-    QSqlQuery query;
-    query.exec("UPDATE test.session SET date_time_stop='"+QDateTime::currentDateTime().toString("dd.MM.yyyy HH:mm:ss")+"', state=0 WHERE id="+session_id);
-    if(query.lastError().isValid())
+    QSqlQuery query(db);
+    if (db.isOpen() && !session_id.isEmpty())
     {
-        qDebug()<<query.lastError();
-        QMessageBox::warning(this,"Ошибка SQL","Произошла ошибка при обращении к базе данных");
+        query.prepare("UPDATE test.session SET date_time_stop = :stopped, state = 0 WHERE id = :id");
+        query.bindValue(":stopped", QDateTime::currentDateTime());
+        query.bindValue(":id", session_id.toLongLong());
+        if (!query.exec())
+            qCritical() << "Failed to close session:" << query.lastError().text();
     }
-    event->accept();
+
     QByteArray datagram = "0{split}"+session_id.toUtf8();
-    QUdpSocket * udpSocketSender_service = new QUdpSocket();
-    udpSocketSender_service->writeDatagram(datagram.data(), datagram.size(), QHostAddress::Broadcast, 7980);
-    udpSocketSender_service->close();
-    qDebug()<<"Close Application";
+    QUdpSocket udpSocketSenderService;
+    udpSocketSenderService.writeDatagram(datagram, QHostAddress::Broadcast, 7980);
+    udpSocketSenderService.close();
+    qInfo() << "Main window closed";
+    event->accept();
 
 }
 void MainWindow::thread_new_changes()
@@ -3945,6 +3954,7 @@ void MainWindow::load_rights_user()
     QSqlDatabase db = QSqlDatabase::database();
     QSqlQuery query;
     Objects_app obj;
+    rights_user.clear();
     if(db.open())
     {
         query.exec("SELECT \
@@ -3979,7 +3989,10 @@ void MainWindow::load_rights_user()
             }
         }
     }
+    while (rights_user.size() < 64)
+        rights_user.append(false);
     obj.rights_user = rights_user;
+    qInfo() << "Loaded user rights:" << rights_user.size();
 }
 }
 void MainWindow::close_old_session()

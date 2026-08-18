@@ -10,22 +10,28 @@ Dialog_login::Dialog_login(QWidget *parent) :
     beta_antivirus();
     Objects_app obj;
     qDebug()<<obj.path_settings;
-    QSettings *settings = new QSettings(obj.path_settings,QSettings::IniFormat);
-    QString ipdatabase = settings->value("ipdatabase").toString();
-    int portdatabase = settings->value("portdatabase").toInt();
-    QString databasename = settings->value("databasename").toString();
-    QString username = settings->value("username").toString();
-    QString password = settings->value("password").toString();
-    bool sys_auth = settings->value("sys_user_type").toBool();
-    bool l_update = settings->value("ProgramUpdate/l_auto_update").toBool();
+    QSettings settings(obj.path_settings,QSettings::IniFormat);
+    QString ipdatabase = settings.value("ipdatabase").toString();
+    int portdatabase = settings.value("portdatabase", 5432).toInt();
+    QString databasename = settings.value("databasename").toString();
+    QString username = settings.value("username").toString();
+    QString password = settings.value("password").toString();
+    bool sys_auth = settings.value("sys_user_type").toBool();
+    bool l_update = settings.value("ProgramUpdate/l_auto_update").toBool();
     //settings->setValue("type_sign",true);
-    type_sign = settings->value("type_sign").toBool();
+    type_sign = settings.value("type_sign", true).toBool();
+    qInfo() << "Database target:" << ipdatabase << portdatabase << databasename
+            << "user:" << username << "application authentication:" << type_sign;
 
     QSqlDatabase db = QSqlDatabase::addDatabase("QPSQL");
-    QSqlDatabase db_emsrn = QSqlDatabase::addDatabase("QODBC3","emsrn");
-    db_emsrn.setDatabaseName( "DRIVER={SQL Server};Server=10.128.72.254,1434;" );
-    db_emsrn.setUserName("counter");
-    db_emsrn.setPassword("gcpp");
+    if (QSqlDatabase::drivers().contains("QODBC")) {
+        QSqlDatabase db_emsrn = QSqlDatabase::addDatabase("QODBC", "emsrn");
+        db_emsrn.setDatabaseName("DRIVER={SQL Server};Server=10.128.72.254,1434;");
+        db_emsrn.setUserName("counter");
+        db_emsrn.setPassword("gcpp");
+    } else {
+        qInfo() << "Optional EMSRN ODBC connection is disabled: QODBC driver is unavailable";
+    }
 
     if(sys_auth)
     {
@@ -207,7 +213,7 @@ void Dialog_login::login_db()
 {
     Objects_app obj;
     QSqlDatabase db = QSqlDatabase::database();
-    QSqlQuery query;
+    QSqlQuery query(db);
 
 
     if(type_sign)
@@ -221,30 +227,34 @@ void Dialog_login::login_db()
         hash.addData(array);
         QString md5_password = hash.result().toHex().data();
 
-        query.exec("SELECT users.staff_id, staff.position FROM test.users, test.staff WHERE staff.id = users.staff_id AND staff.status = '0' AND users.user_login = '"+ui->lineEdit_login->text()+"' AND users.password_login_md5 = '"+md5_password+"';");
-        if(query.lastError().isValid())
+        query.prepare("SELECT users.staff_id, staff.position "
+                      "FROM test.users JOIN test.staff ON staff.id = users.staff_id "
+                      "WHERE staff.status = 0 AND users.user_login = :login "
+                      "AND users.password_login_md5 = :password");
+        query.bindValue(":login", ui->lineEdit_login->text());
+        query.bindValue(":password", md5_password);
+        if(!query.exec())
         {
-            qDebug()<<query.lastError();
+            qCritical() << "Login SQL error:" << query.lastError().text();
             QMessageBox::warning(this,"Ошибка SQL","Произошла ошибка при обращении к базе данных");
+            return;
         }
-        if(query.size()<1)
+        if(!query.next())
         {
+            qWarning() << "Application login rejected for user" << ui->lineEdit_login->text();
             ui->label_3->setText(tr("Не правильный логин или пароль!"));
         }
         else
         {
-        while (query.next())
-        {
-
             QString result_sql = query.value(0).toString();
             int position = query.value(1).toInt();
-                obj.staff_position = position;
-                obj.staff_id = result_sql;
-                staff_id=result_sql;
-                Dialog_login::accept();
-
+            obj.staff_position = position;
+            obj.staff_id = result_sql;
+            staff_id=result_sql;
+            qInfo() << "Application login accepted for user" << ui->lineEdit_login->text()
+                    << "staff id" << result_sql;
+            Dialog_login::accept();
         }
-    }
     }
     }
     else
@@ -271,7 +281,8 @@ void Dialog_login::login_db()
 }
 void Dialog_login::quit_app()
 {
-    exit(0);
+    qInfo() << "Login dialog cancelled";
+    reject();
 }
 void Dialog_login::clear_label_status()
 {
