@@ -7,6 +7,7 @@
 #include <QFileInfo>
 #include <QMutex>
 #include <QMutexLocker>
+#include <QSettings>
 #include <QStandardPaths>
 #include <QTextStream>
 
@@ -33,6 +34,26 @@ QString resolveSettingsPath()
     }
 
     return QDir::current().filePath("settings_user.ini");
+}
+
+QString defaultLogDirectory()
+{
+    QString dataDirectory = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);
+    if (dataDirectory.isEmpty())
+        dataDirectory = QDir::currentPath();
+    return QDir(dataDirectory).filePath("logs");
+}
+
+QString resolveLogDirectory(const QString &settingsPath)
+{
+    QSettings settings(settingsPath, QSettings::IniFormat);
+    QString directory = settings.value("Logging/path").toString().trimmed();
+    if (directory.isEmpty())
+        directory = defaultLogDirectory();
+    else if (QDir::isRelativePath(directory))
+        directory = QFileInfo(settingsPath).dir().absoluteFilePath(directory);
+
+    return QDir::cleanPath(directory);
 }
 
 void messageHandler(QtMsgType type, const QMessageLogContext &context, const QString &message)
@@ -66,14 +87,17 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
     QApplication::setApplicationName("BDPatient");
 
-    QString logDir = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);
-    if (logDir.isEmpty())
-        logDir = QDir::currentPath();
-    QDir().mkpath(logDir + "/logs");
-    logFilePath = logDir + "/logs/bdpatient-" + QDate::currentDate().toString("yyyy-MM") + ".log";
+    ApplicationContext::instance().paths().settingsFile = resolveSettingsPath();
+    QString logDir = resolveLogDirectory(ApplicationContext::instance().paths().settingsFile);
+    if (!QDir().mkpath(logDir)) {
+        const QString fallbackDirectory = defaultLogDirectory();
+        QDir().mkpath(fallbackDirectory);
+        logDir = fallbackDirectory;
+    }
+    logFilePath = QDir(logDir).filePath(
+        "bdpatient-" + QDate::currentDate().toString("yyyy-MM") + ".log");
     qInstallMessageHandler(messageHandler);
 
-    ApplicationContext::instance().paths().settingsFile = resolveSettingsPath();
     qInfo() << "Application start";
     qInfo() << "Settings file:" << ApplicationContext::instance().paths().settingsFile;
     qInfo() << "Log file:" << logFilePath;

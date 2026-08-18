@@ -31,6 +31,7 @@ public slots:
     void set_path_blanks_func();
     void set_updServ_path_blanks_func();
     void set_path_files_patient();
+    void set_path_logs();
 };
 
 #endif // DIALOG_SETTINGS_USER_H

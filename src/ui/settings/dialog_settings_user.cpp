@@ -15,6 +15,7 @@ Dialog_settings_user::Dialog_settings_user(QWidget *parent) :
     connect(ui->pushButton_set_path_blanks,SIGNAL(clicked(bool)),SLOT(set_updServ_path_blanks_func()));
     connect(ui->pushButton_set_path_local_blanks,SIGNAL(clicked(bool)),SLOT(set_path_blanks_func()));
     connect(ui->toolButton_path_files_patient,SIGNAL(clicked(bool)),SLOT(set_path_files_patient()));
+    connect(ui->toolButton_path_logs,SIGNAL(clicked(bool)),SLOT(set_path_logs()));
 }
 
 Dialog_settings_user::~Dialog_settings_user()
@@ -40,6 +41,7 @@ void Dialog_settings_user::load_settings()
     QString path_UpdServ_blanks = settings->value("path_UpdServ_blanks").toString();
     QString path_blanks = settings->value("path_blanks").toString();
     QString path_files_patient = settings->value("path_files_patient").toString();
+    QString path_logs = settings->value("Logging/path").toString();
     QString name_ych = settings->value("name_ych").toString();
     QString adress_ych = settings->value("adress_ych").toString();
     QString ogrn_ych = settings->value("ogrn_ych").toString();
@@ -60,6 +62,7 @@ void Dialog_settings_user::load_settings()
     ui->lineEdit_path_blanks->setText(path_UpdServ_blanks);
     ui->lineEdit_path_local_blanks->setText(path_blanks);
     ui->lineEdit_path_files_patient->setText(path_files_patient);
+    ui->lineEdit_path_logs->setText(path_logs);
     ui->lineEdit_name_ych->setText(name_ych);
     ui->lineEdit_adress_ych->setText(adress_ych);
     ui->lineEdit_OGRN_ych->setText(ogrn_ych);
@@ -109,6 +112,7 @@ void Dialog_settings_user::apply_settings()
     settings->setValue("path_UpdServ_blanks" ,ui->lineEdit_path_blanks->text());
     settings->setValue("path_blanks" ,ui->lineEdit_path_local_blanks->text());
     settings->setValue("path_files_patient", ui->lineEdit_path_files_patient->text());
+    settings->setValue("Logging/path", ui->lineEdit_path_logs->text().trimmed());
     settings->setValue("name_ych", ui->lineEdit_name_ych->text());
     settings->setValue("adress_ych", ui->lineEdit_adress_ych->text());
     settings->setValue("ogrn_ych", ui->lineEdit_OGRN_ych->text());
@@ -121,6 +125,7 @@ void Dialog_settings_user::apply_settings()
     settings->setValue("Document/MarB",ui->spinBox_MarB->value());
     settings->setValue("Document/MarT",ui->spinBox_MarT->value());
     settings->setValue("ProgramUpdate/l_auto_update",ui->checkBox_l_Update->isChecked());
+    settings->sync();
 }
 void Dialog_settings_user::default_settings()
 {
@@ -148,4 +153,13 @@ void Dialog_settings_user::set_path_files_patient()
     QString file_name=ui->lineEdit_path_files_patient->text();
     file_name = QFileDialog::getExistingDirectory(this, tr("Путь к файлам пациента"), file_name, QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
     ui->lineEdit_path_files_patient->setText(file_name);
+}
+
+void Dialog_settings_user::set_path_logs()
+{
+    QString directory = ui->lineEdit_path_logs->text();
+    directory = QFileDialog::getExistingDirectory(this, tr("Путь для сохранения логов"), directory,
+                                                   QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
+    if (!directory.isEmpty())
+        ui->lineEdit_path_logs->setText(directory);
 }

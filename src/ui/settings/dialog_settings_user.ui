@@ -321,6 +321,65 @@
        </item>
       </layout>
      </widget>
+     <widget class="QWidget" name="tab_logging">
+      <attribute name="title">
+       <string>Логирование</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_logging">
+       <item>
+        <layout class="QFormLayout" name="formLayout_logging">
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_path_logs">
+           <property name="text">
+            <string>Каталог логов</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <layout class="QHBoxLayout" name="horizontalLayout_path_logs">
+           <item>
+            <widget class="QLineEdit" name="lineEdit_path_logs">
+             <property name="placeholderText">
+              <string>По умолчанию: каталог данных приложения</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QToolButton" name="toolButton_path_logs">
+             <property name="text">
+              <string>...</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item row="1" column="0" colspan="2">
+          <widget class="QLabel" name="label_path_logs_hint">
+           <property name="text">
+            <string>Новый путь будет использован после перезапуска программы. Пустое значение включает системный каталог по умолчанию.</string>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_logging">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
      <widget class="QWidget" name="tab_6">
       <attribute name="title">
        <string>Настройка документа</string>
